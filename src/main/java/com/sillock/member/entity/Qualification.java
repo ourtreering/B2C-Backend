@@ -3,16 +3,15 @@ package com.sillock.member.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @Getter
 @Entity
 public class Qualification {
-    @Id
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="qualification_id")
     private Long qualificationId;
 
@@ -22,16 +21,16 @@ public class Qualification {
     @Column(name = "content", length = 255)
     private String content;
 
-    @Column(name = "is_verified", nullable = true)
+    @Column(name = "is_verified", nullable = false)
     private Boolean isVerified;
 
     @Column(name = "reg_date")
-    private String regDate;
+    private LocalDateTime regDate;
 
     @Column(name = "mod_date")
-    private String modDate;
+    private LocalDateTime modDate;
 
     @Column(name = "due_date")
-    private String dueDate;
+    private LocalDateTime dueDate;
 
 }
