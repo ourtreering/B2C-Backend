@@ -10,12 +10,10 @@ import javax.persistence.*;
 @Entity
 public class IssuedToken {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="member_id")
+    @Column(name="member_id", nullable = false)
     private Long memberId;
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="event_id")
+    @Column(name="event_id", nullable = false)
     private Long eventId;
 
 }

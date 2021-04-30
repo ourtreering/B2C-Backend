@@ -10,10 +10,9 @@ import javax.persistence.*;
 @Entity
 public class HostSetting {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="member_id")
+    @Column(name="member_id", nullable = false)
     private Long memberId;
 
-    @Column(name="remain_count")
+    @Column(name="remain_count", nullable = false)
     private Long remainCount;
 }

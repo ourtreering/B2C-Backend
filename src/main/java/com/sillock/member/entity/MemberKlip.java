@@ -10,10 +10,9 @@ import javax.persistence.*;
 @Entity
 public class MemberKlip {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="member_id")
+    @Column(name="member_id", nullable = false)
     private Long memberId;
 
-    @Column(name="eoa", length = 255)
+    @Column(name="eoa", length = 255, nullable = false)
     private String eoa;
 }
