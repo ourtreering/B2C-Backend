@@ -8,15 +8,11 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Getter
 @Entity
-public class IssuedToken {
+public class IssuedToken{
 
-
-    @JoinColumn(name = "member_id")
-    @Column(name="member_id", nullable = false)
-    private Long memberId;
-
-    @JoinColumn(name = "event_id")
-    @Column(name="event_id", nullable = false)
-    private Long eventId;
+    @EmbeddedId
+    private IssuedTokenPK memberId;
 
 }
+
+
