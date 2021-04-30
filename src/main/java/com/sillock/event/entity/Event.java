@@ -15,6 +15,8 @@ public class Event {
     @Column(name="event_id", nullable = false)
     private Long eventId;
 
+    @ManyToOne
+    @JoinColumn(name = "member_id")
     @Column(name="member_id", nullable = false)
     private Long memberId;
 

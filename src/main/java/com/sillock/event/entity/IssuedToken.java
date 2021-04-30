@@ -9,10 +9,13 @@ import javax.persistence.*;
 @Getter
 @Entity
 public class IssuedToken {
-    @Id
+
+
+    @JoinColumn(name = "member_id")
     @Column(name="member_id", nullable = false)
     private Long memberId;
 
+    @JoinColumn(name = "event_id")
     @Column(name="event_id", nullable = false)
     private Long eventId;
 

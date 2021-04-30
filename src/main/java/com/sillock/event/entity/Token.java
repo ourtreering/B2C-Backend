@@ -11,6 +11,8 @@ import java.time.LocalDateTime;
 @Entity
 public class Token {
     @Id
+    @OneToOne
+    @JoinColumn(name = "event_id")
     @Column(name="event_id", nullable = false)
     private Long eventId;
 

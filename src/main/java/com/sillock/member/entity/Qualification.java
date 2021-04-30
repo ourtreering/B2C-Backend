@@ -12,10 +12,13 @@ import java.time.LocalDateTime;
 @Getter
 @Entity
 public class Qualification {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="qualification_id", nullable = false)
     private Long qualificationId;
 
+    @ManyToOne
+    @JoinColumn(name = "member_id")
     @Column(name="member_id", nullable = false)
     private Long memberId;
 

@@ -10,6 +10,8 @@ import javax.persistence.*;
 @Entity
 public class HostSetting {
     @Id
+    @OneToOne
+    @JoinColumn(name = "member_id")
     @Column(name="member_id", nullable = false)
     private Long memberId;
 
