@@ -6,7 +6,9 @@ import java.util.Objects;
 
 @Embeddable
 public class IssuedTokenPK  implements Serializable {
+    @Column(name="member_id", nullable = false)
     private Long memberId;
+    @Column(name="event_id", nullable = false)
     private Long eventId;
 
     @Override
