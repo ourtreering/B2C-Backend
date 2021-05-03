@@ -1,14 +1,20 @@
 package com.sillock.event.entity;
 
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
+
+@Getter
+@NoArgsConstructor
 @Embeddable
 public class IssuedTokenPK  implements Serializable {
-    @Column(name="member_id", nullable = false)
+
     private Long memberId;
-    @Column(name="event_id", nullable = false)
     private Long eventId;
 
     @Override
@@ -23,6 +29,8 @@ public class IssuedTokenPK  implements Serializable {
     public int hashCode() {
         return Objects.hash(memberId, eventId);
     }
+
+    @Builder
 
     public IssuedTokenPK(Long memberId, Long eventId){
         this.memberId = memberId;
