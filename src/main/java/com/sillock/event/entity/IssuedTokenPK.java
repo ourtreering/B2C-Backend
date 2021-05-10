@@ -31,7 +31,6 @@ public class IssuedTokenPK  implements Serializable {
     }
 
     @Builder
-
     public IssuedTokenPK(Long memberId, Long eventId){
         this.memberId = memberId;
         this.eventId = eventId;
