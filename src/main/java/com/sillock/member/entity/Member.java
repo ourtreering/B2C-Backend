@@ -22,15 +22,15 @@ public class Member {
     @Column(name = "is_active", nullable = false)
     private Boolean isActive = true;
 
-    @Column(name="role", length = 30, nullable = false)
-    private String role;
-
     @Column(name = "mod_date", nullable = false)
     private LocalDateTime modDate = LocalDateTime.now();
 
     @Column(name = "reg_date", nullable = false)
     private LocalDateTime regDate = LocalDateTime.now();
 
-    @Column(name="name", length = 10, nullable = false)
+    @Column(name="name", length = 15, nullable = false)
     private String name;
+
+    @Column(name="unique_code", length = 7, nullable = false)
+    private String uniqueCode;
 }

@@ -16,9 +16,12 @@ public class Event {
     private Long eventId;
 
     @ManyToOne
-    @JoinColumn(name = "member_id")
-    @Column(name="member_id", nullable = false)
-    private Long memberId;
+    @JoinColumn(name = "myActivity_id")
+    @Column(name="myActivity_id", nullable = false)
+    private Long myActivityId;
+
+    @Column(name="image", length = 255, nullable = false)
+    private String image;
 
     @Column(name="title", length = 255, nullable = false)
     private String title;
@@ -44,7 +47,5 @@ public class Event {
     @Column(name = "due_date", nullable = false)
     private LocalDateTime dueDate;
 
-    @Column(name="image", length = 255, nullable = false)
-    private String image;
 
 }
