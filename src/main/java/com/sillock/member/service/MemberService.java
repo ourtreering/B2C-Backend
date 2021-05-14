@@ -11,11 +11,19 @@ import java.util.Optional;
 
 @Service
 public class MemberService {
+
     @Autowired
     public MemberRepository memberRepository;
+
 
     public Optional<Member> findbymemberId(Long memberId){
         Optional<Member> member = memberRepository.findBymemberId(memberId);
         return member;
+    }
+
+    public List<Member> findAll(){
+        List<Member> members = new ArrayList<>();
+        memberRepository.findAll().forEach(e->members.add(e));
+        return members;
     }
 }
