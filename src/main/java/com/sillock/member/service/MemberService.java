@@ -16,14 +16,14 @@ public class MemberService {
     public MemberRepository memberRepository;
 
 
-    public Optional<Member> findbymemberId(Long memberId){
-        Optional<Member> member = memberRepository.findBymemberId(memberId);
+    public Optional<Member> findById(Long memberId){
+        Optional<Member> member = memberRepository.findById(memberId);
         return member;
     }
 
     public List<Member> findAll(){
         List<Member> members = new ArrayList<>();
-        memberRepository.findAll().forEach(e->members.add(e));
+        memberRepository.findAll();
         return members;
     }
 }
