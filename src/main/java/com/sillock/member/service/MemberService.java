@@ -17,13 +17,10 @@ public class MemberService {
 
 
     public Optional<Member> findById(Long memberId){
-        Optional<Member> member = memberRepository.findById(memberId);
-        return member;
+        return memberRepository.findById(memberId);
     }
 
     public List<Member> findAll(){
-        List<Member> members = new ArrayList<>();
-        memberRepository.findAll();
-        return members;
+        return memberRepository.findAll();
     }
 }
