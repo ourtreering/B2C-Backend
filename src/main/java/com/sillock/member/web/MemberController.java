@@ -32,4 +32,8 @@ public class MemberController {
         List<Member> member = memberService.findAll();
         return new ResponseEntity<>(member, HttpStatus.OK);
     }
+
+
+
+
 }

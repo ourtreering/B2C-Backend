@@ -35,6 +35,9 @@ public class MemberRepositoryTest {
         assertThat(member.getIsActive()).isEqualTo(result.getIsActive());
         assertThat(member.getName()).isEqualTo(result.getName());
         assertThat(member.getUniqueCode()).isEqualTo(result.getUniqueCode());
+        assertThat(member.getModDate()).isEqualTo(result.getModDate());
+        assertThat(member.getRegDate()).isEqualTo(result.getRegDate());
+
     }
 
 
