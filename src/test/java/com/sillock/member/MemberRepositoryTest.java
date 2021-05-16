@@ -31,6 +31,10 @@ public class MemberRepositoryTest {
 
         Member result = memberRepository.findById(member.getMemberId()).get();
         assertThat(member.getMemberId()).isEqualTo(result.getMemberId());
+        assertThat(member.getEmail()).isEqualTo(result.getEmail());
+        assertThat(member.getIsActive()).isEqualTo(result.getIsActive());
+        assertThat(member.getName()).isEqualTo(result.getName());
+        assertThat(member.getUniqueCode()).isEqualTo(result.getUniqueCode());
     }
 
 
