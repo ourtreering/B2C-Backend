@@ -1,4 +1,4 @@
-package com.sillock.config;
+package com.sillock.jwt.config;
 
 import com.github.springtestdbunit.bean.DatabaseConfigBean;
 import com.github.springtestdbunit.bean.DatabaseDataSourceConnectionFactoryBean;
