@@ -16,16 +16,13 @@ public class MemberService {
     MemberRepository memberRepository;
 
     @Transactional
-    public Optional<Member> findById(Long memberId){
-        if(memberRepository.findById(memberId).isEmpty())
-            throw new BadRequestException("존재하지 않은 사용자에 대한 요청입니다.");
-        return memberRepository.findById(memberId);
+    public Member findById(Long memberId){
+        return memberRepository.findById(memberId)
+                .orElseThrow(()->new BadRequestException("존재하지 않은 사용자에 대한 요청입니다."));
     }
 
     @Transactional
     public List<Member> findAll(){
-        if(memberRepository.findAll().isEmpty())
-            throw new BadRequestException("존재하지 않은 사용자들에 대한 요청입니다.");
         return memberRepository.findAll();
     }
 }
