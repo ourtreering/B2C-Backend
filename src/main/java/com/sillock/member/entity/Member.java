@@ -1,5 +1,6 @@
 package com.sillock.member.entity;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.apache.tomcat.jni.Local;
@@ -34,6 +35,14 @@ public class Member {
     @Column(name = "mod_date", nullable = false)
     private LocalDateTime modDate = LocalDateTime.now();
 
-
-
+    @Builder
+    public Member(Long memberId, String email, Boolean isActive, String name, String uniqueCode, LocalDateTime regDate, LocalDateTime modDate) {
+        this.memberId = memberId;
+        this.email = email;
+        this.isActive = isActive;
+        this.name = name;
+        this.uniqueCode = uniqueCode;
+        this.regDate = regDate;
+        this.modDate = modDate;
+    }
 }
