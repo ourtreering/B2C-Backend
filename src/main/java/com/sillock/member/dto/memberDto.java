@@ -9,7 +9,7 @@ import javax.validation.constraints.NotBlank;
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class memberDto {
+public class MemberDto {
 
 
     private Long memberId;
