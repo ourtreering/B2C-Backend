@@ -29,5 +29,5 @@ public class DbUnitConfig {
         dbUnitDatabaseConnection.setDatabaseConfig(dbUnitDatabaseConfig());
         return dbUnitDatabaseConnection;
     }
-
 }
+
