@@ -21,8 +21,8 @@ public class MemberController {
 
     //회원번호로 회원 한명 조회
     @GetMapping(value = "/{memberId}",produces = { MediaType.APPLICATION_JSON_VALUE })
-    public ResponseEntity<Member> getMember(@PathVariable("memberId") Long memberId){
-        Member member = memberService.findById(memberId).get();
+    public ResponseEntity<Member> getMember(@PathVariable Long memberId){
+        Member member = memberService.findById(memberId);
         return new ResponseEntity<>(member, HttpStatus.OK);
     }
 
@@ -32,8 +32,6 @@ public class MemberController {
         List<Member> member = memberService.findAll();
         return new ResponseEntity<>(member, HttpStatus.OK);
     }
-
-
 
 
 }

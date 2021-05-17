@@ -1,5 +1,6 @@
 package com.sillock.member;
 
+import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.sillock.annotation.SillockDataTest;
 import com.sillock.member.entity.Member;
 import com.sillock.member.repository.MemberRepository;
@@ -28,21 +29,18 @@ public class MemberRepositoryTest {
                 .build();
 
         memberRepository.save(member);
+    }
 
-        Member result = memberRepository.findById(member.getMemberId()).get();
-        assertThat(member.getMemberId()).isEqualTo(result.getMemberId());
-        assertThat(member.getEmail()).isEqualTo(result.getEmail());
-        assertThat(member.getIsActive()).isEqualTo(result.getIsActive());
-        assertThat(member.getName()).isEqualTo(result.getName());
-        assertThat(member.getUniqueCode()).isEqualTo(result.getUniqueCode());
-        assertThat(member.getModDate()).isEqualTo(result.getModDate());
-        assertThat(member.getRegDate()).isEqualTo(result.getRegDate());
-
+    @Test
+    @DatabaseSetup(value="classpath:dbunit/entity/member.xml")
+    public void 멤버_조회(){
+        Member result = memberRepository.findById(1L).get();
+        assertThat(result.getMemberId()).isEqualTo(1);
+        assertThat(result.getEmail()).isEqualTo("test@gmail.com");
+        assertThat(result.getIsActive()).isEqualTo(true);
+        assertThat(result.getName()).isEqualTo("Test");
+        assertThat(result.getUniqueCode()).isEqualTo("as12sas");
     }
 
 
-    //    @Test
-//    @DatabaseSetup(value="classpath:dbunit/entity/member.xml")
-//    public void test() {
-//    }
 }
