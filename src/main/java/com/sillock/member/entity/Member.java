@@ -1,5 +1,6 @@
 package com.sillock.member.entity;
 
+import com.sillock.member.jwt.Role;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,8 +30,9 @@ public class Member {
     @Column(name="unique_code", length = 7, nullable = false)
     private String uniqueCode;
 
+    @Enumerated(EnumType.STRING)
     @Column(name="role", length = 20, nullable = false)
-    private String role;
+    private Role role;
 
     @Column(name = "reg_date", nullable = false)
     private LocalDateTime regDate = LocalDateTime.now();
@@ -39,12 +41,13 @@ public class Member {
     private LocalDateTime modDate = LocalDateTime.now();
 
     @Builder
-    public Member(Long memberId, String email, Boolean isActive, String name, String uniqueCode, LocalDateTime regDate, LocalDateTime modDate) {
+    public Member(Long memberId, String email, Boolean isActive, String name, String uniqueCode, Role role, LocalDateTime regDate, LocalDateTime modDate) {
         this.memberId = memberId;
         this.email = email;
         this.isActive = isActive;
         this.name = name;
         this.uniqueCode = uniqueCode;
+        this.role= role;
         this.regDate = regDate;
         this.modDate = modDate;
     }
