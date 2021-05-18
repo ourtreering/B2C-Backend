@@ -1,17 +1,15 @@
-package com.sillock.jwt.service;
+package com.sillock.core.jwt;
 
 import com.sillock.member.entity.Member;
 import com.sillock.member.jwt.Role;
 import com.sillock.member.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -20,8 +18,6 @@ import java.util.Set;
 @Service
 public class JwtUserDtailsService implements UserDetailsService {
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
 
     @Autowired
     private MemberRepository memberRepository;
@@ -36,14 +32,5 @@ public class JwtUserDtailsService implements UserDetailsService {
         return new User(member.getEmail(), member.getUniqueCode(),grantedAuthorities);
     }
 
-    //컨트롤러에서 넘어온 email과 UniqueCode(password)값이 db에 저장된 비밀번호와 일치하는지 검사
-    //UniqueCode -> password로 수정해야함
-    public Member authenticateByEmailAndPssword(String email, String uniqueCode){
-        Member member = memberRepository.findByEmail(email)
-                .orElseThrow(() -> new UsernameNotFoundException(email));
-        if(!passwordEncoder.matches(uniqueCode, member.getUniqueCode())) {
-            throw new BadCredentialsException("옳지않은 비밀번호입니다.");
-        }
-        return member;
-    }
+
 }

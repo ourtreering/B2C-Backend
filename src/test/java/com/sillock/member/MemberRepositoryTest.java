@@ -40,6 +40,7 @@ public class MemberRepositoryTest {
         assertThat(result.getIsActive()).isEqualTo(true);
         assertThat(result.getName()).isEqualTo("Test");
         assertThat(result.getUniqueCode()).isEqualTo("as12sas");
+        assertThat(result.getRole()).isEqualTo("ROLE_USER");
     }
 
 

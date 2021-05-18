@@ -29,6 +29,9 @@ public class Member {
     @Column(name="unique_code", length = 7, nullable = false)
     private String uniqueCode;
 
+    @Column(name="role", length = 20, nullable = false)
+    private String role;
+
     @Column(name = "reg_date", nullable = false)
     private LocalDateTime regDate = LocalDateTime.now();
 
