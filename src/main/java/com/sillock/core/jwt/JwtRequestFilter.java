@@ -1,4 +1,4 @@
-package com.sillock.member.jwt;
+package com.sillock.core.jwt;
 
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -19,7 +19,7 @@ import java.io.IOException;
 public class JwtRequestFilter extends GenericFilterBean  {
     private static final Logger logger = LoggerFactory.getLogger(JwtRequestFilter.class);
 
-    public static final String AUTHORIZATION_HEADER = "Authorization";
+    public static final String AUTHORIZATION_HEADER = "Authorization"; //이거 X-AUTH-TOKEN 로 해야할지 봐두기
 
     private JwtTokenProvider tokenProvider;
 
@@ -42,10 +42,10 @@ public class JwtRequestFilter extends GenericFilterBean  {
         } else {
             logger.debug("유효한 JWT 토큰이 없습니다, uri: {}", requestURI);
         }
-
         filterChain.doFilter(servletRequest, servletResponse);
     }
 
+    //요청의 헤더에서 JWT를 얻기 위해 “Bearer “ 문장 찾기
     private String resolveToken(HttpServletRequest request) {
         String bearerToken = request.getHeader(AUTHORIZATION_HEADER);
         if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {

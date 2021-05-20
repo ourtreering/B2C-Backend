@@ -1,10 +1,9 @@
 package com.sillock.member.entity;
 
-import com.sillock.member.jwt.Role;
+import com.sillock.core.jwt.Role;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.apache.tomcat.jni.Local;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

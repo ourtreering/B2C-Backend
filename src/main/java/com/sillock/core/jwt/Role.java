@@ -1,4 +1,4 @@
-package com.sillock.member.jwt;
+package com.sillock.core.jwt;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

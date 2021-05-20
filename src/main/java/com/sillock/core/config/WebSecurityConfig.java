@@ -3,8 +3,8 @@ package com.sillock.core.config;
 
 import com.sillock.core.jwt.JwtAccessDiniedHandler;
 import com.sillock.core.jwt.JwtAuthenticationEntryPoint;
-import com.sillock.member.jwt.JwtTokenProvider;
-import com.sillock.member.jwt.Role;
+import com.sillock.core.jwt.JwtTokenProvider;
+import com.sillock.core.jwt.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

@@ -1,5 +1,4 @@
-package com.sillock.member.jwt;
-
+package com.sillock.core.jwt;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
@@ -26,9 +25,6 @@ import java.util.stream.Collectors;
 @Component
 public class JwtTokenProvider implements InitializingBean {
 
-//    private final UserDetailsService userDetailsService;
-
-
     private final String secret;
     private final long tokenValidityInMilliseconds;
     private final Logger logger = LoggerFactory.getLogger(JwtTokenProvider.class);
@@ -38,8 +34,8 @@ public class JwtTokenProvider implements InitializingBean {
 
     //jwt secretkey, 만료시간 관련 의존성 주입
     public JwtTokenProvider(
-            @Value("jwt.secret") String secret,
-            @Value("jwt.token-validity-in-seconds") long tokenValidityInSeconds) {
+            @Value("${jwt.secret}") String secret,
+            @Value("${jwt.token-validity-in-seconds}") long tokenValidityInSeconds) {
         this.secret = secret;
         this.tokenValidityInMilliseconds = tokenValidityInSeconds * 1000;
     }
@@ -87,15 +83,6 @@ public class JwtTokenProvider implements InitializingBean {
         return new UsernamePasswordAuthenticationToken(user, token, authorities);
     }
 
-    public String getEmail(String token) {
-        Claims claims = Jwts
-                .parserBuilder()
-                .setSigningKey(key)
-                .build()
-                .parseClaimsJws(token)
-                .getBody();
-        return claims.getSubject();
-    }
 
     //Request의 Header에서 token 값 가져오기("X-AUTH-TOKEN" : "TOKEN값')
     public String resolveToken(HttpServletRequest request) {

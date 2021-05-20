@@ -1,7 +1,7 @@
 package com.sillock.core.config;
 
-import com.sillock.member.jwt.JwtRequestFilter;
-import com.sillock.member.jwt.JwtTokenProvider;
+import com.sillock.core.jwt.JwtRequestFilter;
+import com.sillock.core.jwt.JwtTokenProvider;
 import org.springframework.security.config.annotation.SecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.DefaultSecurityFilterChain;
@@ -9,7 +9,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 
 public class JwtSecurityConfig extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {
-    private JwtTokenProvider jwtTokenProvider;
+    private final JwtTokenProvider jwtTokenProvider;
 
     public JwtSecurityConfig(JwtTokenProvider jwtTokenProvider){
         this.jwtTokenProvider = jwtTokenProvider;
