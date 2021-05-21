@@ -1,5 +1,7 @@
 package com.sillock.core.jwt;
 
+import ch.qos.logback.classic.spi.ILoggingEvent;
+import ch.qos.logback.core.read.ListAppender;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -25,20 +27,16 @@ import java.util.stream.Collectors;
 @Component
 public class JwtTokenProvider implements InitializingBean {
 
-    private final String secret;
-    private final long tokenValidityInMilliseconds;
+    @Value("${jwt.secret}")
+    private String secret;
+    @Value("${jwt.token-validity-in-seconds}")
+    private long tokenValidityInMilliseconds;
     private final Logger logger = LoggerFactory.getLogger(JwtTokenProvider.class);
+    private ListAppender<ILoggingEvent> appender;
     private static final String AUTHORITIES_KEY = "auth";
 
     private Key key;
 
-    //jwt secretkey, 만료시간 관련 의존성 주입
-    public JwtTokenProvider(
-            @Value("${jwt.secret}") String secret,
-            @Value("${jwt.token-validity-in-seconds}") long tokenValidityInSeconds) {
-        this.secret = secret;
-        this.tokenValidityInMilliseconds = tokenValidityInSeconds * 1000;
-    }
 
     //base64로 secretkey 디코딩, 키변수에 할당
     @Override
@@ -106,5 +104,8 @@ public class JwtTokenProvider implements InitializingBean {
         return false;
     }
 
-
+    //테스트용 함수 테스트 완료되면 주석처리
+    public Key getKey(){
+        return key;
+    }
 }
