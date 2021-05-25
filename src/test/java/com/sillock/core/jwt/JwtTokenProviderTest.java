@@ -48,7 +48,7 @@ class JwtTokenProviderTest {
         String wrongJwt = jwt+"wrongjwt";
         jwtTokenProvider.validateToken(wrongJwt);
 
-            //원하는 필드를 추출하고(extracting) containExactly로 비료.
+            //원하는 필드를 추출하고(extracting) containExactly로 비교.
             //ILoggingEvent::getFormattedMessage 는 로그 표준형 출력의 의미
         Assertions.assertThat(appender.list)
                 .extracting(ILoggingEvent::getFormattedMessage)
