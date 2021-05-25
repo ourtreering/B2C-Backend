@@ -36,7 +36,9 @@ public class JwtTokenProvider implements InitializingBean {
     private static final String AUTHORITIES_KEY = "auth";
 
     private Key key;
-
+    public Key getKey(){
+        return key;
+    }
 
     //base64로 secretkey 디코딩, 키변수에 할당
     @Override
@@ -102,10 +104,5 @@ public class JwtTokenProvider implements InitializingBean {
             logger.info("JWT 토큰이 잘못되었습니다.");
         }
         return false;
-    }
-
-    //테스트용 함수 테스트 완료되면 주석처리
-    public Key getKey(){
-        return key;
     }
 }

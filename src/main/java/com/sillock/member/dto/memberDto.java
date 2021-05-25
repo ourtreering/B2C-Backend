@@ -1,8 +1,10 @@
 package com.sillock.member.dto;
+
 import lombok.*;
-import javax.persistence.Column;
+
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 
 @Builder
@@ -11,19 +13,20 @@ import javax.validation.constraints.NotBlank;
 @AllArgsConstructor
 public class MemberDto {
 
-
     private Long memberId;
 
     @Email
-    @NotBlank
+    @NotNull
     private String email;
 
     private Boolean isActive = true;
 
-    @NotBlank
+    @NotNull
+    @Size(min=1, max=15)
     private String name;
 
-    @NotBlank
+    @NotNull
+    @Size(min=1, max=7)
     private String uniqueCode;
 
 }
