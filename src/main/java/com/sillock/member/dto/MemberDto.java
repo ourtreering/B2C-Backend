@@ -19,7 +19,7 @@ public class MemberDto {
     @NotNull
     private String email;
 
-    private Boolean isActive = true;
+    private Boolean isActive;
 
     @NotNull
     @Size(min=1, max=15)

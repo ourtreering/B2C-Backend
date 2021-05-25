@@ -2,6 +2,7 @@ package com.sillock.member;
 
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.sillock.annotation.SillockDataTest;
+import com.sillock.core.jwt.Role;
 import com.sillock.member.entity.Member;
 import com.sillock.member.repository.MemberRepository;
 import org.junit.jupiter.api.Test;
@@ -24,6 +25,7 @@ public class MemberRepositoryTest {
                 .isActive(true)
                 .name("Test")
                 .uniqueCode("Test123")
+                .role(Role.USER)
                 .regDate(LocalDateTime.of(2021,1,11,15,21,2))
                 .modDate(LocalDateTime.of(2021,1,11,15,21,2))
                 .build();
@@ -40,7 +42,7 @@ public class MemberRepositoryTest {
         assertThat(result.getIsActive()).isEqualTo(true);
         assertThat(result.getName()).isEqualTo("Test");
         assertThat(result.getUniqueCode()).isEqualTo("as12sas");
-        assertThat(result.getRole()).isEqualTo("ROLE_USER");
+        assertThat(result.getRole().getValue()).isEqualTo("ROLE_USER");
     }
 
 
