@@ -26,3 +26,4 @@ import java.lang.annotation.Target;
 @DbUnitConfiguration(databaseConnection = "dbUnitDatabaseConnection")
 public @interface SillockDataTest {
 }
+
