@@ -1,14 +1,17 @@
 package com.sillock.core.login;
 
 import com.google.gson.Gson;
+import com.sillock.core.exception.AccessNotAllowedException;
 import com.sillock.core.exception.BadRequestException;
+import com.sillock.core.exception.ResourceNotFoundException;
 import com.sillock.core.jwt.JwtTokenProvider;
 import com.sillock.member.entity.Member;
 import com.sillock.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.env.Environment;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.util.MultiValueMap;
@@ -18,33 +21,38 @@ import org.springframework.web.client.RestTemplate;
 @Service
 public class KakaoService {
 
-    private final RestTemplate restTemplate;
-    private final Environment env;
+    private final RestTemplate restTemplate = new RestTemplate();
     private final Gson gson;
+    private final Logger logger = LoggerFactory.getLogger(this.getClass().getSimpleName());
 
     @Autowired
     MemberRepository memberRepository;
+    @Autowired
+    KakaoService kakaoService;
     @Autowired
     JwtTokenProvider jwtTokenProvider;
     @Value("${spring.social.kakao.url}")
     private String providerUrl;
 
-    //provider(kakao)에게 response 받아오기
+    //provider에게 response 받아오기
     public ResponseEntity<String> getResponse(String accessToken) {
         // Set header : Content-type: application/x-www-form-urlencoded
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-        headers.set("Authorization", "Bearer " + accessToken);
+        headers.setBearerAuth(accessToken);
 
         // Set http entity
         HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(null, headers);
         try {
             // Request profile
-            ResponseEntity<String> response = restTemplate.postForEntity(env.getProperty(providerUrl), request, String.class);
+            logger.info("--------- ");
+            ResponseEntity<String> response = restTemplate.postForEntity(providerUrl, request, String.class);
+            logger.info("response.toString() : "+response.toString());
             if (response.getStatusCode() == HttpStatus.OK)
                 return response;
         } catch (Exception e) {
-            throw new BadRequestException();
+            logger.info(">>> "+e.getMessage());
+            throw new AccessNotAllowedException();
         }
         throw new BadRequestException();
     }
@@ -56,21 +64,18 @@ public class KakaoService {
             if (response.getStatusCode() == HttpStatus.OK)
                 return gson.fromJson(response.getBody(), KakaoProfile.class);
         } catch (Exception e) {
-            throw new BadRequestException();
+            logger.info(e.getMessage());
+            throw new AccessNotAllowedException();
         }
         throw new BadRequestException();
     }
 
-
-    //예외처리 만들어주기
-    //KakaoAccount 안에 있는 email 빼와야함
+    //새로받아온 유저의 email을 통해 기존 DB에 존재여부 확인
     public String checkMember(String accessToken){
         KakaoProfile kakaoProfile = getKakaoProfile(accessToken);
-        Member member = memberRepository.findByEmail(String.valueOf(kakaoProfile.getKakaoAccount())).get();
+        Member member = memberRepository.findByEmail(kakaoProfile.getKakaoAccount().getEmail()).orElseThrow(ResourceNotFoundException::new);
         return jwtTokenProvider.createToken(member.getName(),member.getEmail());
     }
-
-
 }
 
 
