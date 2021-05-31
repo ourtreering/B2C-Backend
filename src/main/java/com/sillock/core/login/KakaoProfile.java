@@ -13,7 +13,7 @@ public class KakaoProfile {
     @Getter
     @Setter
     @ToString
-    private static class Properties {
+    static class Properties {
         private String nickname;
         private String thumbnail_image;
         private String profile_image;
@@ -22,11 +22,12 @@ public class KakaoProfile {
     @Getter
     @Setter
     @ToString
-    private static class KakaoAccount {
+    static class KakaoAccount {
         private String email;
         private String age_range;
-        private String  birthday;
+        private String birthday;
         private String gender;
-    }
+
+      }
 
 }
