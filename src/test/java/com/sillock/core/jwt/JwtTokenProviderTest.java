@@ -22,10 +22,10 @@ import static org.junit.Assert.assertTrue;
 class JwtTokenProviderTest {
 
     @Autowired
-    private JwtTokenProvider jwtTokenProvider;
+    private JwtProvider jwtTokenProvider;
 
     private ListAppender<ILoggingEvent> appender;
-    Logger log = (Logger) LoggerFactory.getLogger(JwtTokenProvider.class);
+    Logger log = (Logger) LoggerFactory.getLogger(JwtProvider.class);
 
     String name = "Testtest";
     String email = "test@gmail.com";

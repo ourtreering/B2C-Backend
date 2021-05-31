@@ -1,6 +1,7 @@
 package com.sillock.core.jwt;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
@@ -17,24 +18,19 @@ import java.io.IOException;
 
 @RequiredArgsConstructor
 public class JwtRequestFilter extends GenericFilterBean  {
-    private static final Logger logger = LoggerFactory.getLogger(JwtRequestFilter.class);
 
-    public static final String AUTHORIZATION_HEADER = "Authorization"; //이거 X-AUTH-TOKEN 로 해야할지 봐두기
+    private final JwtProvider tokenProvider;
+    private final Logger logger = LoggerFactory.getLogger(JwtRequestFilter.class);
 
-    private JwtTokenProvider tokenProvider;
-
-    public JwtRequestFilter(JwtTokenProvider tokenProvider) {
-        this.tokenProvider = tokenProvider;
-    }
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
             throws IOException, ServletException {
         HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
-        //Request에서 토큰 받아오기
-        String jwt = resolveToken(httpServletRequest);
+
+        String jwt = tokenProvider.resolveToken(httpServletRequest);
         String requestURI = httpServletRequest.getRequestURI();
-        //토큰 유효성검사
+
         if (StringUtils.hasText(jwt) && tokenProvider.validateToken(jwt)) {
             Authentication authentication = tokenProvider.getAuthentication(jwt);
             SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -45,12 +41,4 @@ public class JwtRequestFilter extends GenericFilterBean  {
         filterChain.doFilter(servletRequest, servletResponse);
     }
 
-    //요청의 헤더에서 JWT를 얻기 위해 “Bearer “ 문장 찾기
-    private String resolveToken(HttpServletRequest request) {
-        String bearerToken = request.getHeader(AUTHORIZATION_HEADER);
-        if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {
-            return bearerToken.substring(7);
-        }
-        return null;
-    }
 }

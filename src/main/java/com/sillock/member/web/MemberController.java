@@ -1,37 +1,43 @@
 package com.sillock.member.web;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.sillock.core.dto.TokenDto;
 import com.sillock.member.entity.Member;
 import com.sillock.member.service.MemberService;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
-@RestController
+@RestController("/api/members")
 @RequiredArgsConstructor
 public class MemberController {
 
     private final MemberService memberService;
 
-    //회원번호로 회원 한명 조회
-    @GetMapping(value = "/{memberId}",produces = { MediaType.APPLICATION_JSON_VALUE })
+    @GetMapping(value = "/{memberId}")
     public ResponseEntity<Member> getMember(@PathVariable Long memberId){
         Member member = memberService.findById(memberId);
         return new ResponseEntity<>(member, HttpStatus.OK);
     }
 
-    //회원 모두 부르기
-    @GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
-    public ResponseEntity<List<Member>> getAllmembers(){
-        List<Member> member = memberService.findAll();
-        return new ResponseEntity<>(member, HttpStatus.OK);
+    @PostMapping("/exist/{provider}")
+    public ResponseEntity<MemberCheckDto> isExistMember(@RequestBody TokenDto token, @PathVariable String provider) throws JsonProcessingException {
+        boolean isExist = memberService.isExistMemberByProvider(token.getAccessToken(), provider);
+
+        return ResponseEntity.ok(new MemberCheckDto(isExist));
     }
 
+    @AllArgsConstructor
+    public class MemberCheckDto {
+        private boolean exist;
+    }
 
 }
