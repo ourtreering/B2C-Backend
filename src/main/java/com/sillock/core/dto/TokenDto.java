@@ -3,11 +3,11 @@ package com.sillock.core.dto;
 import lombok.*;
 
 
-@Getter
-@Setter
 @Builder
+@Getter @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class TokenDto {
-    private String token;
+    private String accessToken;
+    private String refreshToken;
 }

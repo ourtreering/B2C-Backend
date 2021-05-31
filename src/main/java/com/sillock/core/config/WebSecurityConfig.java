@@ -3,9 +3,9 @@ package com.sillock.core.config;
 
 import com.sillock.core.jwt.JwtAccessDiniedHandler;
 import com.sillock.core.jwt.JwtAuthenticationEntryPoint;
-import com.sillock.core.jwt.JwtTokenProvider;
+import com.sillock.core.jwt.JwtProvider;
 import com.sillock.core.jwt.Role;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -13,14 +13,12 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    private JwtTokenProvider jwtTokenProvider;
-    @Autowired
-    private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
-    @Autowired
-    private JwtAccessDiniedHandler jwtAccessDiniedHandler;
+    private final JwtProvider jwtTokenProvider;
+    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+    private final JwtAccessDiniedHandler jwtAccessDiniedHandler;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
