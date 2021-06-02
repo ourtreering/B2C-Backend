@@ -1,5 +1,8 @@
 package com.sillock.event.domain;
 
+import javax.persistence.Embedded;
+
 public class OpenEvent extends Event{
-    private String searchKeyword;
+    @Embedded
+    private Host host;
 }
