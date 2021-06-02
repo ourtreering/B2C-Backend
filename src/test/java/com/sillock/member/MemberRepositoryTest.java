@@ -2,8 +2,8 @@ package com.sillock.member;
 
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.sillock.annotation.SillockDataTest;
-import com.sillock.core.jwt.Role;
-import com.sillock.member.entity.Member;
+import com.sillock.common.jwt.Role;
+import com.sillock.member.domain.entity.Member;
 import com.sillock.member.repository.MemberRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,20 +1,14 @@
 package com.sillock.member.web;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.sillock.core.dto.TokenDto;
-import com.sillock.member.entity.Member;
+import com.sillock.common.dto.TokenDto;
+import com.sillock.member.domain.entity.Member;
 import com.sillock.member.service.MemberService;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.Optional;
 
 @RestController("/api/members")
 @RequiredArgsConstructor
