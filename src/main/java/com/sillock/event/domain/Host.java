@@ -14,7 +14,7 @@ public class Host {
         this.value = host;
     }
 
-    public boolean Host(String host) {
+    public boolean isHost(String host) {
         return this.value.equals(host);
     }
 }
