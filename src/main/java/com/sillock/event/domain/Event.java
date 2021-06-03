@@ -9,17 +9,17 @@ import java.time.LocalDateTime;
 @Entity
 @Inheritance
 public class Event {
-    @Column(name="title")
+    @Column(nullable = false, name="title")
     private String title;
-    @Column(name="content")
+    @Column(nullable = false,name="content")
     private String content;
-    @Column(name="image")
+    @Column(nullable = true,name="image")
     private String image;
-    @Column(name="regDate")
+    @Column(nullable = false,name="regDate")
     private LocalDateTime regDate;
-    @Column(name="modDate")
+    @Column(nullable = false,name="modDate")
     private LocalDateTime modDate;
 
     @Embedded
-    private EventDate date;
+    private Host host;
 }

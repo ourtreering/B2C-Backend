@@ -1,24 +1,25 @@
 package com.sillock.event.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Embeddable
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor
 public class EventDate {
-    @Column(name ="start_date")
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long dateId;
+
+    @Column(nullable = false, name ="start_date")
     private LocalDateTime startDate;
-    @Column(name ="due_date")
+    @Column(nullable = false, name ="due_date")
     private LocalDateTime dueDate;
 
-    protected EventDate(){}
 
-    public EventDate(LocalDateTime startDate,LocalDateTime dueDate){
-        this.startDate = startDate;
-        this.dueDate = dueDate;
-    }
-
-    public Boolean EventIsActive(){
+    public Boolean isActive(){
     return this.startDate.isBefore(this.dueDate);
     }
 }
