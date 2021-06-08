@@ -1,12 +1,33 @@
 package com.sillock.event.domain;
 
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Table(name ="CLOSED_EVENT_DATE")
-public class ClosedEventDate extends EventDate{
+import javax.persistence.*;
+import java.time.LocalDateTime;
+
+@Getter @Setter
+@NoArgsConstructor
+@Entity
+public class ClosedEventDate{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long dateId;
+
     @ManyToOne
-    @JoinColumn(nullable = false, name = "OPEN_EVENT")
-    private Long closedEventId;
+    @JoinColumn(nullable = false, name = "CLOSED_EVENT")
+    private ClosedEvent closedEvent;
+
+    @Column(nullable = false, name ="start_date")
+    private LocalDateTime startDate;
+    @Column(nullable = false, name ="due_date")
+    private LocalDateTime dueDate;
+
+
+    public Boolean isActive(){
+        return this.startDate.isBefore(this.dueDate);
+    }
+
+
 }
