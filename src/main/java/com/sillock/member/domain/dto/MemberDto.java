@@ -15,6 +15,8 @@ public class MemberDto {
 
     private Long memberId;
 
+    private String identifier;
+
     @Email
     @NotNull
     private String email;

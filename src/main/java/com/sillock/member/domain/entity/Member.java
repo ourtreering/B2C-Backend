@@ -17,6 +17,9 @@ public class Member {
     @Column(name="member_id", nullable = false)
     private Long memberId;
 
+    @Column(name="identifier", nullable = false)
+    private String identifier;
+
     @Column(name="email", length = 255, nullable = false)
     private String email;
 
@@ -40,8 +43,9 @@ public class Member {
     private LocalDateTime modDate = LocalDateTime.now();
 
     @Builder
-    public Member(Long memberId, String email, Boolean isActive, String name, String uniqueCode, Role role, LocalDateTime regDate, LocalDateTime modDate) {
+    public Member(Long memberId, String identifier, String email, Boolean isActive, String name, String uniqueCode, Role role, LocalDateTime regDate, LocalDateTime modDate) {
         this.memberId = memberId;
+        this.identifier = identifier;
         this.email = email;
         this.isActive = isActive;
         this.name = name;

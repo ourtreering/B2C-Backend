@@ -21,6 +21,7 @@ public class MemberRepositoryTest {
     public void 멤버_회원가입(){
         Member member = Member.builder()
                 .memberId(1L)
+                .identifier("kakao:123")
                 .email("test@gmail.com")
                 .isActive(true)
                 .name("Test")
@@ -38,6 +39,7 @@ public class MemberRepositoryTest {
     public void 멤버_조회(){
         Member result = memberRepository.findById(1L).get();
         assertThat(result.getMemberId()).isEqualTo(1);
+        assertThat(result.getIdentifier()).isEqualTo("kakao:123");
         assertThat(result.getEmail()).isEqualTo("test@gmail.com");
         assertThat(result.getIsActive()).isEqualTo(true);
         assertThat(result.getName()).isEqualTo("Test");

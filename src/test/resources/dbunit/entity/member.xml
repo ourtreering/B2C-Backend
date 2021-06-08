@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
-    <member member_id="1" email="test@gmail.com" is_active="true" name="Test" unique_code="as12sas"
+    <member member_id="1" identifier="kakao:123"  email="test@gmail.com" is_active="true" name="Test" unique_code="as12sas"
             role="USER" mod_date="2020-10-14 17:11:10" reg_date="2020-10-14 17:11:09"/>
-    <member member_id="2" email="test2@gmail.com" is_active="true" name="Test2" unique_code="sdw1ss0"
+    <member member_id="2" identifier="kakao:124"  email="test2@gmail.com" is_active="true" name="Test2" unique_code="sdw1ss0"
             role="USER" mod_date="2020-10-14 17:11:10" reg_date="2020-10-14 17:11:09"/>
 </dataset>
