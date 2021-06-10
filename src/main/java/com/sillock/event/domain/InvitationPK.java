@@ -1,15 +1,16 @@
 package com.sillock.event.domain;
 
-import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Embeddable;
 import java.io.Serializable;
 import java.util.Objects;
 
+@Getter @Builder
 @Embeddable
 @NoArgsConstructor
-@AllArgsConstructor
 public class InvitationPK implements Serializable {
     private Long memberId;
     private Long closedEventId;
