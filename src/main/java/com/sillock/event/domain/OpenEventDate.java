@@ -7,17 +7,18 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Getter @Setter
+@Getter
+@Setter
 @NoArgsConstructor
 @Entity
-public class ClosedEventDate{
+public class OpenEventDate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long dateId;
 
     @ManyToOne
-    @JoinColumn(nullable = false, name = "closed_event_id")
-    private ClosedEvent closedEvent;
+    @JoinColumn(nullable = false, name = "open_event_id")
+    private OpenEvent openEvent;
 
     @Column(nullable = false, name ="start_date")
     private LocalDateTime startDate;
