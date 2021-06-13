@@ -1,24 +1,23 @@
 package com.sillock.event.domain;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Getter @Setter
+@Getter @Builder
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class OpenEvent{
-    @Id
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false, name = "open_event_id")
     private Long openEventid;
 
     @Column(nullable = false, name="title")
     private String title;
+    @Column(nullable = false, name = "host")
+    private String host;
     @Column(nullable = false,name="content")
     private String content;
     @Column(nullable = true,name="image")
@@ -27,7 +26,4 @@ public class OpenEvent{
     private LocalDateTime regDate;
     @Column(nullable = false,name="modDate")
     private LocalDateTime modDate;
-
-    @Embedded
-    private Host host;
 }
