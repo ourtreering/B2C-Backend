@@ -1,5 +1,6 @@
 package com.sillock.event.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,8 +9,8 @@ import javax.persistence.Embeddable;
 import java.io.Serializable;
 import java.util.Objects;
 
-@Getter
-@Builder
+@Getter @Builder
+@AllArgsConstructor
 @NoArgsConstructor
 @Embeddable
 public class OpenEventTagPK implements Serializable {
