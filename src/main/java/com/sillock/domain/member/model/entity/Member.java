@@ -1,6 +1,7 @@
 package com.sillock.domain.member.model.entity;
 
 import com.sillock.core.auth.jwt.Role;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,7 +9,9 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Entity
 public class Member {
@@ -23,6 +26,7 @@ public class Member {
     @Column(name="email", length = 255, nullable = false)
     private String email;
 
+    @Builder.Default
     @Column(name = "is_active", nullable = false)
     private Boolean isActive = true;
 
@@ -36,22 +40,11 @@ public class Member {
     @Column(name="role", length = 20, nullable = false)
     private Role role;
 
+    @Builder.Default
     @Column(name = "reg_date", nullable = false)
     private LocalDateTime regDate = LocalDateTime.now();
 
+    @Builder.Default
     @Column(name = "mod_date", nullable = false)
     private LocalDateTime modDate = LocalDateTime.now();
-
-    @Builder
-    public Member(Long memberId, String identifier, String email, Boolean isActive, String name, String uniqueCode, Role role, LocalDateTime regDate, LocalDateTime modDate) {
-        this.memberId = memberId;
-        this.identifier = identifier;
-        this.email = email;
-        this.isActive = isActive;
-        this.name = name;
-        this.uniqueCode = uniqueCode;
-        this.role= role;
-        this.regDate = regDate;
-        this.modDate = modDate;
-    }
 }

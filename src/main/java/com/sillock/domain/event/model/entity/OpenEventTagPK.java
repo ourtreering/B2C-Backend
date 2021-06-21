@@ -1,5 +1,6 @@
 package com.sillock.domain.event.model.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,6 +12,7 @@ import java.util.Objects;
 @Getter
 @Builder
 @NoArgsConstructor
+@AllArgsConstructor
 @Embeddable
 public class OpenEventTagPK implements Serializable {
     private Long tagId;

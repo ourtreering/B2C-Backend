@@ -1,0 +1,16 @@
+== members/test API
+
+=== Request
+
+CURL:
+include::{snippets}/member/test/curl-request.adoc[]
+
+Request Parameters:
+include::{snippets}/member/test/http-request.adoc[]
+
+Request HTTP Example:
+include::{snippets}/member/test/http-request.adoc[]
+
+=== Response
+Response:
+include::{snippets}/member/test/http-response.adoc[]

@@ -5,7 +5,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.util.StringUtils;
 import org.springframework.web.filter.GenericFilterBean;
 
 import javax.servlet.FilterChain;
@@ -16,22 +15,21 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 @RequiredArgsConstructor
-public class JwtRequestFilter extends GenericFilterBean  {
+public class JwtAuthenticationFilter extends GenericFilterBean  {
 
-    private final JwtProvider tokenProvider;
-    private final Logger logger = LoggerFactory.getLogger(JwtRequestFilter.class);
-
+    private final JwtProvider jwtProvider;
+    private final Logger logger = LoggerFactory.getLogger(JwtAuthenticationFilter.class);
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
             throws IOException, ServletException {
         HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
 
-        String jwt = tokenProvider.resolveToken(httpServletRequest);
+        String jwt = jwtProvider.resolveToken(httpServletRequest);
         String requestURI = httpServletRequest.getRequestURI();
 
-        if (StringUtils.hasText(jwt) && tokenProvider.validateToken(jwt)) {
-            Authentication authentication = tokenProvider.getAuthentication(jwt);
+        if (jwtProvider.validateToken(jwt)) {
+            Authentication authentication = jwtProvider.getAuthentication(jwt);
             SecurityContextHolder.getContext().setAuthentication(authentication);
             logger.debug("Security Context에 '{}' 인증 정보를 저장했습니다, uri: {}", authentication.getName(), requestURI);
         } else {

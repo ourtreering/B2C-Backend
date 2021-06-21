@@ -1,5 +1,6 @@
 package com.sillock.domain.tag.model.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,6 +11,7 @@ import java.time.LocalDateTime;
 @Getter
 @Builder
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Tag {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
