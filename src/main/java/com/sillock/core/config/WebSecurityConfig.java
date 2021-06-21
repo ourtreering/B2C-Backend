@@ -1,10 +1,10 @@
 package com.sillock.core.config;
 
 
-import com.sillock.common.jwt.JwtAccessDiniedHandler;
-import com.sillock.common.jwt.JwtAuthenticationEntryPoint;
-import com.sillock.common.jwt.JwtProvider;
-import com.sillock.common.jwt.Role;
+import com.sillock.core.auth.jwt.JwtAccessDiniedHandler;
+import com.sillock.core.auth.jwt.JwtAuthenticationEntryPoint;
+import com.sillock.core.auth.jwt.JwtProvider;
+import com.sillock.core.auth.jwt.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
