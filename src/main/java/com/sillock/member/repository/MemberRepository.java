@@ -1,6 +1,6 @@
 package com.sillock.member.repository;
 
-import com.sillock.member.entity.Member;
+import com.sillock.member.domain.entity.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

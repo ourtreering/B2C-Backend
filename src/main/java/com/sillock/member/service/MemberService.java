@@ -2,16 +2,13 @@ package com.sillock.member.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.sillock.core.exception.BadRequestException;
-import com.sillock.core.login.SocialProfile;
-import com.sillock.core.login.SocialService;
-import com.sillock.member.entity.Member;
+import com.sillock.common.login.SocialProfile;
+import com.sillock.common.login.SocialService;
+import com.sillock.member.domain.entity.Member;
 import com.sillock.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
