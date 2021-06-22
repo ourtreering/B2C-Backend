@@ -7,7 +7,6 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -16,6 +15,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import java.security.Key;
 import java.util.Arrays;
@@ -24,7 +24,7 @@ import java.util.Date;
 import java.util.stream.Collectors;
 
 @Component
-public class JwtProvider implements InitializingBean {
+public class JwtProvider{
 
     @Value("${jwt.secret}")
     private String secret;
@@ -39,8 +39,8 @@ public class JwtProvider implements InitializingBean {
         return key;
     }
 
-    @Override
-    public void afterPropertiesSet(){
+    @PostConstruct
+    public void initialize(){
         byte[] keyBytes = Decoders.BASE64.decode(secret);
         this.key = Keys.hmacShaKeyFor(keyBytes);
     }

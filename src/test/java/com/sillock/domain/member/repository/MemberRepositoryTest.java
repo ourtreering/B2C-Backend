@@ -1,4 +1,4 @@
-package com.sillock.domain.member;
+package com.sillock.domain.member.repository;
 
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.sillock.annotation.SillockDataTest;

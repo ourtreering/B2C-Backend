@@ -21,8 +21,6 @@ public class MemberDto {
     @NotNull
     private String email;
 
-    private Boolean isActive;
-
     @NotNull
     @Size(min=1, max=15)
     private String name;
