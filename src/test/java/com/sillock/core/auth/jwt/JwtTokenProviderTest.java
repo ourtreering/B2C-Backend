@@ -3,6 +3,7 @@ package com.sillock.core.auth.jwt;
 import ch.qos.logback.classic.Logger;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.read.ListAppender;
+import com.sillock.common.message.JwtMessage;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import org.assertj.core.api.Assertions;
@@ -30,7 +31,6 @@ class JwtTokenProviderTest {
     String name = "Testtest";
     String email = "test@gmail.com";
 
-
     @Test
     void Token_생성성공() {
         String jwt = jwtTokenProvider.createToken(name,email);
@@ -52,7 +52,7 @@ class JwtTokenProviderTest {
             //ILoggingEvent::getFormattedMessage 는 로그 표준형 출력의 의미
         Assertions.assertThat(appender.list)
                 .extracting(ILoggingEvent::getFormattedMessage)
-                .containsExactly("잘못된 JWT 서명입니다.");
+                .containsExactly(JwtMessage.WRONG_JWT);
     }
 
     @Test
@@ -71,7 +71,7 @@ class JwtTokenProviderTest {
 
         Assertions.assertThat(appender.list)
                 .extracting(ILoggingEvent::getFormattedMessage)
-                .containsExactly("만료된 JWT 토큰입니다.");
+                .containsExactly(JwtMessage.EXPIRED_JWT);
     }
 
     @Test
@@ -91,23 +91,7 @@ class JwtTokenProviderTest {
 
         Assertions.assertThat(appender.list)
                 .extracting(ILoggingEvent::getFormattedMessage)
-                .containsExactly("지원되지 않는 JWT 토큰입니다.");
-    }
-
-    @Test
-    void Token_생성실패_잘못된_JWT_토큰() {
-        String jwt = jwtTokenProvider.createToken(name,email);
-        appender = new ListAppender<>();
-        appender.start(); //기록을 시작한다
-        log.addAppender(appender);
-
-        //잘못된 토큰 인수 넣어주기
-        String wrongToken = "";
-        jwtTokenProvider.validateToken(wrongToken);
-
-        Assertions.assertThat(appender.list)
-                .extracting(ILoggingEvent::getFormattedMessage)
-                .containsExactly("JWT 토큰이 잘못되었습니다.");
+                .containsExactly(JwtMessage.UNSUPPORTED_JWT);
     }
 
 }

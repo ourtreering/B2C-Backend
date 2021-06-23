@@ -16,6 +16,9 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
+/**
+ * created by soyeon 21/06/23
+ */
 @RequiredArgsConstructor
 @Service
 public class SocialService {

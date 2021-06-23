@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * created by soyeon 21/06/23
+ */
 @Component
 public class JwtAccessDiniedHandler implements AccessDeniedHandler {
     //403 Forbidden 에러
