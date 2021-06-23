@@ -1,7 +1,7 @@
 package com.sillock.core.config;
 
-import com.sillock.common.jwt.JwtRequestFilter;
-import com.sillock.common.jwt.JwtProvider;
+import com.sillock.core.auth.jwt.JwtAuthenticationFilter;
+import com.sillock.core.auth.jwt.JwtProvider;
 import org.springframework.security.config.annotation.SecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.DefaultSecurityFilterChain;
@@ -17,7 +17,7 @@ public class JwtSecurityConfig extends SecurityConfigurerAdapter<DefaultSecurity
 
     @Override
     public void configure(HttpSecurity http) {
-        JwtRequestFilter jwtRequestFilter = new JwtRequestFilter(jwtTokenProvider);
+        JwtAuthenticationFilter jwtRequestFilter = new JwtAuthenticationFilter(jwtTokenProvider);
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
 }
