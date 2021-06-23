@@ -14,6 +14,9 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
+/**
+ * created by soyeon 21/06/23
+ */
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends GenericFilterBean  {
 

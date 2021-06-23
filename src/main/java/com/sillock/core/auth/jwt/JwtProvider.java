@@ -2,6 +2,7 @@ package com.sillock.core.auth.jwt;
 
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.read.ListAppender;
+import com.sillock.common.message.JwtMessage;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -23,6 +24,9 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.stream.Collectors;
 
+/**
+ * created by soyeon 21/06/23
+ */
 @Component
 public class JwtProvider{
 
@@ -31,7 +35,6 @@ public class JwtProvider{
     @Value("${jwt.token-validity-in-seconds}")
     private long tokenValidityInMilliseconds;
     private final Logger logger = LoggerFactory.getLogger(JwtProvider.class);
-    private ListAppender<ILoggingEvent> appender;
     private static final String AUTHORITIES_KEY = "auth";
 
     private Key key;
@@ -88,13 +91,12 @@ public class JwtProvider{
             Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(Token);
             return true;
         } catch (io.jsonwebtoken.security.SecurityException | MalformedJwtException e) {
-            logger.info("잘못된 JWT 서명입니다.");
+            logger.info(JwtMessage.WRONG_JWT);
         } catch (ExpiredJwtException e) {
-            logger.info("만료된 JWT 토큰입니다.");
+            logger.info(JwtMessage.EXPIRED_JWT);
         } catch (UnsupportedJwtException e) {
-            logger.info("지원되지 않는 JWT 토큰입니다.");
+            logger.info(JwtMessage.UNSUPPORTED_JWT);
         } catch (IllegalArgumentException e) {
-            logger.info("JWT 토큰이 잘못되었습니다.");
         }
         return false;
     }
