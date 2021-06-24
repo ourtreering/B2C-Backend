@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: sillock-app-deployment
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: sillock-app-dev
@@ -15,13 +15,13 @@ spec:
       containers:
         - name: sillock-app-dev
           image: <IMAGE>
-          resources:
-            requests:
-              memory: "256Mi"
-              cpu: "500m"
-            limits:
-              memory: "256Mi"
-              cpu: "500m"
+          resources: {}
+#            requests:
+#              memory: "256Mi"
+#              cpu: "500m"
+#            limits:
+#              memory: "256Mi"
+#              cpu: "500m"
 #          volumeMounts:
 #            - name: content-server-volume
 #              mountPath: /home/gradle/mount
