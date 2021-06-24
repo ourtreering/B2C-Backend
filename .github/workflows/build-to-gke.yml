@@ -99,33 +99,4 @@ jobs:
         ./kustomize build . | kubectl apply -f -
         kubectl rollout status deployment/$DEPLOYMENT_NAME
         kubectl get services -o wide
-        
-  notification-success:
-    name: 슬랙에 성공 알림
-    if: success()
-    needs: [test, setup-build-publish-deploy]
-    runs-on: ubuntu-latest
-    steps:
-    - name: 슬랙 성공 알림
-      env:
-        SLACK_BOT_TOKEN: ${{ secrets.SLACK_NOTIFICATIONS_BOT_TOKEN }}
-      uses: voxmedia/github-action-slack-notify-build@v1
-      with:
-        channel: 실록-서버-알림
-        status: SUCCESS
-        color: good
-
-  notification-failure:
-    name: 슬랙에 실패 알림
-    if: failure()
-    needs: [test, setup-build-publish-deploy]
-    runs-on: ubuntu-latest
-    steps:
-    - name: 슬랙 실패 알림
-      env:
-        SLACK_BOT_TOKEN: ${{ secrets.SLACK_NOTIFICATIONS_BOT_TOKEN }}
-      uses: voxmedia/github-action-slack-notify-build@v1
-      with:
-        channel: 실록-서버-알림
-        status: FAILED
-        color: danger
+      
