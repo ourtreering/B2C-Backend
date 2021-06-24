@@ -13,15 +13,16 @@
 name: Build and Deploy to GKE
 
 on:
-  release:
-    types: [created]
+  push:
+    branches:
+      - develop
 
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
   GKE_CLUSTER: cluster-1    # TODO: update to cluster name
-  GKE_ZONE: us-central1-c   # TODO: update to cluster zone
-  DEPLOYMENT_NAME: gke-test # TODO: update to deployment name
-  IMAGE: static-site
+  GKE_ZONE: asia-east1-a   # TODO: update to cluster zone
+  DEPLOYMENT_NAME: sillock-deployment # TODO: update to deployment name
+  IMAGE: sillock-app-dev
 
 jobs:
   test:
@@ -51,7 +52,7 @@ jobs:
     # Setup gcloud CLI
     - uses: google-github-actions/setup-gcloud@v0.2.0
       with:
-        service_account_key: ${{ secrets.GKE_SA_KEY }}
+        service_account_key: ${{ secrets.GKE_KEY }}
         project_id: ${{ secrets.GKE_PROJECT }}
 
     # Configure Docker to use the gcloud command-line tool as a credential
@@ -64,7 +65,12 @@ jobs:
       with:
         cluster_name: ${{ env.GKE_CLUSTER }}
         location: ${{ env.GKE_ZONE }}
-        credentials: ${{ secrets.GKE_SA_KEY }}
+        credentials: ${{ secrets.GKE_KEY }}
+        
+    # 그래들 빌드
+    - name: Build Gradle
+      run: |
+        ./gradlew build
 
     # Build the Docker image
     - name: Build
@@ -93,33 +99,4 @@ jobs:
         ./kustomize build . | kubectl apply -f -
         kubectl rollout status deployment/$DEPLOYMENT_NAME
         kubectl get services -o wide
-        
-  notification-success:
-    name: 슬랙에 성공 알림
-    if: success()
-    needs: [test, setup-build-publish-deploy]
-    runs-on: ubuntu-latest
-    steps:
-    - name: 슬랙 성공 알림
-      env:
-        SLACK_BOT_TOKEN: ${{ secrets.SLACK_NOTIFICATIONS_BOT_TOKEN }}
-      uses: voxmedia/github-action-slack-notify-build@v1
-      with:
-        channel: 실록-서버-알림
-        status: SUCCESS
-        color: good
-
-  notification-failure:
-    name: 슬랙에 실패 알림
-    if: failure()
-    needs: [test, setup-build-publish-deploy]
-    runs-on: ubuntu-latest
-    steps:
-    - name: 슬랙 실패 알림
-      env:
-        SLACK_BOT_TOKEN: ${{ secrets.SLACK_NOTIFICATIONS_BOT_TOKEN }}
-      uses: voxmedia/github-action-slack-notify-build@v1
-      with:
-        channel: 실록-서버-알림
-        status: FAILED
-        color: danger
+      
