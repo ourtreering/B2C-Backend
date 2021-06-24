@@ -18,7 +18,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final JwtProvider jwtProvider;
-
+    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+    private final JwtAccessDiniedHandler jwtAccessDiniedHandler;
 
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
@@ -30,14 +31,32 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .httpBasic().disable()
                 .csrf().disable()
+                //401, 403에러 검사
+                .exceptionHandling()
+                .authenticationEntryPoint(jwtAuthenticationEntryPoint)
+                .accessDeniedHandler(jwtAccessDiniedHandler)
+                .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .authorizeRequests()
-                .antMatchers("/").permitAll()
-                .antMatchers("/api/members/test").permitAll()
-                .anyRequest().authenticated()
+                .headers().frameOptions().disable()
+
                 .and()
-                .addFilterBefore(new JwtAuthenticationFilter(jwtProvider), UsernamePasswordAuthenticationFilter.class);
+                .apply(new JwtSecurityConfig(jwtProvider));
+//                .authorizeRequests()
+//                .antMatchers("/","/css/**","images/**","/img/**",
+//                        "/js/**","/favicon.ico").permitAll()
+//                .antMatchers("/*/signin", "/*/signin/**", "/*/signup", "/social/**").permitAll()
+//                .antMatchers("/user/**").hasRole(Role.USER.name())
+//                .antMatchers("/admin/**").hasRole(Role.ADMIN.name())
+//                .anyRequest().authenticated()
+//
+//                //JwtSecurityConfig를 통해 jwtRequestFilter 등록
+//                .authorizeRequests()
+//                .antMatchers("/").permitAll()
+//                .antMatchers("/api/members/test").permitAll()
+//                .anyRequest().authenticated()
+//                .and()
+//                .addFilterBefore(new JwtAuthenticationFilter(jwtProvider), UsernamePasswordAuthenticationFilter.class);
     }
 
     @Override
