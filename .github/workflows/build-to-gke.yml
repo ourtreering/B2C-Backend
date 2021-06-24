@@ -68,9 +68,10 @@ jobs:
         credentials: ${{ secrets.GKE_KEY }}
         
     # 그래들 빌드
-    - name: Build Gradle
-      run: |
-        ./gradlew build
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+    - name: Build with Gradle
+      run: ./gradlew build 
 
     # Build the Docker image
     - name: Build
