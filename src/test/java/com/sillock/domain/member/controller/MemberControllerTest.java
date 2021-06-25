@@ -40,8 +40,8 @@ public class MemberControllerTest {
                         fieldWithPath("memberId").description("member unique id"),
                         fieldWithPath("name").description("name"),
                         fieldWithPath("email").description("email"),
-                        fieldWithPath("identifier").description("test"),
-                        fieldWithPath("uniqueCode").description("123")
+                        fieldWithPath("identifier").description("identifier"),
+                        fieldWithPath("uniqueCode").description("uniqueCode")
                 )
         ));
     }

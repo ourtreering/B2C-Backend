@@ -34,7 +34,7 @@ public class MemberController {
 
     @GetMapping("/test")
     public ResponseEntity<MemberDto> test(){
-        MemberDto memberDto = MemberDto.builder().memberId(1L).email("test@gmail.com").name("treering").identifier("test").uniqueCode("123").build();
+        MemberDto memberDto = MemberDto.builder().memberId(1L).email("test@gmail.com").name("treering").identifier("test").uniqueCode("1234").build();
         return ResponseEntity.ok(memberDto);
     }
 
