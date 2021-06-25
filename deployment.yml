@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: sillock-app-dev
-          image: <IMAGE>
+          image: gcr.io/PROJECT_ID/IMAGE:TAG
           resources: {}
 #            requests:
 #              memory: "256Mi"
