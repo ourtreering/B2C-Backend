@@ -1,9 +1,22 @@
 package com.sillock.domain.sillog.model.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import javax.persistence.Id;
 import java.util.List;
 
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Document(collection = "qna")
 public class Qna {
-    private Long questionId;
+    @Id
+    private String questionId;
     private String question;
     private String answer;
     private List<String> tags;

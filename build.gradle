@@ -54,6 +54,8 @@ dependencies {
 	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
 
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+	testImplementation group: 'de.flapdoodle.embed', name: 'de.flapdoodle.embed.mongo', version: '2.2.0'
+
 
 }
 

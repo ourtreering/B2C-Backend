@@ -1,13 +1,27 @@
 package com.sillock.domain.sillog.model.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.persistence.Id;
 import java.util.List;
 
-@Document(collection = "sillogs")
-public class Sillog {
+/**
+ * Todo
+ * Id에 Auto Increment 를 적용해야하나?
+ */
 
-    private Long id;
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Document(collection = "sillog")
+public class Sillog {
+    @Id
+    private String id;
     private String author;
     private int sequence;
     private List<Qna> data;
