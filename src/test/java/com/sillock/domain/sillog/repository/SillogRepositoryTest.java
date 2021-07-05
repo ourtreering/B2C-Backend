@@ -29,6 +29,7 @@ public class SillogRepositoryTest {
 
         Optional<Sillog> byId = sillogRepository.findById(sillog.getId());
         assertEquals(byId.get().getAuthor(), "author");
+        assertEquals(byId.get().getData().get(0).getAnswer(), "답변");
         System.out.println("Id: " + sillog.getId());
     }
 
