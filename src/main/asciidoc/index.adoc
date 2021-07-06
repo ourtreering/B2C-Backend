@@ -1,31 +1,9 @@
 == members/test API
+:toc: left
+:toc-title: 목차
+:toclevels: 4
+
+operation::/member/test[snippets='curl-request,http-request,path-parameters,request-body,http-response,response-body,response-fields']
 
 
-=== Request
 
-CURL:
-include::{snippets}/member/test/curl-request.adoc[]
-
-Request Parameters:
-include::{snippets}/member/test/http-request.adoc[]
-
-Request HTTP Example:
-include::{snippets}/member/test/http-request.adoc[]
-
-=== Response
-Response:
-include::{snippets}/member/test/http-response.adoc[]
-
-
-=== Response-fields
-[cols=4*, opeions=header]
-|===
-|필드명 |타입 |필수여부 |설명
-|memberId |int |not null |memberPK
-|identifier |String |not null |유저식별자
-|email |String |null |email
-|isActive |bool |not null (기본값 : true)|활동여부
-|name|String |not null |이름
-|===
-
-체인지 테스트4
