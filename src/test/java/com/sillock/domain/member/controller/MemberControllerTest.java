@@ -1,12 +1,9 @@
 package com.sillock.domain.member.controller;
 
+import com.sillock.common.AbstractControllerTest;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
@@ -18,13 +15,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 /**
  * created by hyunwoo 21/06/22
  */
-@SpringBootTest
-@AutoConfigureMockMvc
-@AutoConfigureRestDocs(outputDir = "build/generated-snippets")
-public class MemberControllerTest {
-
-    @Autowired
-    private MockMvc mockMvc;
+public class MemberControllerTest extends AbstractControllerTest {
 
     @Test
     public void 멤버를_조회한다() throws Exception {

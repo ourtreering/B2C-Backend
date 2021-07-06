@@ -43,7 +43,6 @@ public class SillogController {
 
         log.info(sillog.toString());
 
-
         return ResponseDto.of(HttpStatus.CREATED, ResponseMessage.REGISTER_SILLOG, sillogDto);
     }
 
