@@ -1,18 +1,9 @@
 == members/test API
+:toc: left
+:toc-title: 목차
+:toclevels: 4
 
-=== Request
+operation::/member/test[snippets='curl-request,http-request,path-parameters,request-body,http-response,response-body,response-fields']
 
-CURL:
-include::{snippets}/member/test/curl-request.adoc[]
 
-Request Parameters:
-include::{snippets}/member/test/http-request.adoc[]
 
-Request HTTP Example:
-include::{snippets}/member/test/http-request.adoc[]
-
-=== Response
-Response:
-include::{snippets}/member/test/http-response.adoc[]
-
-체인지 테스트4
