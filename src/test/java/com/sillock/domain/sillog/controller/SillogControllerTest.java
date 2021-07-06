@@ -2,13 +2,11 @@ package com.sillock.domain.sillog.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sillock.common.AbstractControllerTest;
-import com.sillock.domain.member.controller.MemberController;
+import com.sillock.domain.member.model.entity.Member;
 import com.sillock.domain.sillog.model.dto.QnaDto;
 import com.sillock.domain.sillog.model.dto.SillogDto;
-import com.sillock.domain.sillog.model.entity.Sillog;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
@@ -16,9 +14,8 @@ import java.time.LocalDate;
 import java.util.Arrays;
 
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
-import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
-import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
+import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
@@ -45,19 +42,34 @@ public class SillogControllerTest extends AbstractControllerTest {
 
         mockMvc.perform(post("/api/sillogs")
                 .content(content)
+                .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().isCreated())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.author").value("sillog")) // (5)
-                .andExpect(MockMvcResultMatchers.jsonPath("$.title").value("제목"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.sequence").value(1))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.author").value("sillog")) // (5)
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.title").value("제목"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.sequence").value(1))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.data[0].question").value("질문"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.data[0].answer").value("답변"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.data[0].tags[0]").value("교육"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.image").value("/src/image"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.qualification").value("/src/qualification"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.startDate").value("2021-07-05"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.endDate").value("2021-07-12"))
                 .andDo(print())
                 .andDo(document("api/sillogs",
-                        responseFields(
-                                fieldWithPath("memberId").description("member unique id"),
-                                fieldWithPath("name").description("name"),
-                                fieldWithPath("email").description("email"),
-                                fieldWithPath("identifier").description("identifier"),
-                                fieldWithPath("uniqueCode").description("uniqueCode")
+                        preprocessRequest(prettyPrint()),
+                        preprocessResponse(prettyPrint()),
+                        requestFields(
+                                fieldWithPath("author").description("글쓴이"),
+                                fieldWithPath("title").description("제목"),
+                                fieldWithPath("sequence").description("처음 쓸 경우 1, 이어쓸 경우 시퀀스"),
+                                fieldWithPath("data.[].question").description("QnA 질문"),
+                                fieldWithPath("data.[].answer").description("QnA 답변"),
+                                fieldWithPath("data.[].tags.[]").description("QnA 태그"),
+                                fieldWithPath("image.[]").description("이미지"),
+                                fieldWithPath("qualification.[]").description("증명서"),
+                                fieldWithPath("startDate").description("시작일"),
+                                fieldWithPath("endDate").description("종료일")
                         )
                 ));
     }
