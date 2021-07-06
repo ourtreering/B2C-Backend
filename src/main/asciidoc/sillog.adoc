@@ -1,9 +1,14 @@
 == api/sillogs API
 :toc: left
 :toc-title: 목차
-:toclevels: 4
+:toclevels: 3
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
 
-operation::/api/sillogs[snippets='curl-request,http-request,request-body,http-response']
+operation::/api/sillogs[snippets='curl-request,http-request,request-body,http-response,request-fields']
 
+- data는 QnA 데이터들을 의미.
+- data.[].question 은 data 리스트 안에 있는 'question' 을 의미
 
 
