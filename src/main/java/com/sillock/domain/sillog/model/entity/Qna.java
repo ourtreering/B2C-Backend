@@ -16,7 +16,7 @@ import java.util.List;
 @Document(collection = "qna")
 public class Qna {
     @Id
-    private String questionId;
+    private Long questionId;
     private String question;
     private String answer;
     private List<String> tags;

@@ -23,14 +23,14 @@ public class SillogRepositoryTest {
     @Test
     public void 입력(){
         Qna qna = Qna.builder().question("질문").answer("답변").build();
-        Sillog sillog = Sillog.builder().author("author").data(Arrays.asList(qna)).build();
+        Sillog sillog = Sillog.builder().author("author").qnaData(Arrays.asList(qna)).build();
 
         sillogRepository.save(sillog);
 
-        Optional<Sillog> byId = sillogRepository.findById(sillog.getId());
+        Optional<Sillog> byId = sillogRepository.findById(sillog.getSillogId().toString());
         assertEquals(byId.get().getAuthor(), "author");
-        assertEquals(byId.get().getData().get(0).getAnswer(), "답변");
-        System.out.println("Id: " + sillog.getId());
+        assertEquals(byId.get().getQnaData().get(0).getAnswer(), "답변");
+        System.out.println("Id: " + sillog.getSillogId());
     }
 
 }

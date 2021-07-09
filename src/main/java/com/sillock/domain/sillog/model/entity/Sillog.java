@@ -24,13 +24,14 @@ import java.util.List;
 @Document(collection = "sillog")
 public class Sillog {
     @Id
-    private String id;
+    private Long sillogId;
     private String author;
     private String title;
     private int sequence;
-    private List<Qna> data;
+    private List<Qna> qnaData;
     private List<String> image;
     private List<String> qualification;
+    private LocalDate regDate;
     private LocalDate startDate;
     private LocalDate endDate;
 
