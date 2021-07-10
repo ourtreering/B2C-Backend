@@ -1,10 +1,12 @@
-== api/sillogs/{eventId} API
+= api/sillogs/{eventId} API
 :toc: left
-:toc-title: 목차
 :toclevels: 3
+:toc-title: 전체리스트 조회
 :doctype: book
 :icons: font
 :source-highlighter: highlightjs
+
+== 목차
 
 operation::/api/sillogList[snippets='curl-request,http-request,response-body,http-response,response-fields']
 

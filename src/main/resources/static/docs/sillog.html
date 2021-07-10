@@ -429,19 +429,38 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 #footer-text{color:rgba(0,0,0,.6);font-size:.9em}}
 @media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
 </style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body class="book">
+<body class="book toc2 toc-left">
 <div id="header">
+<h1>api/sillogs API</h1>
+<div class="details">
+<span id="revnumber">version 0.0.1-SNAPSHOT</span>
+</div>
+<div id="toc" class="toc2">
+<div id="toctitle">행사 등록</div>
+<ul class="sectlevel1">
+<li><a href="#_목차">목차</a>
+<ul class="sectlevel2">
+<li><a href="#_목차_curl_request">Curl request</a></li>
+<li><a href="#_목차_http_request">HTTP request</a></li>
+<li><a href="#_목차_request_body">Request body</a></li>
+<li><a href="#_목차_http_response">HTTP response</a></li>
+<li><a href="#_목차_request_fields">Request fields</a></li>
+</ul>
+</li>
+</ul>
+</div>
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="_apisillogs_api">api/sillogs API</h2>
+<h2 id="_목차">목차</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_apisillogs_api_curl_request">Curl request</h3>
+<h3 id="_목차_curl_request">Curl request</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/api/sillogs' -i -X POST \
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ curl 'http://localhost:8080/api/sillogs' -i -X POST \
     -H 'Content-Type: application/json;charset=UTF-8' \
     -H 'Accept: application/json' \
     -d '{
@@ -463,10 +482,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect2">
-<h3 id="_apisillogs_api_http_request">HTTP request</h3>
+<h3 id="_목차_http_request">HTTP request</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /api/sillogs HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /api/sillogs HTTP/1.1
 Content-Type: application/json;charset=UTF-8
 Accept: application/json
 Content-Length: 354
@@ -491,10 +510,10 @@ Host: localhost:8080
 </div>
 </div>
 <div class="sect2">
-<h3 id="_apisillogs_api_request_body">Request body</h3>
+<h3 id="_목차_request_body">Request body</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code>{
+<pre class="highlightjs highlight nowrap"><code>{
   "author" : "sillog",
   "title" : "제목",
   "sequence" : 1,
@@ -513,10 +532,10 @@ Host: localhost:8080
 </div>
 </div>
 <div class="sect2">
-<h3 id="_apisillogs_api_http_response">HTTP response</h3>
+<h3 id="_목차_http_response">HTTP response</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 200 OK
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 X-Content-Type-Options: nosniff
 X-XSS-Protection: 1; mode=block
 Cache-Control: no-cache, no-store, max-age=0, must-revalidate
@@ -549,7 +568,7 @@ Content-Length: 508
 </div>
 </div>
 <div class="sect2">
-<h3 id="_apisillogs_api_request_fields">Request fields</h3>
+<h3 id="_목차_request_fields">Request fields</h3>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 33.3333%;">
@@ -638,8 +657,11 @@ Content-Length: 508
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1-SNAPSHOT<br>
-Last updated 2021-07-07 01:38:31 +0900
+Last updated 2021-07-11 03:30:49 +0900
 </div>
 </div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/github.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+<script>hljs.initHighlighting()</script>
 </body>
 </html>
