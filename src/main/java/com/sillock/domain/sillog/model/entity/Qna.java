@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.Id;
+import java.time.LocalDate;
 import java.util.List;
 
 @Builder
@@ -16,10 +17,12 @@ import java.util.List;
 @Document(collection = "qna")
 public class Qna {
     @Id
-    private Long questionId;
+    private String id;
     private String question;
     private String answer;
     private List<String> tags;
+    private LocalDate regDate;
+    private LocalDate modDate;
 }
 /**
  *  *     {

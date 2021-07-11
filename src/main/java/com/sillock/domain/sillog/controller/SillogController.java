@@ -43,7 +43,6 @@ public class SillogController {
                 .qnaData(Arrays.asList(qna))
                 .image(sillogDto.getImage())
                 .qualification(sillogDto.getQualification())
-                .regDate(sillogDto.getRegDate())
                 .startDate(sillogDto.getStartDate())
                 .endDate(sillogDto.getEndDate())
                 .build();
@@ -80,7 +79,6 @@ public class SillogController {
                     .qnaData(qnaDtoList)
                     .image(sillog.getImage())
                     .qualification(sillog.getQualification())
-                    .regDate(sillog.getRegDate())
                     .startDate(sillog.getStartDate())
                     .endDate(sillog.getEndDate())
                     .build();

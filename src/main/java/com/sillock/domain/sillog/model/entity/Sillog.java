@@ -24,7 +24,7 @@ import java.util.List;
 @Document(collection = "sillog")
 public class Sillog {
     @Id
-    private Long sillogId;
+    private String id;
     private String author;
     private String title;
     private int sequence;
