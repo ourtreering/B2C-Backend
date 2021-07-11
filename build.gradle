@@ -21,7 +21,6 @@ task copyDocument(type: Copy) {
 	into file("src/main/resources/static/docs")
 }
 
-
 repositories {
 	mavenCentral()
 }
@@ -61,7 +60,6 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
 	testImplementation group: 'de.flapdoodle.embed', name: 'de.flapdoodle.embed.mongo', version: '2.2.0'
 
-	// https://mvnrepository.com/artifact/org.mongounit/mongounit
 	implementation group: 'org.mongounit', name: 'mongounit', version: '2.0.1'
 }
 
