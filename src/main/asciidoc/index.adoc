@@ -1,9 +1,13 @@
-== members/test API
+= members/test API
 :toc: left
-:toc-title: 목차
-:toclevels: 4
+:toclevels: 3
+:toc-title: 유저정보
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
 
-operation::/member/test[snippets='curl-request,http-request,path-parameters,request-body,http-response,response-body,response-fields']
+== 목차
+operation::/member/test[snippets='curl-request,http-request,http-response,response-body,response-fields']
 
 
 

@@ -2,10 +2,13 @@ package com.sillock.domain.sillog.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sillock.common.AbstractControllerTest;
-import com.sillock.domain.member.model.entity.Member;
 import com.sillock.domain.sillog.model.dto.QnaDto;
 import com.sillock.domain.sillog.model.dto.SillogDto;
+import com.sillock.domain.sillog.model.entity.Qna;
+import com.sillock.domain.sillog.model.entity.Sillog;
+import com.sillock.domain.sillog.service.SillogService;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -13,16 +16,21 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import java.time.LocalDate;
 import java.util.Arrays;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-
 
 public class SillogControllerTest extends AbstractControllerTest {
     @Autowired
     ObjectMapper objectMapper;
+
+    @Mock
+    private SillogService sillogService;
 
     @Test
     public void 실록_등록_테스트() throws Exception {
@@ -31,9 +39,10 @@ public class SillogControllerTest extends AbstractControllerTest {
                 .author("sillog")
                 .title("제목")
                 .sequence(1)
-                .data(Arrays.asList(qnaDto))
+                .qnaData(Arrays.asList(qnaDto))
                 .image(Arrays.asList("/src/image"))
                 .qualification(Arrays.asList("/src/qualification"))
+                .regDate(LocalDate.of(2021,07,05))
                 .startDate(LocalDate.of(2021,07,05))
                 .endDate(LocalDate.of(2021, 07, 12))
                 .build();
@@ -48,9 +57,9 @@ public class SillogControllerTest extends AbstractControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data.author").value("sillog")) // (5)
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data.title").value("제목"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data.sequence").value(1))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.data[0].question").value("질문"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.data[0].answer").value("답변"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.data[0].tags[0]").value("교육"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.qnaData[0].question").value("질문"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.qnaData[0].answer").value("답변"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.qnaData[0].tags[0]").value("교육"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data.image").value("/src/image"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data.qualification").value("/src/qualification"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data.startDate").value("2021-07-05"))
@@ -63,11 +72,12 @@ public class SillogControllerTest extends AbstractControllerTest {
                                 fieldWithPath("author").description("글쓴이"),
                                 fieldWithPath("title").description("제목"),
                                 fieldWithPath("sequence").description("처음 쓸 경우 1, 이어쓸 경우 시퀀스"),
-                                fieldWithPath("data.[].question").description("QnA 질문"),
-                                fieldWithPath("data.[].answer").description("QnA 답변"),
-                                fieldWithPath("data.[].tags.[]").description("QnA 태그"),
+                                fieldWithPath("qnaData.[].question").description("QnA 질문"),
+                                fieldWithPath("qnaData.[].answer").description("QnA 답변"),
+                                fieldWithPath("qnaData.[].tags.[]").description("QnA 태그"),
                                 fieldWithPath("image.[]").description("이미지"),
                                 fieldWithPath("qualification.[]").description("증명서"),
+                                fieldWithPath("regDate").description("등록일"),
                                 fieldWithPath("startDate").description("시작일"),
                                 fieldWithPath("endDate").description("종료일")
                         )

@@ -429,74 +429,91 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 #footer-text{color:rgba(0,0,0,.6);font-size:.9em}}
 @media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
 </style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body class="article">
+<body class="book toc2 toc-left">
 <div id="header">
+<h1>members/test API</h1>
+<div class="details">
+<span id="revnumber">version 0.0.1-SNAPSHOT</span>
+</div>
+<div id="toc" class="toc2">
+<div id="toctitle">유저정보</div>
+<ul class="sectlevel1">
+<li><a href="#_목차">목차</a>
+<ul class="sectlevel2">
+<li><a href="#_목차_curl_request">Curl request</a></li>
+<li><a href="#_목차_http_request">HTTP request</a></li>
+<li><a href="#_목차_http_response">HTTP response</a></li>
+<li><a href="#_목차_response_body">Response body</a></li>
+<li><a href="#_목차_response_fields">Response fields</a></li>
+</ul>
+</li>
+</ul>
+</div>
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="_memberstest_api">members/test API</h2>
+<h2 id="_목차">목차</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_memberstest_api_curl_request">Curl request</h3>
+<h3 id="_목차_curl_request">Curl request</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/api/members/test' -i -X GET \
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ curl 'http://localhost:8080/api/members/test' -i -X GET \
     -H 'Accept: application/json'</code></pre>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_memberstest_api_http_request">HTTP request</h3>
+<h3 id="_목차_http_request">HTTP request</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /api/members/test HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /api/members/test HTTP/1.1
 Accept: application/json
 Host: localhost:8080</code></pre>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_memberstest_api_path_parameters">Path parameters</h3>
-<div class="paragraph">
-<p>Snippet path-parameters not found for operation::/member/test</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_memberstest_api_request_body">Request body</h3>
+<h3 id="_목차_http_response">HTTP response</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code></code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_memberstest_api_http_response">HTTP response</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 200 OK
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 X-Content-Type-Options: nosniff
 X-XSS-Protection: 1; mode=block
 Cache-Control: no-cache, no-store, max-age=0, must-revalidate
 Pragma: no-cache
 Expires: 0
 Content-Type: application/json
-Content-Length: 97
+Content-Length: 129
 
-{"memberId":1,"identifier":"test","email":"test@gmail.com","name":"treering","uniqueCode":"1234"}</code></pre>
+{
+  "memberId" : 1,
+  "identifier" : "test",
+  "email" : "test@gmail.com",
+  "name" : "treering",
+  "uniqueCode" : "1234"
+}</code></pre>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_memberstest_api_response_body">Response body</h3>
+<h3 id="_목차_response_body">Response body</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code>{"memberId":1,"identifier":"test","email":"test@gmail.com","name":"treering","uniqueCode":"1234"}</code></pre>
+<pre class="highlightjs highlight nowrap"><code>{
+  "memberId" : 1,
+  "identifier" : "test",
+  "email" : "test@gmail.com",
+  "name" : "treering",
+  "uniqueCode" : "1234"
+}</code></pre>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_memberstest_api_response_fields">Response fields</h3>
+<h3 id="_목차_response_fields">Response fields</h3>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 33.3333%;">
@@ -545,8 +562,11 @@ Content-Length: 97
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1-SNAPSHOT<br>
-Last updated 2021-07-06 14:54:12 +0900
+Last updated 2021-07-11 03:32:41 +0900
 </div>
 </div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/github.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+<script>hljs.initHighlighting()</script>
 </body>
 </html>

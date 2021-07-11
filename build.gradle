@@ -21,7 +21,6 @@ task copyDocument(type: Copy) {
 	into file("src/main/resources/static/docs")
 }
 
-
 repositories {
 	mavenCentral()
 }
@@ -36,11 +35,14 @@ dependencies {
 
 	implementation 'io.jsonwebtoken:jjwt-api:0.11.2'
 	implementation 'io.jsonwebtoken:jjwt-jackson:0.11.2'
-	implementation 'com.google.code.gson:gson'
     runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.2'
-
+	
+	implementation 'org.mapstruct:mapstruct:1.4.1.Final'
 	compileOnly 'org.projectlombok:lombok'
+	compile group: 'org.projectlombok', name: 'lombok-mapstruct-binding', version: '0.2.0'
 	annotationProcessor 'org.projectlombok:lombok'
+	annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.1.Final'
+
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 	compileOnly 'org.springframework.boot:spring-boot-configuration-processor'
 
@@ -58,24 +60,10 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
 	testImplementation group: 'de.flapdoodle.embed', name: 'de.flapdoodle.embed.mongo', version: '2.2.0'
 
-
-}
-
-ext {
-	snippetsDir = file('build/generated-snippets')
+	implementation group: 'org.mongounit', name: 'mongounit', version: '2.0.1'
 }
 
 test {
 	useJUnitPlatform()
-	outputs.dir snippetsDir
 }
-asciidoctor {
-	inputs.dir snippetsDir
-	dependsOn test
-}
-bootJar {
-	dependsOn asciidoctor
-	from ("${asciidoctor.outputDir}/html5") {
-		into 'static/docs'
-	}
-}
+

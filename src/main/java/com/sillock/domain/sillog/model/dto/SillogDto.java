@@ -20,11 +20,13 @@ public class SillogDto {
 
     private int sequence;
 
-    private List<QnaDto> data;
+    private List<QnaDto> qnaData;
 
     private List<String> image;
 
     private List<String> qualification;
+
+    private LocalDate regDate;
 
     private LocalDate startDate;
 

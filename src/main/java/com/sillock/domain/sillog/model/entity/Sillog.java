@@ -1,9 +1,6 @@
 package com.sillock.domain.sillog.model.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.Id;
@@ -20,20 +17,33 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
+@Getter @Setter
 @Document(collection = "sillog")
 public class Sillog {
     @Id
     private String id;
-    private String author;
-    private String title;
-    private int sequence;
-    private List<Qna> data;
-    private List<String> image;
-    private List<String> qualification;
-    private LocalDate startDate;
-    private LocalDate endDate;
 
+    private String author;
+
+    private String title;
+
+    private int sequence;
+
+    private List<Qna> qnaData;
+
+    private List<String> image;
+
+    private List<String> qualification;
+
+    @Builder.Default
+    private LocalDate regDate = LocalDate.now();
+
+    @Builder.Default
+    private LocalDate modDate = LocalDate.now();
+
+    private LocalDate startDate;
+
+    private LocalDate endDate;
 }
 
 /**
