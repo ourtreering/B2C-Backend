@@ -1,4 +1,4 @@
-= api/sillogs/{eventId} API
+= api/members/{memberId}/sillogs API
 :toc: left
 :toclevels: 3
 :toc-title: 전체리스트 조회
@@ -8,7 +8,7 @@
 
 == 목차
 
-operation::/api/sillogList[snippets='curl-request,http-request,response-body,http-response,response-fields']
+operation::/api/members/{memberId}/sillogs[snippets='curl-request,http-request,response-body,http-response,response-fields']
 
 - 에포크타임스탬프 참고 : https://www.online-toolz.com/langs/ko/tool-ko-date-functions.html
 
