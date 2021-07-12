@@ -4,6 +4,7 @@ import com.sillock.domain.sillog.model.entity.Qna;
 import com.sillock.domain.sillog.model.entity.Sillog;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
+import org.mongounit.AssertMatchesDataset;
 import org.mongounit.LocationType;
 import org.mongounit.MongoUnitTest;
 import org.mongounit.SeedWithDataset;
@@ -12,6 +13,7 @@ import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -22,30 +24,44 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 //@DataMongoTest
 @SpringBootTest
 @MongoUnitTest
-@SeedWithDataset("sillogRepositoryTest-seed.json")
 public class SillogRepositoryTest {
 
     @Autowired
     private SillogRepository sillogRepository;
 
-    @Test
-    public void 입력(){
-        Qna qna = Qna.builder().question("질문").answer("답변").build();
-        Sillog sillog = Sillog.builder().author("author").qnaData(Arrays.asList(qna)).build();
-
-        sillogRepository.save(sillog);
-
-        Optional<Sillog> byId = sillogRepository.findById(sillog.getId());
-        assertEquals(byId.get().getAuthor(), "author");
-        assertEquals(byId.get().getQnaData().get(0).getAnswer(), "답변");
-        System.out.println("Id: " + sillog.getId());
-    }
+    @Autowired
+    private QnaRepository qnaRepository;
 
     @Test
+    @SeedWithDataset("sillogRepositoryTest-seed.json")
     public void Author로_실록_조회() {
 
         List<Sillog> sillogList = sillogRepository.findSillogsByAuthor("sillog");
+        assertEquals(1, sillogList.size());
         assertEquals("60ebdd48a275056ffc4e7a3c", sillogList.get(0).getId());
+    }
+
+    @Test
+    @SeedWithDataset("sillogRepositoryTest-seed.json")
+    @AssertMatchesDataset("sillogRepositoryTest-expected.json")
+    public void Sillog_등록(){
+        Qna qna1 = Qna.builder().question("question").answer("answer").tags(Arrays.asList("study", "volunteer")).build();
+        Qna qna2 = Qna.builder().question("question2").answer("answer2").tags(Arrays.asList("study2", "volunteer2")).build();
+
+        Sillog sillog = Sillog.builder()
+                .author("author")
+                .title("title2")
+                .sequence(1)
+                .qnaData(Arrays.asList(qna1, qna2))
+                .image(Arrays.asList("/src/image"))
+                .qualification(Arrays.asList("/src/qualification"))
+                .regDate(LocalDate.of(2021, 7, 5))
+                .startDate(LocalDate.of(2021, 7, 5))
+                .endDate(LocalDate.of(2021, 7, 12))
+                .build();
+
+        qnaRepository.saveAll(Arrays.asList(qna1, qna2));
+        sillogRepository.save(sillog);
     }
 
 
