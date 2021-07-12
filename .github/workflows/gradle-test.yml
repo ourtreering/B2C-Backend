@@ -9,7 +9,11 @@ on:
 
 jobs:
   build:
-
+    services:
+      mongodb:
+        image: mongo:3.4.23
+        ports:
+          - 27017:27017
     runs-on: ubuntu-latest
 
     steps:
@@ -23,12 +27,4 @@ jobs:
       run: chmod +x gradlew
     - name: Build with Gradle
       run: ./gradlew build test
-    - name: Install MongoDB
-      run: |
-        wget -qO - https://www.mongodb.org/static/pgp/server-3.6.asc | sudo apt-key add -
-        echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.6 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.6.list
-        sudo apt-get update
-        sudo apt-get install -y mongodb-org
-        sudo apt-get install -y mongodb-org=3.6.14 mongodb-org-server=3.6.14 mongodb-org-shell=3.6.14 mongodb-org-mongos=3.6.14 mongodb-org-tools=3.6.14
-    - name: Start MongoDB
-      run: sudo systemctl start mongod
+
