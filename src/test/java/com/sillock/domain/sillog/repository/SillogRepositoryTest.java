@@ -4,13 +4,16 @@ import com.sillock.domain.sillog.model.entity.Qna;
 import com.sillock.domain.sillog.model.entity.Sillog;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
+import org.mongounit.LocationType;
 import org.mongounit.MongoUnitTest;
+import org.mongounit.SeedWithDataset;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -19,6 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 //@DataMongoTest
 @SpringBootTest
 @MongoUnitTest
+@SeedWithDataset("sillogRepositoryTest-seed.json")
 public class SillogRepositoryTest {
 
     @Autowired
@@ -36,5 +40,13 @@ public class SillogRepositoryTest {
         assertEquals(byId.get().getQnaData().get(0).getAnswer(), "답변");
         System.out.println("Id: " + sillog.getId());
     }
+
+    @Test
+    public void Author로_실록_조회() {
+
+        List<Sillog> sillogList = sillogRepository.findSillogsByAuthor("sillog");
+        assertEquals("60ebdd48a275056ffc4e7a3c", sillogList.get(0).getId());
+    }
+
 
 }
