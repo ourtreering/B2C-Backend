@@ -51,13 +51,18 @@ public class MemberController {
 
     @GetMapping(value = "/{memberId}/sillogs")
     @ResponseBody
-    public ResponseDto<List<SillogDto>> readSillogList(@PathVariable Long memberId) {
-
+    public ResponseDto<List<SillogDto>> readSillogList(@PathVariable String memberId) {
         List<Sillog> sillogList = sillogService.getSillogList(memberId);
-
         List<SillogDto> sillogDtoList = sillogList.stream().map(sillogMapper::toDto).collect(Collectors.toList());
-
         return ResponseDto.of(HttpStatus.OK, ResponseMessage.READ_EVENT, sillogDtoList);
+    }
+
+    @GetMapping(value = "/{memberId}/sillogs/{title}")
+    @ResponseBody
+    public ResponseDto<List<SillogDto>> readSillogListBytitle(@PathVariable String memberId, @PathVariable String title) {
+        List<Sillog> sillogListByTitle = sillogService.findSillogTitle(memberId, title);
+        List<SillogDto> sillogDtoListByTitle = sillogListByTitle.stream().map(sillogMapper::toDto).collect(Collectors.toList());
+        return ResponseDto.of(HttpStatus.OK, ResponseMessage.READ_EVENT, sillogDtoListByTitle);
     }
 
     @AllArgsConstructor
