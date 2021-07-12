@@ -2,20 +2,17 @@ package com.sillock.domain.member.controller;
 
 import com.sillock.common.AbstractControllerTest;
 import com.sillock.common.object.BuilderObjects;
-import com.sillock.domain.sillog.model.entity.Qna;
 import com.sillock.domain.sillog.model.entity.Sillog;
+import com.sillock.domain.sillog.repository.SillogRepository;
 import com.sillock.domain.sillog.service.SillogService;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.mockito.stubbing.Answer;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
@@ -34,6 +31,9 @@ public class MemberControllerTest extends AbstractControllerTest {
 
     @MockBean
     private SillogService sillogService;
+
+    @MockBean
+    private SillogRepository sillogRepository;
 
     BuilderObjects builderObjects = new BuilderObjects();
 
@@ -109,27 +109,22 @@ public class MemberControllerTest extends AbstractControllerTest {
         Sillog sillog2_1 = builderObjects.customSillog("글쓴이","제목2",2);
         Sillog sillog3 = builderObjects.customSillog("글쓴이","제목3",2);
 
-        when(sillogService.findSillogTitle(any(), any())).thenReturn(Arrays.asList(sillog,sillog2,sillog2_1,sillog3));
+        when(sillogRepository.findByIdAndTitle(any(),any())).thenReturn(Arrays.asList(sillog2,sillog2_1));
+        when(sillogService.findSillogTitle(any(),any())).thenAnswer((Answer<List<Sillog>>) invocation -> sillogRepository.findByIdAndTitle(any(),any()));
 
         mockMvc.perform(get("/api/members/{memberId}/sillogs/{title}", 1,"제목2")
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].author").value("글쓴이2"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].author").value("글쓴이"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].title").value("제목2"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].sequence").value(1))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].image").value("/src/image2"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].qualification").value("/src/qualification2"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].regDate").value("2021-07-07"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].startDate").value("2021-07-07"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].endDate").value("2021-07-08"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].author").value("글쓴이2"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].image").value("/src/image"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].qualification").value("/src/qualification"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].author").value("글쓴이"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].title").value("제목2"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].sequence").value(2))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].image").value("/src/image"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].qualification").value("/src/qualification2"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].regDate").value("2021-08-07"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].startDate").value("2021-08-07"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].endDate").value("2021-08-08"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].qualification").value("/src/qualification"))
                 .andDo(print())
                 .andDo(document("api/sillogListByTitle",
                         preprocessRequest(prettyPrint()),
