@@ -79,9 +79,6 @@ jobs:
         key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
         restore-keys: |
             ${{ runner.os }}-gradle-
-            
-    - name: Docker run mongoDB
-      run: docker run -d --name mongo-db -v /data:/data/db -p 27017:27017 mongo
       
     - name: Build with Gradle test
       run: ./gradlew test 
