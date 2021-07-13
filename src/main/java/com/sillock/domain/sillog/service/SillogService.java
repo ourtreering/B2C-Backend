@@ -18,7 +18,7 @@ public class SillogService {
     private final QnaRepository qnaRepository;
 
     @Transactional(readOnly = true)
-    public List<Sillog> getSillogList(Long memberId){
+    public List<Sillog> getSillogList(String memberId){
 
         return sillogRepository.findAllById(memberId);
     }
