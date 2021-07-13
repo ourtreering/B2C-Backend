@@ -28,12 +28,8 @@ spec:
           ports:
             - containerPort: 8080
           env:
-            - name: SPRING_DATA_MONGODB_USER
-              value: "$MONGODB_USER"
-            - name: SPRING_DATA_MONGODB_PASSWORD
-              value: "$MONGODB_PASSWORD"
-            - name: SPRING_DATA_MONGODB_DATABASE
-              value: "$MONGODB_DATABASE"
+            - name: SPRING_DATA_MONGODB_URI
+              value: "$SPRING_DATA_MONGODB_URI"
 #      volumes:
 #        - name: content-server-volume
 #          hostPath:
