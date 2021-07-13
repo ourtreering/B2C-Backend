@@ -8,4 +8,5 @@ import java.util.List;
 public interface SillogRepository extends MongoRepository<Sillog, String> {
     List<Sillog> findAllById(String memberId);
     List<Sillog> findByIdAndTitle(String memberId, String title);
+    Sillog findByIdAndTitleAndSequence(String memberId, String title, int sequence);
 }

@@ -53,4 +53,19 @@ public class SillogRepositoryTest {
         assertEquals(myList.get(0).getTitle(), "제목2");
     }
 
+    @Test
+    public void 시퀀스로_조회(){
+        Sillog sillog = builderObjects.basicSillog();
+        Sillog sillog2 = builderObjects.customSillog("글쓴이","제목",2);
+        Sillog sillog3 = builderObjects.customSillog("글쓴이","제목",3);
+        sillogRepository.save(sillog);
+        sillogRepository.save(sillog2);
+        sillogRepository.save(sillog3);
+
+        Sillog sillogBySequence = sillogRepository.findByIdAndTitleAndSequence(sillog2.getId(), sillog2.getTitle(), sillog2.getSequence());
+        assertEquals(sillogBySequence.getAuthor(), "글쓴이");
+        assertEquals(sillogBySequence.getTitle(), "제목");
+        assertEquals(sillogBySequence.getSequence(), 2);
+    }
+
 }
