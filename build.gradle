@@ -58,8 +58,6 @@ dependencies {
 	asciidoctor 'org.springframework.restdocs:spring-restdocs-asciidoctor:2.0.4.RELEASE'
 
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
-	testImplementation group: 'de.flapdoodle.embed', name: 'de.flapdoodle.embed.mongo', version: '2.2.0'
-
 	implementation group: 'org.mongounit', name: 'mongounit', version: '2.0.1'
 }
 

@@ -80,7 +80,7 @@ public class MemberControllerTest extends AbstractControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].startDate").value("2021-07-07"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].endDate").value("2021-07-08"))
                 .andDo(print())
-                .andDo(document("api/sillogList",
+                .andDo(document("api/members/{memberId}/sillogs",
                         preprocessRequest(prettyPrint()),
                         preprocessResponse(prettyPrint()),
                         responseFields(
