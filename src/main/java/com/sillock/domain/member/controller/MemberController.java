@@ -57,13 +57,15 @@ public class MemberController {
         return ResponseDto.of(HttpStatus.OK, ResponseMessage.READ_EVENT, sillogDtoList);
     }
 
-    @GetMapping(value = "/{memberId}/sillogs/{title}")
+    @GetMapping(value = "/{memberId}/sillogs")
     @ResponseBody
-    public ResponseDto<List<SillogDto>> readSillogListBytitle(@PathVariable String memberId, @PathVariable String title) {
+    public ResponseDto<List<SillogDto>> readSillogListBytitle(@PathVariable String memberId, @RequestParam String title) {
         List<Sillog> sillogListByTitle = sillogService.findSillogTitle(memberId, title);
         List<SillogDto> sillogDtoListByTitle = sillogListByTitle.stream().map(sillogMapper::toDto).collect(Collectors.toList());
         return ResponseDto.of(HttpStatus.OK, ResponseMessage.READ_EVENT, sillogDtoListByTitle);
     }
+
+
 
     @AllArgsConstructor
     public class MemberCheckDto {
