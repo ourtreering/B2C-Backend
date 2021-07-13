@@ -105,14 +105,14 @@ jobs:
         docker push "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA"
 
     - name: Replace Environment Variables
-        uses: danielr1996/envsubst-action@1.0.0
-        env:
-          MONGODB_USER: ${{ secrets.MONGODB_USER }}
-          MONGODB_PASSWORD: ${{ secrets.MONGODB_PASSWORD }}
-          MONGODB_DATABASE: ${{ secrets.MONGODB_DATABASE }}
-        with:
-          input: deployment.yml
-          output: deployment.yml
+      uses: danielr1996/envsubst-action@1.0.0
+      env:
+        MONGODB_USER: ${{ secrets.MONGODB_USER }}
+        MONGODB_PASSWORD: ${{ secrets.MONGODB_PASSWORD }}
+        MONGODB_DATABASE: ${{ secrets.MONGODB_DATABASE }}
+      with:
+        input: deployment.yml
+        output: deployment.yml
 
     # Set up kustomize
     - name: Set up Kustomize
