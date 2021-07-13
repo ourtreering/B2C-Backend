@@ -110,7 +110,7 @@ jobs:
         SPRING_DATA_MONGODB_URI: ${{ secrets.SPRING_DATA_MONGODB_URI }}
       with:
         input: deployment.yml
-        output: deployment.yml
+        output: deploy.yml
 
     # Set up kustomize
     - name: Set up Kustomize
