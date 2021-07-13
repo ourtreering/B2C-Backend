@@ -16,8 +16,12 @@ import java.util.List;
 public class SillogService {
     private final SillogRepository sillogRepository;
 
-    public List<Sillog> getSillogList(Long memberId){
-
+    public List<Sillog> getSillogList(String memberId){
         return sillogRepository.findAllById(memberId);
     }
+
+    public List<Sillog> findSillogTitle(String memberId, String title){
+        return  sillogRepository.findByIdAndTitle(memberId, title);
+    }
+
 }
