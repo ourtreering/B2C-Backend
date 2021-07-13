@@ -65,6 +65,9 @@ jobs:
         location: ${{ env.GKE_ZONE }}
         credentials: ${{ secrets.GKE_KEY }}
         
+    - name: Start MongoDB
+      uses: supercharge/mongodb-github-action@1.6.0
+        
     # Set permission
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
