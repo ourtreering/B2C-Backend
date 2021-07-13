@@ -9,4 +9,5 @@ import java.util.Optional;
 public interface SillogRepository extends MongoRepository<Sillog, String> {
     List<Sillog> findAllById(Long memberId);
     List<Sillog> findSillogsByAuthor(String author);
+    List<Sillog> findByIdAndTitle(String memberId, String title);
 }

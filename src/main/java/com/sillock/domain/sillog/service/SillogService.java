@@ -28,4 +28,9 @@ public class SillogService {
         qnaRepository.saveAll(sillog.getQnaData());
         sillogRepository.save(sillog);
     }
+
+    public List<Sillog> findSillogTitle(String memberId, String title){
+        return  sillogRepository.findByIdAndTitle(memberId, title);
+    }
+
 }

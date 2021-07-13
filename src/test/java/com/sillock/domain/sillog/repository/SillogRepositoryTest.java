@@ -1,5 +1,6 @@
 package com.sillock.domain.sillog.repository;
 
+import com.sillock.common.object.BuilderObjects;
 import com.sillock.domain.sillog.model.entity.Qna;
 import com.sillock.domain.sillog.model.entity.Sillog;
 import org.junit.jupiter.api.Test;
@@ -31,6 +32,9 @@ public class SillogRepositoryTest {
 
     @Autowired
     private QnaRepository qnaRepository;
+
+    BuilderObjects builderObjects = new BuilderObjects();
+
 
     @Test
     @SeedWithDataset("sillogRepositoryTest-seed.json")
@@ -64,5 +68,17 @@ public class SillogRepositoryTest {
         sillogRepository.save(sillog);
     }
 
+
+    @Test
+    public void 이름으로_조회(){
+        Sillog sillog = builderObjects.basicSillog();
+        Sillog sillog2 = builderObjects.customSillog("글쓴이","제목2",1);
+        sillogRepository.save(sillog);
+        sillogRepository.save(sillog2);
+
+        List<Sillog> myList = sillogRepository.findByIdAndTitle(sillog2.getId(), sillog2.getTitle());
+        assertEquals(myList.get(0).getAuthor(), "글쓴이");
+        assertEquals(myList.get(0).getTitle(), "제목2");
+    }
 
 }
