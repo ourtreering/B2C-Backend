@@ -1,4 +1,4 @@
-= /api/members/{memberId}/sillogs/{title} API
+= /api/members/{memberId}/sillogs?title="행사제목" API
 :toc: left
 :toclevels: 3
 :toc-title: 행사이름 리스트 검색조회

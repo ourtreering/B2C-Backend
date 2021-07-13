@@ -542,27 +542,32 @@ Cache-Control: no-cache, no-store, max-age=0, must-revalidate
 Pragma: no-cache
 Expires: 0
 Content-Type: application/json
-Content-Length: 508
+Content-Length: 635
 
 {
   "status" : 201,
   "message" : "실록 등록이 완료되었습니다.",
   "data" : {
+    "id" : null,
     "author" : "sillog",
     "title" : "제목",
     "sequence" : 1,
     "qnaData" : [ {
+      "id" : null,
       "question" : "질문",
       "answer" : "답변",
-      "tags" : [ "교육", "봉사" ]
+      "tags" : [ "교육", "봉사" ],
+      "regDate" : null,
+      "modDate" : "2021-07-13"
     } ],
     "image" : [ "/src/image" ],
     "qualification" : [ "/src/qualification" ],
     "regDate" : "2021-07-05",
+    "modDate" : "2021-07-13",
     "startDate" : "2021-07-05",
     "endDate" : "2021-07-12"
   },
-  "timestamp" : 1625983790320
+  "timestamp" : 1626110281506
 }</code></pre>
 </div>
 </div>
@@ -657,7 +662,7 @@ Content-Length: 508
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1-SNAPSHOT<br>
-Last updated 2021-07-12 01:01:03 +0900
+Last updated 2021-07-12 01:15:26 +0900
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/github.min.css">
