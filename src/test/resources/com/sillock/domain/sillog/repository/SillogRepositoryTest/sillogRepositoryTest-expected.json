@@ -23,9 +23,6 @@
     "_class" : "com.sillock.domain.sillog.model.entity.Qna",
     "tags" : [ "±³À°2", "ºÀ»ç2" ]
   }, {
-    "modDate" : {
-      "$$DATE_TIME" : "2021-07-12T00:00:00.000Z"
-    },
     "question" : "question",
     "answer" : "answer",
     "_id" : {
@@ -35,9 +32,6 @@
     "_class" : "com.sillock.domain.sillog.model.entity.Qna",
     "tags" : [ "study", "volunteer" ]
   }, {
-    "modDate" : {
-      "$$DATE_TIME" : "2021-07-12T00:00:00.000Z"
-    },
     "question" : "question2",
     "answer" : "answer2",
     "_id" : {
@@ -99,16 +93,10 @@
         "comparator" : "!="
       }
     } ],
-    "modDate" : {
-      "$$DATE_TIME" : "2021-07-12T00:00:00.000Z"
-    },
     "endDate" : {
       "$$DATE_TIME" : "2021-07-12T00:00:00.000Z"
     },
     "author" : "author",
-    "regDate" : {
-      "$$DATE_TIME" : "2021-07-05T00:00:00.000Z"
-    },
     "_id" : {
       "$$OBJECT_ID" : "60ebf4e630dccb20cfff5982",
       "comparator" : "!="

@@ -68,17 +68,4 @@ public class SillogRepositoryTest {
         sillogRepository.save(sillog);
     }
 
-
-    @Test
-    public void 이름으로_조회(){
-        Sillog sillog = builderObjects.basicSillog();
-        Sillog sillog2 = builderObjects.customSillog("글쓴이","제목2",1);
-        sillogRepository.save(sillog);
-        sillogRepository.save(sillog2);
-
-        List<Sillog> myList = sillogRepository.findByIdAndTitle(sillog2.getId(), sillog2.getTitle());
-        assertEquals(myList.get(0).getAuthor(), "글쓴이");
-        assertEquals(myList.get(0).getTitle(), "제목2");
-    }
-
 }
