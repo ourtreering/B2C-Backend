@@ -8,11 +8,11 @@ import com.sillock.domain.member.model.dto.MemberDto;
 import com.sillock.domain.member.model.entity.Member;
 import com.sillock.domain.member.service.MemberService;
 import com.sillock.domain.sillog.model.component.SillogMapper;
+import com.sillock.domain.sillog.model.dto.SillogBySequenceDto;
 import com.sillock.domain.sillog.model.dto.SillogDto;
 import com.sillock.domain.sillog.model.entity.Sillog;
 import com.sillock.domain.sillog.service.SillogService;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -60,9 +60,16 @@ public class MemberController {
     @GetMapping(value = "/{memberId}/sillogs/{title}")
     @ResponseBody
     public ResponseDto<List<SillogDto>> readSillogListBytitle(@PathVariable String memberId, @PathVariable String title) {
-        List<Sillog> sillogListByTitle = sillogService.findSillogTitle(memberId, title);
+        List<Sillog> sillogListByTitle = sillogService.findSillogByTitle(memberId, title);
         List<SillogDto> sillogDtoListByTitle = sillogListByTitle.stream().map(sillogMapper::toDto).collect(Collectors.toList());
         return ResponseDto.of(HttpStatus.OK, ResponseMessage.READ_EVENT, sillogDtoListByTitle);
+    }
+
+    @GetMapping(value = "/{memberId}/sillogs/{title}/{sequence}")
+    @ResponseBody
+    public ResponseDto<SillogBySequenceDto> readSillogListBySequence(@PathVariable String memberId, @PathVariable String title, @PathVariable int sequence) {
+        SillogBySequenceDto sillogBySequenceDto = sillogService.findSillogBySequence(memberId, title, sequence);
+        return ResponseDto.of(HttpStatus.OK, ResponseMessage.READ_EVENT,sillogBySequenceDto);
     }
 
     @AllArgsConstructor
