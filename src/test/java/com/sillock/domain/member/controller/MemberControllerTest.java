@@ -110,7 +110,7 @@ public class MemberControllerTest extends AbstractControllerTest {
         Sillog sillog3 = builderObjects.customSillog("글쓴이","제목3",2);
 
         when(sillogRepository.findByIdAndTitle(any(),any())).thenReturn(Arrays.asList(sillog2,sillog2_1));
-        when(sillogService.findSillogTitle(any(),any())).thenAnswer((Answer<List<Sillog>>) invocation -> sillogRepository.findByIdAndTitle(any(),any()));
+        when(sillogService.findSillogByTitle(any(),any())).thenAnswer((Answer<List<Sillog>>) invocation -> sillogRepository.findByIdAndTitle(any(),any()));
 
         mockMvc.perform(get("/api/members/{memberId}/sillogs/{title}", 1,"제목2")
                 .accept(MediaType.APPLICATION_JSON))
