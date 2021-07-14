@@ -14,6 +14,7 @@ import com.sillock.domain.sillog.model.entity.Sillog;
 import com.sillock.domain.sillog.service.SillogService;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.java.Log;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -49,25 +50,28 @@ public class MemberController {
         return ResponseEntity.ok(memberDto);
     }
 
+    /*실록태그 생기면 사용할 코드 - sillogService 코드도 동일*/
+//    @GetMapping(value = "/{memberId}/sillogs")
+//    @ResponseBody
+//    public ResponseDto<List<SillogDto>> readSillogList(@PathVariable Long memberId,
+//    @RequestParam(required = false) String title, @RequestParam(required = false) String tag) {
+//        List<Sillog> sillogListByTitle = sillogService.findSillogList(memberId, title, tag);
+//        List<SillogDto> sillogDtoListByTitle = sillogListByTitle.stream().map(sillogMapper::toDto).collect(Collectors.toList());
+//        return ResponseDto.of(HttpStatus.OK, ResponseMessage.READ_EVENT, sillogDtoListByTitle);
+//    }
+
+    /*실록 태그가 없어서 임시로 사용하는 코드*/
     @GetMapping(value = "/{memberId}/sillogs")
     @ResponseBody
-    public ResponseDto<List<SillogDto>> readSillogList(@PathVariable String memberId) {
-        List<Sillog> sillogList = sillogService.getSillogList(memberId);
-        List<SillogDto> sillogDtoList = sillogList.stream().map(sillogMapper::toDto).collect(Collectors.toList());
-        return ResponseDto.of(HttpStatus.OK, ResponseMessage.READ_EVENT, sillogDtoList);
-    }
-
-    @GetMapping(value = "/{memberId}/sillogs/{title}")
-    @ResponseBody
-    public ResponseDto<List<SillogDto>> readSillogListBytitle(@PathVariable String memberId, @PathVariable String title) {
-        List<Sillog> sillogListByTitle = sillogService.findSillogByTitle(memberId, title);
+    public ResponseDto<List<SillogDto>> readSillogList(@PathVariable Long memberId, @RequestParam(required = false) String title) {
+        List<Sillog> sillogListByTitle = sillogService.findSillogList(memberId, title);
         List<SillogDto> sillogDtoListByTitle = sillogListByTitle.stream().map(sillogMapper::toDto).collect(Collectors.toList());
         return ResponseDto.of(HttpStatus.OK, ResponseMessage.READ_EVENT, sillogDtoListByTitle);
     }
 
     @GetMapping(value = "/{memberId}/sillogs/{title}/{sequence}")
     @ResponseBody
-    public ResponseDto<SillogBySequenceDto> readSillogListBySequence(@PathVariable String memberId, @PathVariable String title, @PathVariable int sequence) {
+    public ResponseDto<SillogBySequenceDto> readSillogListBySequence(@PathVariable Long memberId, @PathVariable String title, @PathVariable int sequence) {
         SillogBySequenceDto sillogBySequenceDto = sillogService.findSillogBySequence(memberId, title, sequence);
         return ResponseDto.of(HttpStatus.OK, ResponseMessage.READ_EVENT,sillogBySequenceDto);
     }
