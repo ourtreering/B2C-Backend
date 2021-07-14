@@ -1,6 +1,7 @@
 package com.sillock.domain.sillog.model.entity;
 
 import lombok.*;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.Id;
@@ -18,6 +19,8 @@ public class Qna {
     private String question;
     private String answer;
     private List<String> tags;
+
+    @Indexed
     private LocalDate regDate;
 
     @Builder.Default

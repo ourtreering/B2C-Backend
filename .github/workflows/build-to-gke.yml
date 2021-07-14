@@ -65,6 +65,9 @@ jobs:
         location: ${{ env.GKE_ZONE }}
         credentials: ${{ secrets.GKE_KEY }}
         
+    - name: Start MongoDB
+      uses: supercharge/mongodb-github-action@1.6.0
+        
     # Set permission
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
@@ -100,6 +103,14 @@ jobs:
     - name: Publish
       run: |-
         docker push "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA"
+
+    - name: Replace Environment Variables
+      uses: danielr1996/envsubst-action@1.0.0
+      env:
+        SPRING_DATA_MONGODB_URI: ${{ secrets.SPRING_DATA_MONGODB_URI }}
+      with:
+        input: deployment.yml
+        output: deploy.yml
 
     # Set up kustomize
     - name: Set up Kustomize

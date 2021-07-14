@@ -16,6 +16,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import java.time.LocalDate;
 import java.util.Arrays;
 
+import static com.sillock.common.message.ResponseMessage.REGISTER_SILLOG;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
@@ -54,16 +55,7 @@ public class SillogControllerTest extends AbstractControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.author").value("sillog")) // (5)
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.title").value("제목"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.sequence").value(1))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.qnaData[0].question").value("질문"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.qnaData[0].answer").value("답변"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.qnaData[0].tags[0]").value("교육"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.image").value("/src/image"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.qualification").value("/src/qualification"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.startDate").value("2021-07-05"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.endDate").value("2021-07-12"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value(REGISTER_SILLOG)) // (5)
                 .andDo(print())
                 .andDo(document("api/sillogs",
                         preprocessRequest(prettyPrint()),

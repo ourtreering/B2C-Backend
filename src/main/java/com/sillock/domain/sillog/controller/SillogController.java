@@ -24,11 +24,11 @@ public class SillogController {
 
 
     @PostMapping
-    public ResponseDto<Sillog> register(@RequestBody SillogDto sillogDto) {
-
+    public ResponseDto register(@RequestBody SillogDto sillogDto) {
         Sillog sillog = sillogMapper.toEntity(sillogDto);
-
-        return ResponseDto.of(HttpStatus.CREATED, ResponseMessage.REGISTER_SILLOG, sillog);
+        sillogService.register(sillog);
+        return ResponseDto.of(HttpStatus.CREATED, ResponseMessage.REGISTER_SILLOG);
     }
+
 
 }
