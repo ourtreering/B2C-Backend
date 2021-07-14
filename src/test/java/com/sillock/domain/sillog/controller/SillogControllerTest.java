@@ -4,8 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sillock.common.AbstractControllerTest;
 import com.sillock.domain.sillog.model.dto.QnaDto;
 import com.sillock.domain.sillog.model.dto.SillogDto;
-import com.sillock.domain.sillog.model.entity.Qna;
-import com.sillock.domain.sillog.model.entity.Sillog;
 import com.sillock.domain.sillog.service.SillogService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -17,12 +15,9 @@ import java.time.LocalDate;
 import java.util.Arrays;
 
 import static com.sillock.common.message.ResponseMessage.REGISTER_SILLOG;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
@@ -32,7 +27,6 @@ public class SillogControllerTest extends AbstractControllerTest {
 
     @Mock
     private SillogService sillogService;
-
     @Test
     public void 실록_등록_테스트() throws Exception {
         QnaDto qnaDto = QnaDto.builder().question("질문").answer("답변").tags(Arrays.asList("교육", "봉사")).build();
@@ -61,6 +55,7 @@ public class SillogControllerTest extends AbstractControllerTest {
                         preprocessRequest(prettyPrint()),
                         preprocessResponse(prettyPrint()),
                         requestFields(
+                                fieldWithPath("memberId").description("유저아이디"),
                                 fieldWithPath("author").description("글쓴이"),
                                 fieldWithPath("title").description("제목"),
                                 fieldWithPath("sequence").description("처음 쓸 경우 1, 이어쓸 경우 시퀀스"),
@@ -75,4 +70,5 @@ public class SillogControllerTest extends AbstractControllerTest {
                         )
                 ));
     }
+
 }

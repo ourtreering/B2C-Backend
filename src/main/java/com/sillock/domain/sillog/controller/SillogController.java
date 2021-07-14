@@ -27,7 +27,6 @@ public class SillogController {
     public ResponseDto register(@RequestBody SillogDto sillogDto) {
         Sillog sillog = sillogMapper.toEntity(sillogDto);
         sillogService.register(sillog);
-
         return ResponseDto.of(HttpStatus.CREATED, ResponseMessage.REGISTER_SILLOG);
     }
 

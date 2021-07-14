@@ -1,19 +1,16 @@
 package com.sillock.domain.sillog.model.dto;
 
-import com.sillock.domain.sillog.model.entity.Qna;
 import lombok.*;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.List;
 
 @Builder
-@Getter @Setter
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class SillogDto {
-
+public class SillogBySequenceDto {
     private Long memberId;
 
     private String author;
@@ -21,6 +18,8 @@ public class SillogDto {
     private String title;
 
     private int sequence;
+
+    private int maxSequence;
 
     private List<QnaDto> qnaData;
 

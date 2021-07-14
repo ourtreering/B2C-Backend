@@ -1,7 +1,6 @@
 package com.sillock.domain.sillog.model.entity;
 
 import lombok.*;
-import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -25,6 +24,8 @@ import java.util.List;
 public class Sillog {
     @Id
     private String id;
+
+    private Long memberId;
 
     private String author;
 

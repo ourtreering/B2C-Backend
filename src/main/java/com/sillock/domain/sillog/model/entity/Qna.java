@@ -1,7 +1,6 @@
 package com.sillock.domain.sillog.model.entity;
 
 import lombok.*;
-import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 

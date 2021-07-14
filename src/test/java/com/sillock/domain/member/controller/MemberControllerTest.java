@@ -7,6 +7,8 @@ import com.sillock.domain.sillog.repository.SillogRepository;
 import com.sillock.domain.sillog.service.SillogService;
 import org.junit.jupiter.api.Test;
 import org.mockito.stubbing.Answer;
+import org.mongounit.MongoUnitTest;
+import org.mongounit.SeedWithDataset;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -27,6 +29,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 /**
  * created by hyunwoo 21/06/22
  */
+@MongoUnitTest
 public class MemberControllerTest extends AbstractControllerTest {
 
     @MockBean
@@ -47,25 +50,21 @@ public class MemberControllerTest extends AbstractControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.email").value("test@gmail.com"))
                 .andDo(print())
                 .andDo(document("member/test",
-                preprocessRequest(prettyPrint()),
-                preprocessResponse(prettyPrint()),
-                responseFields(
-                        fieldWithPath("memberId").description("member unique id"),
-                        fieldWithPath("name").description("name"),
-                        fieldWithPath("email").description("email"),
-                        fieldWithPath("identifier").description("identifier"),
-                        fieldWithPath("uniqueCode").description("uniqueCode")
-                )
-        ));
+                        preprocessRequest(prettyPrint()),
+                        preprocessResponse(prettyPrint()),
+                        responseFields(
+                                fieldWithPath("memberId").description("member unique id"),
+                                fieldWithPath("name").description("name"),
+                                fieldWithPath("email").description("email"),
+                                fieldWithPath("identifier").description("identifier"),
+                                fieldWithPath("uniqueCode").description("uniqueCode")
+                        )
+                ));
     }
 
     @Test
     public void 사용자_실록_조회_테스트() throws Exception{
-        Sillog sillog = builderObjects.basicSillog();
-
-        when(sillogService.getSillogList(any())).thenReturn(Arrays.asList(sillog,sillog));
-
-        mockMvc.perform(get("/api/members/{memberId}/sillogs", 1)
+        mockMvc.perform(get("/api/members/{memberId}/sillogs", 1, null)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].author").value("글쓴이"))
@@ -80,12 +79,13 @@ public class MemberControllerTest extends AbstractControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].startDate").value("2021-07-07"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].endDate").value("2021-07-08"))
                 .andDo(print())
-                .andDo(document("api/members/{memberId}/sillogs",
+                .andDo(document("api/sillogList",
                         preprocessRequest(prettyPrint()),
                         preprocessResponse(prettyPrint()),
                         responseFields(
                                 fieldWithPath("status").description("HttpStatus"),
                                 fieldWithPath("message").description("메세지"),
+                                fieldWithPath("data.[].memberId").description("유저아이디"),
                                 fieldWithPath("data.[].author").description("글쓴이"),
                                 fieldWithPath("data.[].title").description("제목"),
                                 fieldWithPath("data.[].sequence").description("처음 쓸 경우 1, 이어쓸 경우 시퀀스"),
@@ -104,15 +104,7 @@ public class MemberControllerTest extends AbstractControllerTest {
 
     @Test
     public void 사용자_실록_동일이름_행사조회_테스트() throws Exception {
-        Sillog sillog = builderObjects.basicSillog();
-        Sillog sillog2 = builderObjects.customSillog("글쓴이","제목2",1);
-        Sillog sillog2_1 = builderObjects.customSillog("글쓴이","제목2",2);
-        Sillog sillog3 = builderObjects.customSillog("글쓴이","제목3",2);
-
-        when(sillogRepository.findByIdAndTitle(any(),any())).thenReturn(Arrays.asList(sillog2,sillog2_1));
-        when(sillogService.findSillogTitle(any(),any())).thenAnswer((Answer<List<Sillog>>) invocation -> sillogRepository.findByIdAndTitle(any(),any()));
-
-        mockMvc.perform(get("/api/members/{memberId}/sillogs/{title}", 1,"제목2")
+        mockMvc.perform(get("/api/members/{memberId}/sillogs", 1,"title")
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].author").value("글쓴이"))

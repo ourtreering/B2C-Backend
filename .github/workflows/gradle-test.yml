@@ -1,6 +1,4 @@
-
 name: Gradle with Test
-
 on:
   workflow_dispatch:
     inputs:
@@ -12,11 +10,9 @@ on:
         description: 'Test scenario tags'
   pull_request:
     branches: [ main, develop ]
-
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v2
       - name: Set up JDK 11
@@ -26,12 +22,10 @@ jobs:
           distribution: 'adopt'
       - name: Shutdown Ubuntu MongoDB (SUDO)
         run: sudo service mongod stop # Shutdown the Default MongoDB, "sudo" is necessary, please not remove it
-          
+        read/title-sequence
       - name: Start MongoDB
         uses: supercharge/mongodb-github-action@1.6.0
-        
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
       - name: Build with Gradle
         run: ./gradlew build test
-

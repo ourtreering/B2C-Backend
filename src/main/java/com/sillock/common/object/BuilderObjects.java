@@ -9,7 +9,7 @@ import java.util.Arrays;
 public class BuilderObjects {
 
     public Qna basicQna(){
-        return Qna.builder().question("첫번째 질문입니다.").answer("첫번째 답변입니다.").tags(Arrays.asList("tag1", "tag2")).build();
+        return Qna.builder().id("1").question("첫번째 질문입니다.").answer("첫번째 답변입니다.").tags(Arrays.asList("tag1", "tag2")).build();
     }
 
     public Sillog basicSillog(){
@@ -26,6 +26,13 @@ public class BuilderObjects {
     public Sillog customSillog(String author, String title, int sequence){
         Qna qna = this.basicQna();
         return Sillog.builder().author(author).title(title).sequence(sequence).qnaData(Arrays.asList(qna))
+                .image(Arrays.asList("/src/image")).qualification(Arrays.asList("/src/qualification")).regDate(LocalDate.of(2021, 7, 7))
+                .startDate(LocalDate.of(2021, 7, 7)).endDate(LocalDate.of(2021, 7, 8)).build();
+    }
+
+    public Sillog customSillogById(String id, String author, String title, int sequence){
+        Qna qna = this.basicQna();
+        return Sillog.builder().id(id).author(author).title(title).sequence(sequence).qnaData(Arrays.asList(qna))
                 .image(Arrays.asList("/src/image")).qualification(Arrays.asList("/src/qualification")).regDate(LocalDate.of(2021, 7, 7))
                 .startDate(LocalDate.of(2021, 7, 7)).endDate(LocalDate.of(2021, 7, 8)).build();
     }
