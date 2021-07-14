@@ -15,11 +15,6 @@ on:
 
 jobs:
   build:
-    services:
-      mongodb:
-        image: mongo:3.4.23
-        ports:
-          - 27017:27017
     runs-on: ubuntu-latest
 
     steps:
@@ -29,6 +24,8 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
+      - name: Shutdown Ubuntu MongoDB (SUDO)
+        run: sudo service mongod stop # Shutdown the Default MongoDB, "sudo" is necessary, please not remove it
           
       - name: Start MongoDB
         uses: supercharge/mongodb-github-action@1.6.0
@@ -37,4 +34,3 @@ jobs:
         run: chmod +x gradlew
       - name: Build with Gradle
         run: ./gradlew build test
-
