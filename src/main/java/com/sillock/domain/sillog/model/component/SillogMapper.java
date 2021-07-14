@@ -11,5 +11,6 @@ public interface SillogMapper {
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "modDate", ignore = true)
+    @Mapping(target = "memberId", ignore = true)
     Sillog toEntity(SillogDto sillogDto);
 }

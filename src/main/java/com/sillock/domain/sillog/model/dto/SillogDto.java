@@ -14,6 +14,8 @@ import java.util.List;
 @AllArgsConstructor
 public class SillogDto {
 
+    private Long memberId;
+
     private String author;
 
     private String title;

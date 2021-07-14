@@ -11,6 +11,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SillogBySequenceDto {
+    private Long memberId;
+
     private String author;
 
     private String title;

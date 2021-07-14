@@ -1,6 +1,8 @@
 package com.sillock.domain.sillog.model.entity;
 
 import lombok.*;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.Id;
@@ -23,18 +25,22 @@ public class Sillog {
     @Id
     private String id;
 
+    private Long memberId;
+
     private String author;
 
     private String title;
 
     private int sequence;
 
+    @DBRef
     private List<Qna> qnaData;
 
     private List<String> image;
 
     private List<String> qualification;
 
+    @Indexed
     @Builder.Default
     private LocalDate regDate = LocalDate.now();
 
