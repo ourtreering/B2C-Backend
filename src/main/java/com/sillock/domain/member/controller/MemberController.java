@@ -3,6 +3,7 @@ package com.sillock.domain.member.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.sillock.common.dto.ResponseDto;
 import com.sillock.common.message.ResponseMessage;
+import com.sillock.common.object.BuilderObjects;
 import com.sillock.core.auth.jwt.dto.TokenDto;
 import com.sillock.domain.member.model.dto.MemberDto;
 import com.sillock.domain.member.model.entity.Member;
@@ -19,6 +20,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,6 +33,7 @@ public class MemberController {
     private final MemberService memberService;
     private final SillogService sillogService;
     private final SillogMapper sillogMapper;
+    BuilderObjects builderObjects = new BuilderObjects();
 
     @GetMapping(value = "/{memberId}")
     public ResponseEntity<Member> getMember(@PathVariable Long memberId){
@@ -64,7 +68,10 @@ public class MemberController {
     @GetMapping(value = "/{memberId}/sillogs")
     @ResponseBody
     public ResponseDto<List<SillogDto>> readSillogList(@PathVariable Long memberId, @RequestParam(required = false) String title) {
-        List<Sillog> sillogListByTitle = sillogService.findSillogList(memberId, title);
+        Sillog sillog = new Sillog();
+        if(title == null) sillog = builderObjects.customSillog(memberId, "제목");
+        else sillog = builderObjects.customSillog(memberId, title);
+        List<Sillog> sillogListByTitle = Arrays.asList(sillog,sillog);
         List<SillogDto> sillogDtoListByTitle = sillogListByTitle.stream().map(sillogMapper::toDto).collect(Collectors.toList());
         return ResponseDto.of(HttpStatus.OK, ResponseMessage.READ_EVENT, sillogDtoListByTitle);
     }

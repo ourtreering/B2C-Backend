@@ -12,9 +12,12 @@ import org.mongounit.SeedWithDataset;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
@@ -64,10 +67,10 @@ public class MemberControllerTest extends AbstractControllerTest {
 
     @Test
     public void 사용자_실록_조회_테스트() throws Exception{
-        mockMvc.perform(get("/api/members/{memberId}/sillogs", 1, null)
+        mockMvc.perform(get("/api/members/{memberId}/sillogs", 1)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].author").value("글쓴이"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].author").value("sillog"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].title").value("제목"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].sequence").value(1))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].qnaData[0].question").value("첫번째 질문입니다."))
@@ -104,17 +107,17 @@ public class MemberControllerTest extends AbstractControllerTest {
 
     @Test
     public void 사용자_실록_동일이름_행사조회_테스트() throws Exception {
-        mockMvc.perform(get("/api/members/{memberId}/sillogs", 1,"title")
+        mockMvc.perform(get("/api/members/{memberId}/sillogs",1,"제목")
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].author").value("글쓴이"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].title").value("제목2"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].author").value("sillog"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].title").value("제목"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].sequence").value(1))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].image").value("/src/image"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].qualification").value("/src/qualification"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].author").value("글쓴이"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].title").value("제목2"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].sequence").value(2))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].author").value("sillog"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].title").value("제목"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].sequence").value(1))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].image").value("/src/image"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].qualification").value("/src/qualification"))
                 .andDo(print())
@@ -124,6 +127,7 @@ public class MemberControllerTest extends AbstractControllerTest {
                         responseFields(
                                 fieldWithPath("status").description("HttpStatus"),
                                 fieldWithPath("message").description("메세지"),
+                                fieldWithPath("data.[].memberId").description("유저아이디"),
                                 fieldWithPath("data.[].author").description("글쓴이"),
                                 fieldWithPath("data.[].title").description("제목은 모두 동일"),
                                 fieldWithPath("data.[].sequence").description("처음 쓸 경우 1, 이어쓸 경우 시퀀스"),
