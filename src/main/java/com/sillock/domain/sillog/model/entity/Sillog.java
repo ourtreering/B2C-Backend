@@ -8,6 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.Id;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -45,7 +46,7 @@ public class Sillog {
 
     private List<String> file;
 
-    private List<LocalDate> dateList;
+    private List<LocalDateTime> dateList;
 
     private String memo;
 
