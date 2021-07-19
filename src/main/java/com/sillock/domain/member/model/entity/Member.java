@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Builder
@@ -20,25 +21,23 @@ public class Member {
     @Column(name="member_id", nullable = false)
     private Long memberId;
 
-    @Column(name="identifier", nullable = false)
-    private String identifier;
+    @Column(name="nick_name", nullable = false)
+    private String nickName;
 
-    @Column(name="email", length = 255, nullable = false)
+    @Column(name="email", length = 30, nullable = false)
     private String email;
 
-    @Builder.Default
-    @Column(name = "is_active", nullable = false)
-    private Boolean isActive = true;
+    @Column(name="password", length = 20, nullable = false)
+    private String password;
 
-    @Column(name="name", length = 15, nullable = false)
-    private String name;
+    @Column(name="birth", nullable = false)
+    private LocalDate birth;
 
-    @Column(name="unique_code", length = 7, nullable = false)
-    private String uniqueCode;
+    @Column(name="profile_image", nullable = false)
+    private String profileImage;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name="role", length = 20, nullable = false)
-    private Role role;
+    @Column(name="gender", nullable = false)
+    private String gender;
 
     @Builder.Default
     @Column(name = "reg_date", nullable = false)
