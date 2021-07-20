@@ -1,10 +1,7 @@
 package com.sillock.domain.sillog.model.dto;
 
-import com.sillock.domain.sillog.model.entity.Qna;
 import lombok.*;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -13,24 +10,15 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SillogDto {
-
     private Long memberId;
-
     private String author;
-
     private String title;
-
-    private int sequence;
-
+    private String nextSequence;
+    private String previousSequence;
     private List<QnaDto> qnaData;
-
+    private List<TagDto> tagData;
     private List<String> image;
-
-    private List<String> qualification;
-
-    private LocalDate regDate;
-
-    private LocalDate startDate;
-
-    private LocalDate endDate;
+    private List<String> file;
+    private List<LocalDate> dateList;
+    private String memo;
 }

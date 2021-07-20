@@ -2,9 +2,7 @@ package com.sillock.domain.member.model.dto;
 
 import lombok.*;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import java.time.LocalDate;
 
 
 @Builder
@@ -12,21 +10,11 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MemberDto {
-
     private Long memberId;
-
-    private String identifier;
-
-    @Email
-    @NotNull
     private String email;
-
-    @NotNull
-    @Size(min=1, max=15)
-    private String name;
-
-    @NotNull
-    @Size(min=1, max=7)
-    private String uniqueCode;
-
+    private String nickName;
+    private String password;
+    private LocalDate birth;
+    private String profileImage;
+    private String gender;
 }

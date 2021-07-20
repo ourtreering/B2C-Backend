@@ -25,20 +25,27 @@ public class Sillog {
     @Id
     private String id;
 
-    private Long memberId;
-
     private String author;
 
     private String title;
 
-    private int sequence;
+    private String nextSequence;
+
+    private String previousSequence;
 
     @DBRef
     private List<Qna> qnaData;
 
+    @DBRef
+    private List<Tag> tagData;
+
     private List<String> image;
 
-    private List<String> qualification;
+    private List<String> file;
+
+    private List<LocalDate> dateList;
+
+    private String memo;
 
     @Indexed
     @Builder.Default
@@ -46,10 +53,6 @@ public class Sillog {
 
     @Builder.Default
     private LocalDate modDate = LocalDate.now();
-
-    private LocalDate startDate;
-
-    private LocalDate endDate;
 }
 
 /**
