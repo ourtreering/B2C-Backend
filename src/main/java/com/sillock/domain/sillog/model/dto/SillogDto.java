@@ -3,7 +3,6 @@ package com.sillock.domain.sillog.model.dto;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Builder
@@ -20,6 +19,6 @@ public class SillogDto {
     private List<TagDto> tagData;
     private List<String> image;
     private List<String> file;
-    private List<LocalDateTime> dateList;
+    private List<LocalDate> dateList;
     private String memo;
 }
