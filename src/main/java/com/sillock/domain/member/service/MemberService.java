@@ -17,8 +17,8 @@ public class MemberService {
     private final SocialService socialService;
 
     @Transactional(readOnly = true)
-    public Member findById(Long memberId){
-        return memberRepository.findById(memberId)
+    public Member findById(String memberId){
+        return memberRepository.findByMemberId(memberId)
                 .orElseThrow(()->new BadRequestException("존재하지 않은 사용자에 대한 요청입니다."));
     }
 

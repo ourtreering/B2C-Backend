@@ -3,7 +3,6 @@ package com.sillock.domain.sillog.service;
 
 import com.sillock.domain.sillog.model.component.QnaMapper;
 import com.sillock.domain.sillog.model.dto.QnaDto;
-import com.sillock.domain.sillog.model.dto.SillogBySequenceDto;
 import com.sillock.domain.sillog.model.entity.Sillog;
 import com.sillock.domain.sillog.repository.QnaRepository;
 import com.sillock.domain.sillog.repository.SillogRepository;
@@ -24,7 +23,7 @@ public class SillogService {
     private final QnaRepository qnaRepository;
 
     @Transactional(readOnly = true)
-    public List<Sillog> getSillogList(Long memberId){
+    public List<Sillog> getSillogList(String memberId){
         return sillogRepository.findAllByMemberId(memberId);
     }
 
@@ -45,29 +44,10 @@ public class SillogService {
 
     /* 임시로 태그 없이 멤버id와 title만 사용하는 코드. tag생기면 삭제예정 */
     @Transactional(readOnly = true)
-    public List<Sillog> findSillogList(Long memberId, String title){
+    public List<Sillog> findSillogList(String memberId, String title){
         if(title == null) return sillogRepository.findAllByMemberId(memberId);
         else return sillogRepository.findByMemberIdAndTitle(memberId, title);
     }
 
-    @Transactional(readOnly = true)
-    public SillogBySequenceDto findSillogBySequence(Long memberId, String title, int sequence) {
-        List<Sillog> sillogListByTitle = this.findSillogList(memberId,title);
-        int maxSequence = sillogListByTitle.size();
 
-        Sillog sillogBySequence = sillogRepository.findByMemberIdAndTitleAndSequence(memberId,title,sequence);
-        List<QnaDto> qnaDto = sillogBySequence.getQnaData().stream().map(qnaMapper::toDto).collect(Collectors.toList());
-        return SillogBySequenceDto.builder()
-                .author(sillogBySequence.getAuthor())
-                .title(sillogBySequence.getTitle())
-                .sequence(sillogBySequence.getSequence())
-                .maxSequence(maxSequence)
-                .qnaData(qnaDto)
-                .image(sillogBySequence.getImage())
-                .qualification(sillogBySequence.getQualification())
-                .regDate(sillogBySequence.getRegDate())
-                .startDate(sillogBySequence.getStartDate())
-                .endDate(sillogBySequence.getEndDate())
-                .build();
-    }
 }

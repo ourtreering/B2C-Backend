@@ -25,6 +25,8 @@ public class Sillog {
     @Id
     private String id;
 
+    private String memberId;
+
     private String author;
 
     private String title;

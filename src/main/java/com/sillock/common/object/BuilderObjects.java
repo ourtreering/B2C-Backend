@@ -9,24 +9,24 @@ import java.util.Arrays;
 public class BuilderObjects {
 
     public Qna basicQna(){
-        return Qna.builder().id("1").question("첫번째 질문입니다.").answer("첫번째 답변입니다.").tags(Arrays.asList("tag1", "tag2")).build();
+        return Qna.builder().id("1").question("첫번째 질문입니다.").answer("첫번째 답변입니다.").build();
     }
 
     public Sillog basicSillog(){
         Qna qna = this.basicQna();
-        return Sillog.builder().memberId(1L).author("글쓴이").title("제목").sequence(1).qnaData(Arrays.asList(qna))
-                .image(Arrays.asList("/src/image")).qualification(Arrays.asList("/src/qualification")).regDate(LocalDate.of(2021, 7, 7))
-                .startDate(LocalDate.of(2021, 7, 7)).endDate(LocalDate.of(2021, 7, 8)).build();
+        return Sillog.builder().memberId("1").author("글쓴이").title("제목").qnaData(Arrays.asList(qna))
+                .image(Arrays.asList("/src/image")).regDate(LocalDate.of(2021, 7, 7))
+               .build();
     }
 
     public Qna customQna(String question, String answer, String tag1, String tag2){
-        return Qna.builder().question(question).answer(answer).tags(Arrays.asList(tag1, tag2)).build();
+        return Qna.builder().question(question).answer(answer).build();
     }
 
-    public Sillog customSillog(Long memberId, String title){
+    public Sillog customSillog(String memberId, String title){
         Qna qna = this.basicQna();
-        return Sillog.builder().memberId(memberId).author("sillog").title(title).sequence(1).qnaData(Arrays.asList(qna))
-                .image(Arrays.asList("/src/image")).qualification(Arrays.asList("/src/qualification")).regDate(LocalDate.of(2021, 7, 7))
-                .startDate(LocalDate.of(2021, 7, 7)).endDate(LocalDate.of(2021, 7, 8)).build();
+        return Sillog.builder().memberId(memberId).author("sillog").title(title).qnaData(Arrays.asList(qna))
+                .image(Arrays.asList("/src/image")).regDate(LocalDate.of(2021, 7, 7))
+                .build();
     }
 }

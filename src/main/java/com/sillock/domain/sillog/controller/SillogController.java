@@ -19,16 +19,16 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RequestMapping("/api/sillogs")
 public class SillogController {
-    private final SillogService sillogService;
-    private final SillogMapper sillogMapper;
-
-
-    @PostMapping
-    public ResponseDto register(@RequestBody SillogDto sillogDto) {
-        Sillog sillog = sillogMapper.toEntity(sillogDto);
-        sillogService.register(sillog);
-        return ResponseDto.of(HttpStatus.CREATED, ResponseMessage.REGISTER_SILLOG);
-    }
+//    private final SillogService sillogService;
+//    private final SillogMapper sillogMapper;
+//
+//
+////    @PostMapping
+////    public ResponseDto register(@RequestBody SillogDto sillogDto) {
+////        Sillog sillog = sillogMapper.toEntity(sillogDto);
+////        sillogService.register(sillog);
+////        return ResponseDto.of(HttpStatus.CREATED, ResponseMessage.REGISTER_SILLOG);
+////    }
 
 
 }
