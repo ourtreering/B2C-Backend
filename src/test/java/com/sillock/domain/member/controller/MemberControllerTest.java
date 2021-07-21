@@ -1,30 +1,10 @@
 package com.sillock.domain.member.controller;
 
 import com.sillock.common.AbstractControllerTest;
-import com.sillock.common.object.BuilderObjects;
-import com.sillock.domain.sillog.model.entity.Sillog;
-import com.sillock.domain.sillog.repository.SillogRepository;
-import com.sillock.domain.sillog.service.SillogService;
-import org.junit.jupiter.api.Test;
-import org.mockito.stubbing.Answer;
 import org.mongounit.MongoUnitTest;
-import org.mongounit.SeedWithDataset;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
-import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
-import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint;
-import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -32,7 +12,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 /**
  * created by hyunwoo 21/06/22
  */
-@MongoUnitTest
 public class MemberControllerTest extends AbstractControllerTest {
 
 //    @MockBean

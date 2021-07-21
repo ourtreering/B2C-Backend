@@ -1,10 +1,7 @@
 package com.sillock.domain.sillog.service;
 
 
-import com.sillock.domain.sillog.model.component.QnaMapper;
-import com.sillock.domain.sillog.model.dto.QnaDto;
 import com.sillock.domain.sillog.model.entity.Sillog;
-import com.sillock.domain.sillog.repository.QnaRepository;
 import com.sillock.domain.sillog.repository.SillogRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,26 +9,17 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Slf4j
 @RequiredArgsConstructor
 @Service
 public class SillogService {
     private final SillogRepository sillogRepository;
-    private final QnaMapper qnaMapper;
-    private final QnaRepository qnaRepository;
 
-    @Transactional(readOnly = true)
-    public List<Sillog> getSillogList(String memberId){
-        return sillogRepository.findAllByMemberId(memberId);
-    }
-
-    @Transactional
-    public void register(Sillog sillog){
-        qnaRepository.saveAll(sillog.getQnaData());
-        sillogRepository.save(sillog);
-    }
+//    @Transactional(readOnly = true)
+//    public List<Sillog> getSillogList( memberId){
+//        return sillogRepository.findAllByMemberId(memberId);
+//    }
 
     /* 나중에 실록 태그가 생겼을 때의 사용할 코드 */
 //    @Transactional(readOnly = true)

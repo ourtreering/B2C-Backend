@@ -6,7 +6,6 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter @Setter
-public class Qna {
-    private String question;
-    private String answer;
+public class Memo {
+    private String body;
 }

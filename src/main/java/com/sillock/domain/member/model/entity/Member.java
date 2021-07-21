@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.index.Indexed;
 
 import javax.persistence.*;
@@ -18,7 +19,7 @@ import java.time.LocalDateTime;
 @Entity
 public class Member {
     @Id
-    private Long memberId;
+    private ObjectId memberId;
 
     private String nickName;
 

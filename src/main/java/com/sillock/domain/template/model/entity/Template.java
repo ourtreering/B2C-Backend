@@ -1,5 +1,6 @@
-package com.sillock.domain.sillog.model.entity;
+package com.sillock.domain.template.model.entity;
 
+import com.sillock.domain.sillog.model.entity.Qna;
 import lombok.*;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.index.Indexed;
@@ -7,21 +8,17 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.Id;
 import java.time.LocalDate;
+import java.util.List;
 
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter @Setter
-@Document(collection = "tag")
-public class Tag {
+@Document(collection = "template")
+public class Template {
     @Id
     private ObjectId id;
-
-    private ObjectId memberId;
-
-    private String name;
-
-    private String category;
+    private List<Qna> qnaList;
 
     @Indexed
     @Builder.Default
@@ -30,3 +27,4 @@ public class Tag {
     @Builder.Default
     private LocalDate modDate = LocalDate.now();
 }
+
