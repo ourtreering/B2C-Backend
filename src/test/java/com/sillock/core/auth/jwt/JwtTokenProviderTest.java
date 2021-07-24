@@ -62,7 +62,7 @@ class JwtTokenProviderTest {
         appender.start(); //기록을 시작한다
         log.addAppender(appender);
 
-        Claims claims = Jwts.parserBuilder().setSigningKey(jwtTokenProvider.getKey()).build().parseClaimsJws(jwt).getBody();
+        Claims claims = Jwts.parserBuilder().setSigningKey(jwtTokenProvider.getSecret()).build().parseClaimsJws(jwt).getBody();
         Date now = new Date();
         Date wrongDate = new Date(claims.getExpiration().getTime()-now.getTime()); //만료시간에 현재시간 빼기
         claims.setExpiration(wrongDate);
@@ -82,7 +82,7 @@ class JwtTokenProviderTest {
         log.addAppender(appender);
 
         Claims claims = Jwts.parserBuilder()
-                .setSigningKey(jwtTokenProvider.getKey())
+                .setSigningKey(jwtTokenProvider.getSecret())
                 .build().parseClaimsJws(jwt).getBody();
 
         //key 암호화과정을 생략
