@@ -1,16 +1,17 @@
 package com.sillock.domain.sillog.model.component;
 
-import com.sillock.domain.sillog.model.dto.SillogDto;
+import com.sillock.domain.member.model.entity.Member;
+import com.sillock.domain.sillog.model.dto.SillogPostDto;
+import com.sillock.domain.sillog.model.dto.SillogResponseDto;
 import com.sillock.domain.sillog.model.entity.Sillog;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
+import org.mapstruct.*;
 
-@Mapper(componentModel = "spring", uses = QnaMapper.class)
+@Mapper(componentModel = "spring",
+        unmappedTargetPolicy = ReportingPolicy.IGNORE,
+        uses = TagMapper.class)
 public interface SillogMapper {
-    SillogDto toDto(Sillog sillog);
 
-    @Mapping(target = "id", ignore = true)
-    @Mapping(target = "modDate", ignore = true)
-    @Mapping(target = "memberId", ignore = true)
-    Sillog toEntity(SillogDto sillogDto);
+    @Mapping(target = "memberId", expression = "java(member.getId())")
+    Sillog toEntityFromPostDto(SillogPostDto sillogPostDto, @Context Member member);
+
 }

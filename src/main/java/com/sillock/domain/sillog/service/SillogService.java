@@ -1,37 +1,33 @@
 package com.sillock.domain.sillog.service;
 
 
-import com.sillock.domain.sillog.model.component.QnaMapper;
-import com.sillock.domain.sillog.model.dto.QnaDto;
 import com.sillock.domain.sillog.model.entity.Sillog;
-import com.sillock.domain.sillog.repository.QnaRepository;
+import com.sillock.domain.sillog.model.entity.Tag;
 import com.sillock.domain.sillog.repository.SillogRepository;
+import com.sillock.domain.sillog.repository.TagRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.bson.types.ObjectId;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Slf4j
 @RequiredArgsConstructor
 @Service
 public class SillogService {
     private final SillogRepository sillogRepository;
-    private final QnaMapper qnaMapper;
-    private final QnaRepository qnaRepository;
-
-    @Transactional(readOnly = true)
-    public List<Sillog> getSillogList(String memberId){
-        return sillogRepository.findAllByMemberId(memberId);
-    }
+    private final TagRepository tagRepository;
 
     @Transactional
     public void register(Sillog sillog){
-        qnaRepository.saveAll(sillog.getQnaData());
+        List<Tag> tagList = sillog.getTagList();
+        tagRepository.saveAll(tagList);
         sillogRepository.save(sillog);
     }
+
+
 
     /* 나중에 실록 태그가 생겼을 때의 사용할 코드 */
 //    @Transactional(readOnly = true)
@@ -43,11 +39,11 @@ public class SillogService {
 //    }
 
     /* 임시로 태그 없이 멤버id와 title만 사용하는 코드. tag생기면 삭제예정 */
-    @Transactional(readOnly = true)
-    public List<Sillog> findSillogList(String memberId, String title){
-        if(title == null) return sillogRepository.findAllByMemberId(memberId);
-        else return sillogRepository.findByMemberIdAndTitle(memberId, title);
-    }
+//    @Transactional(readOnly = true)
+//    public List<Sillog> findSillogList(ObjectId memberId, String title){
+//        if(title == null) return sillogRepository.findAllByAuthorId(memberId);
+//        else return sillogRepository.findByAuthorIdAndTitle(memberId, title);
+//    }
 
 
 }

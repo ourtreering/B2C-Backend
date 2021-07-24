@@ -7,7 +7,6 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TagDto {
-    private Long memberId;
     private String name;
     private String category;
 }

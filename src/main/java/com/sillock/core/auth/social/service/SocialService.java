@@ -24,7 +24,6 @@ import org.springframework.web.client.RestTemplate;
 public class SocialService {
 
     private final RestTemplate restTemplate = new RestTemplate();
-    private final Logger logger = LoggerFactory.getLogger(this.getClass().getSimpleName());
     private final ObjectMapper objectMapper;
 
     private final MemberRepository memberRepository;

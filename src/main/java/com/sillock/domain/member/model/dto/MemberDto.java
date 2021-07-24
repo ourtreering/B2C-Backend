@@ -1,6 +1,7 @@
 package com.sillock.domain.member.model.dto;
 
 import lombok.*;
+import org.bson.types.ObjectId;
 
 import java.time.LocalDate;
 
@@ -10,7 +11,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MemberDto {
-    private Long memberId;
+    private ObjectId memberId;
     private String email;
     private String nickName;
     private String password;
