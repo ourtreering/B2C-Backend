@@ -51,14 +51,14 @@ public class SillogControllerTest extends AbstractControllerTest {
 
         String content = objectMapper.writeValueAsString(sillogPostDto);
 
-        mockMvc.perform(post("/api/sillogs")
+        mockMvc.perform(post("/api/v1/sillogs")
                 .content(content)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isCreated())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.message").value(REGISTER_SILLOG)) // (5)
                 .andDo(print())
-                .andDo(document("api/sillogs",
+                .andDo(document("api/v1/sillogs",
                         getDocumentRequest(),
                         getDocumentResponse(),
                         requestFields(

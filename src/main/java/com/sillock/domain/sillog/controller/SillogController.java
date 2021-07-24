@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/sillogs")
+@RequestMapping("/api/v1/sillogs")
 public class SillogController {
     private final SillogService sillogService;
     private final SillogMapper sillogMapper;

@@ -1,13 +1,25 @@
-= members/test API
+= Sillog API Document
 :toc: left
 :toclevels: 3
-:toc-title: 유저정보
+:toc-title: Sillog API Document
 :doctype: book
 :icons: font
 :source-highlighter: highlightjs
 
-== 목차
-operation::/member/test[snippets='curl-request,http-request,http-response,response-body,response-fields']
+== 설명
+
+
+== POST /api/v1/sillogs
+
+.request
+include::{snippets}/api/v1/sillogs/http-request.adoc[]
+
+.request fields
+include::{snippets}/api/v1/sillogs/request-fields.adoc[]
+
+.response
+include::{snippets}/api/v1/sillogs/http-response.adoc[]
+
 
 
 
