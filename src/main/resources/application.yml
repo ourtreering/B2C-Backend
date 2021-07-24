@@ -8,4 +8,4 @@ spring:
       uri: mongodb://127.0.0.1:27017/sillog
 
 jwt:
-  secret: sillog
+  secret: thisissecretwhichusedforsillogservicethisissecretwhichusedforsillogservice
