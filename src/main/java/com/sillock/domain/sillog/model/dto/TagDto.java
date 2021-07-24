@@ -1,7 +1,6 @@
 package com.sillock.domain.sillog.model.dto;
 
 import lombok.*;
-import org.bson.types.ObjectId;
 
 @Builder
 @Getter @Setter

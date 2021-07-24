@@ -27,14 +27,9 @@ public class Sillog {
     @Id
     private ObjectId id;
 
-    @DBRef
-    private Member author;
+    private ObjectId memberId;
 
     private String title;
-
-    private ObjectId nextSillog;
-
-    private ObjectId previousSillog;
 
     private List<Qna> qnaList;
 
@@ -43,9 +38,9 @@ public class Sillog {
     @DBRef
     private List<Tag> tagList;
 
-    private List<String> image;
+    private List<String> imageList;
 
-    private List<String> file;
+    private List<String> fileList;
 
     private List<LocalDate> dateList;
 
