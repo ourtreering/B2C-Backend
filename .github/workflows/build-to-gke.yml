@@ -27,9 +27,9 @@ on:
 
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
-  GKE_CLUSTER: cluster-1    # TODO: update to cluster name
-  GKE_ZONE: asia-east1-a   # TODO: update to cluster zone
-  DEPLOYMENT_NAME: sillock-app-deployment # TODO: update to deployment name
+  GKE_CLUSTER: cluster-1
+  GKE_ZONE: asia-east1-a
+  DEPLOYMENT_NAME: sillock-app-deployment
   IMAGE: sillock-app-dev
 
 jobs:      
@@ -84,7 +84,15 @@ jobs:
             ${{ runner.os }}-gradle-
       
     - name: Build with Gradle test
-      run: ./gradlew test 
+      run: ./gradlew test
+
+    - name: Publish Test Results
+      uses: EnricoMi/publish-unit-test-result-action@v1
+      if: always()
+      with:
+        files: build/test-results/**/*.xml
+        check_name: '[unit-test] Results'
+
     - name: Run copyDocument task
       run: ./gradlew copyDocument
     - name: Build with Gradle
@@ -108,9 +116,10 @@ jobs:
       uses: danielr1996/envsubst-action@1.0.0
       env:
         SPRING_DATA_MONGODB_URI: ${{ secrets.SPRING_DATA_MONGODB_URI }}
+#        SPRING_JWT_SECRET: ${{ secrets.SPRING_JWT_SECRET }}
       with:
         input: deployment.yml
-        output: deploy.yml
+        output: deployment-prod.yml
 
     # Set up kustomize
     - name: Set up Kustomize
