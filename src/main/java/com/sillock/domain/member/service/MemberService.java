@@ -7,6 +7,7 @@ import com.sillock.core.auth.social.service.SocialService;
 import com.sillock.domain.member.model.entity.Member;
 import com.sillock.domain.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.bson.types.ObjectId;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,8 +18,8 @@ public class MemberService {
     private final SocialService socialService;
 
     @Transactional(readOnly = true)
-    public Member findById(String memberId){
-        return memberRepository.findByMemberId(memberId)
+    public Member findById(ObjectId memberId){
+        return memberRepository.findById(memberId)
                 .orElseThrow(()->new BadRequestException("존재하지 않은 사용자에 대한 요청입니다."));
     }
 
