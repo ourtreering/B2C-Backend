@@ -63,7 +63,7 @@ public class MemberSillogControllerTest extends AbstractControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].qnaList[0].question").value("첫번째 질문입니다."))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].qnaList[0].answer").value("첫번째 답변입니다."))
                 .andDo(print())
-                .andDo(document("api/v1/members/{memberId}/sillogs",
+                .andDo(document("api/v1/members/memberId/sillogs",
                         getDocumentRequest(),
                         getDocumentResponse(),
                         pathParameters(
@@ -100,7 +100,7 @@ public class MemberSillogControllerTest extends AbstractControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.message").value(READ_SILLOG_TITLE_LIST)) // (5)
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].title").value("제목"))
                 .andDo(print())
-                .andDo(document("api/v1/members/{memberId}/sillogs/title",
+                .andDo(document("api/v1/members/memberId/sillogs/title",
                         getDocumentRequest(),
                         getDocumentResponse(),
                         pathParameters(

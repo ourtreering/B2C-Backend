@@ -23,29 +23,29 @@ include::{snippets}/api/v1/sillogs/http-response.adoc[]
 == GET /api/v1/members/{memberId}/sillogs
 
 .request
-include::{snippets}/api/v1/members/{memberId}/sillogs/http-request.adoc[]
+include::{snippets}/api/v1/members/memberId/sillogs/http-request.adoc[]
 
 .path parameters
-include::{snippets}/api/v1/members/{memberId}/sillogs/path-parameters.adoc[]
+include::{snippets}/api/v1/members/memberId/sillogs/path-parameters.adoc[]
 
 .response
-include::{snippets}/api/v1/members/{memberId}/sillogs/http-response.adoc[]
+include::{snippets}/api/v1/members/memberId/sillogs/http-response.adoc[]
 
 .response fields
-include::{snippets}/api/v1/members/{memberId}/sillogs/response-fields.adoc[]
+include::{snippets}/api/v1/members/memberId/sillogs/response-fields.adoc[]
 
 
 == GET /api/v1/members/{memberId}/sillogs/title
 
 .request
-include::{snippets}/api/v1/members/{memberId}/sillogs/title/http-request.adoc[]
+include::{snippets}/api/v1/members/memberId/sillogs/title/http-request.adoc[]
 
 .path parameters
-include::{snippets}/api/v1/members/{memberId}/sillogs/title/path-parameters.adoc[]
+include::{snippets}/api/v1/members/memberId/sillogs/title/path-parameters.adoc[]
 
 .response
-include::{snippets}/api/v1/members/{memberId}/sillogs/title/http-response.adoc[]
+include::{snippets}/api/v1/members/memberId/sillogs/title/http-response.adoc[]
 
 .response fields
-include::{snippets}/api/v1/members/{memberId}/sillogs/title/response-fields.adoc[]
+include::{snippets}/api/v1/members/memberId/sillogs/title/response-fields.adoc[]
 
