@@ -1,18 +1,12 @@
 package com.sillock.domain.sillog.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sillock.common.AbstractControllerTest;
 import com.sillock.common.DtoFactory;
 import com.sillock.common.EntityFactory;
-import com.sillock.domain.member.model.entity.Member;
-import com.sillock.domain.member.repository.MemberRepository;
 import com.sillock.domain.sillog.model.component.SillogMapper;
 import com.sillock.domain.sillog.model.dto.SillogPostDto;
-import com.sillock.domain.sillog.model.entity.Sillog;
 import com.sillock.domain.sillog.service.SillogService;
 import org.junit.jupiter.api.Test;
-import org.mockito.AdditionalAnswers;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -22,20 +16,14 @@ import java.util.Arrays;
 import static com.sillock.common.message.ResponseMessage.REGISTER_SILLOG;
 import static com.sillock.config.ApiDocumentUtils.getDocumentRequest;
 import static com.sillock.config.ApiDocumentUtils.getDocumentResponse;
-import static org.mockito.AdditionalAnswers.returnsFirstArg;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.when;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
-import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessRequest;
-import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
-import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
+import static org.springframework.restdocs.payload.PayloadDocumentation.*;
+import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
+import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 public class SillogControllerTest extends AbstractControllerTest {
-    @Autowired
-    private ObjectMapper objectMapper;
 
     @MockBean
     private SillogService sillogService;
@@ -71,6 +59,11 @@ public class SillogControllerTest extends AbstractControllerTest {
                                 fieldWithPath("imageList.[]").description("이미지 리스트"),
                                 fieldWithPath("fileList.[]").description("파일 리스트"),
                                 fieldWithPath("dateList.[]").description("날짜 리스트")
+                        ),
+                        responseFields(
+                                fieldWithPath("status").description("상태 값"),
+                                fieldWithPath("message").description("결과 메시지"),
+                                fieldWithPath("timestamp").description("타임 스탬프")
                         )
                 ));
     }

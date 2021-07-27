@@ -1,7 +1,15 @@
 package com.sillock.domain.member.controller;
 
+import com.sillock.common.dto.ResponseDto;
+import com.sillock.core.annotation.CurrentUser;
+import com.sillock.domain.member.model.entity.Member;
+import com.sillock.domain.sillog.model.dto.SillogResponseDto;
 import lombok.RequiredArgsConstructor;
+import org.bson.types.ObjectId;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -42,16 +50,11 @@ public class MemberController {
 ////        return ResponseDto.of(HttpStatus.OK, ResponseMessage.READ_EVENT, sillogDtoListByTitle);
 ////    }
 //
-//    /*실록 태그가 없어서 임시로 사용하는 코드*/
+    /*실록 태그가 없어서 임시로 사용하는 코드*/
 //    @GetMapping(value = "/{memberId}/sillogs")
 //    @ResponseBody
-//    public ResponseDto<List<SillogDto>> readSillogList(@PathVariable String memberId, @RequestParam(required = false) String title) {
-//        Sillog sillog = new Sillog();
-//        if(title == null) sillog = builderObjects.customSillog(memberId, "제목");
-//        else sillog = builderObjects.customSillog(memberId, title);
-//        List<Sillog> sillogListByTitle = Arrays.asList(sillog,sillog);
-//        List<SillogDto> sillogDtoListByTitle = sillogListByTitle.stream().map(sillogMapper::toDto).collect(Collectors.toList());
-//        return ResponseDto.of(HttpStatus.OK, ResponseMessage.READ_EVENT, sillogDtoListByTitle);
+//    public ResponseEntity<ResponseDto<List<SillogResponseDto>>> readSillogList(@CurrentUser Member member, @PathVariable ObjectId memberId) {
+//
 //    }
 //
 //

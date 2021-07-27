@@ -7,13 +7,20 @@ import com.sillock.domain.member.repository.MemberRepository;
 import com.sillock.domain.sillog.model.component.SillogMapper;
 import com.sillock.domain.sillog.model.dto.SillogPostDto;
 import com.sillock.domain.sillog.model.entity.Sillog;
+import com.sillock.domain.sillog.model.entity.SillogTitle;
 import com.sillock.domain.sillog.repository.SillogRepository;
 import com.sillock.domain.sillog.repository.TagRepository;
+import org.bson.types.ObjectId;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.mongodb.core.MongoTemplate;
+
+import java.util.Arrays;
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
 
 @SpringBootTest
 public class SillogServiceTest {
@@ -39,6 +46,8 @@ public class SillogServiceTest {
     @Test
     @Disabled
     public void 환경_세팅() {
+        mongoTemplate.getDb().drop();
+
         Member member = EntityFactory.basicMemberEntity();
         memberRepository.save(member);
 
@@ -46,7 +55,12 @@ public class SillogServiceTest {
         sillog.setMemberId(member.getId());
 
         tagRepository.saveAll(sillog.getTagList());
-        sillogRepository.save(sillog);
+
+        Sillog sillog2 = EntityFactory.basicSillogMemoEntity();
+        sillog2.setMemberId(member.getId());
+
+        tagRepository.saveAll(sillog2.getTagList());
+        sillogRepository.saveAll(Arrays.asList(sillog, sillog2));
     }
 
     @Test
@@ -68,4 +82,11 @@ public class SillogServiceTest {
         mongoTemplate.getDb().drop();
     }
 
+    @Test
+    @Disabled
+    public void getMemberSillogTitleList() {
+        List<SillogTitle> sillogTitleList = sillogService.getMemberSillogTitleList(new ObjectId(EntityFactory.basicObjectId()));
+        assertEquals(sillogTitleList.size(), 1);
+
+    }
 }

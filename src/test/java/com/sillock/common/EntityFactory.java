@@ -1,11 +1,8 @@
 package com.sillock.common;
 
 import com.sillock.domain.member.model.entity.Member;
-import com.sillock.domain.sillog.model.entity.Memo;
-import com.sillock.domain.sillog.model.entity.Qna;
-import com.sillock.domain.sillog.model.entity.Tag;
+import com.sillock.domain.sillog.model.entity.*;
 import com.sillock.domain.template.model.entity.Template;
-import com.sillock.domain.sillog.model.entity.Sillog;
 import org.bson.types.ObjectId;
 
 import javax.persistence.TableGenerator;
@@ -85,6 +82,20 @@ public class EntityFactory {
                 .category("교육")
                 .name("AI")
                 .build();
+    }
+
+    public static SillogTitle basicSillogTitleEntity(){
+        return new SillogTitle() {
+            @Override
+            public String getTitle() {
+                return "제목";
+            }
+
+            @Override
+            public LocalDate getRegDate() {
+                return LocalDate.of(2021, 07, 07);
+            }
+        };
     }
 
 }

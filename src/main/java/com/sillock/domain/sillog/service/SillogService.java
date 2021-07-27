@@ -2,6 +2,7 @@ package com.sillock.domain.sillog.service;
 
 
 import com.sillock.domain.sillog.model.entity.Sillog;
+import com.sillock.domain.sillog.model.entity.SillogTitle;
 import com.sillock.domain.sillog.model.entity.Tag;
 import com.sillock.domain.sillog.repository.SillogRepository;
 import com.sillock.domain.sillog.repository.TagRepository;
@@ -11,7 +12,10 @@ import org.bson.types.ObjectId;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -27,6 +31,23 @@ public class SillogService {
         sillogRepository.save(sillog);
     }
 
+    @Transactional(readOnly = true)
+    public List<Sillog> getMemberSillogList(ObjectId memberId){
+        return sillogRepository.findAllByMemberId(memberId);
+    }
+
+    @Transactional(readOnly = true)
+    public List<SillogTitle> getMemberSillogTitleList(ObjectId memberId){
+        List<SillogTitle> sillogTitleList = sillogRepository.findTitlesByMemberId(memberId)
+                .stream()
+                .collect(Collectors.groupingBy(SillogTitle::getTitle,
+                        Collectors.maxBy(Comparator.comparing(SillogTitle::getRegDate))))
+                .values()
+                .stream()
+                .map(Optional::get).collect(Collectors.toList());
+
+        return sillogTitleList;
+    }
 
 
     /* 나중에 실록 태그가 생겼을 때의 사용할 코드 */
