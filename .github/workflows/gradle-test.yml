@@ -22,7 +22,6 @@ jobs:
           distribution: 'adopt'
       - name: Shutdown Ubuntu MongoDB (SUDO)
         run: sudo service mongod stop # Shutdown the Default MongoDB, "sudo" is necessary, please not remove it
-        read/title-sequence
       - name: Start MongoDB
         uses: supercharge/mongodb-github-action@1.6.0
       - name: Grant execute permission for gradlew
