@@ -6,6 +6,8 @@ import com.sillock.domain.sillog.model.entity.SillogTitle;
 import com.sillock.domain.sillog.repository.SillogRepository;
 import com.sillock.domain.tag.model.entity.Tag;
 import com.sillock.domain.tag.repository.TagRepository;
+import com.sillock.domain.tag.service.TagEventService;
+import com.sillock.domain.tag.service.TagService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.bson.types.ObjectId;
@@ -23,6 +25,7 @@ import java.util.stream.Collectors;
 public class SillogService {
     private final SillogRepository sillogRepository;
     private final TagRepository tagRepository;
+    private final TagEventService tagEventService;
 
     @Transactional
     public void register(Sillog sillog){
