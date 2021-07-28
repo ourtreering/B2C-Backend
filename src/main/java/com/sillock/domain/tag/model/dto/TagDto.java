@@ -1,4 +1,4 @@
-package com.sillock.domain.sillog.model.dto;
+package com.sillock.domain.tag.model.dto;
 
 import lombok.*;
 
@@ -7,6 +7,6 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TagDto {
-    private String name;
     private String category;
+    private String name;
 }

@@ -2,6 +2,7 @@ package com.sillock.domain.sillog.model.dto;
 
 import com.sillock.domain.sillog.model.entity.Memo;
 import com.sillock.domain.sillog.model.entity.Qna;
+import com.sillock.domain.tag.model.dto.TagDto;
 import lombok.*;
 
 import java.time.LocalDate;

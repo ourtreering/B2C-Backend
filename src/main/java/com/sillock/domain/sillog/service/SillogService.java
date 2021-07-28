@@ -3,9 +3,9 @@ package com.sillock.domain.sillog.service;
 
 import com.sillock.domain.sillog.model.entity.Sillog;
 import com.sillock.domain.sillog.model.entity.SillogTitle;
-import com.sillock.domain.sillog.model.entity.Tag;
 import com.sillock.domain.sillog.repository.SillogRepository;
-import com.sillock.domain.sillog.repository.TagRepository;
+import com.sillock.domain.tag.model.entity.Tag;
+import com.sillock.domain.tag.repository.TagRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.bson.types.ObjectId;

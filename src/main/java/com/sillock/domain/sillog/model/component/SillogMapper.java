@@ -3,10 +3,10 @@ package com.sillock.domain.sillog.model.component;
 import com.sillock.domain.member.model.entity.Member;
 import com.sillock.domain.sillog.model.dto.SillogElementDto;
 import com.sillock.domain.sillog.model.dto.SillogPostDto;
-import com.sillock.domain.sillog.model.dto.SillogResponseDto;
 import com.sillock.domain.sillog.model.dto.SillogTitleDto;
 import com.sillock.domain.sillog.model.entity.Sillog;
 import com.sillock.domain.sillog.model.entity.SillogTitle;
+import com.sillock.domain.tag.model.mapper.TagMapper;
 import org.mapstruct.*;
 
 @Mapper(componentModel = "spring",

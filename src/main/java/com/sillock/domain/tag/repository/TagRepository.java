@@ -1,12 +1,14 @@
-package com.sillock.domain.sillog.repository;
+package com.sillock.domain.tag.repository;
 
-import com.sillock.domain.sillog.model.entity.Sillog;
-import com.sillock.domain.sillog.model.entity.Tag;
+import com.sillock.domain.tag.model.entity.Tag;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface TagRepository extends MongoRepository<Tag, ObjectId> {
+    List<Tag> findTagsByMemberIdIsNull();
+    List<Tag> findTagsByCategoryNot(String category);
 }

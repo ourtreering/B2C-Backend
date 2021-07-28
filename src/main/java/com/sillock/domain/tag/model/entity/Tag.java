@@ -1,4 +1,4 @@
-package com.sillock.domain.sillog.model.entity;
+package com.sillock.domain.tag.model.entity;
 
 import lombok.*;
 import org.bson.types.ObjectId;
@@ -17,13 +17,13 @@ public class Tag {
     @Id
     private ObjectId id;
 
+    @Indexed
     private ObjectId memberId;
-
-    private String name;
 
     private String category;
 
-    @Indexed
+    private String name;
+
     @Builder.Default
     private LocalDate regDate = LocalDate.now();
 

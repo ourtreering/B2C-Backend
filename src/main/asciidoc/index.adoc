@@ -49,3 +49,14 @@ include::{snippets}/api/v1/members/memberId/sillogs/title/http-response.adoc[]
 .response fields
 include::{snippets}/api/v1/members/memberId/sillogs/title/response-fields.adoc[]
 
+== GET /api/v1/tags/default
+
+.request
+include::{snippets}/api/v1/tags/default/http-request.adoc[]
+
+.response
+include::{snippets}/api/v1/tags/default/http-response.adoc[]
+
+.response fields
+include::{snippets}/api/v1/tags/default/response-fields.adoc[]
+
