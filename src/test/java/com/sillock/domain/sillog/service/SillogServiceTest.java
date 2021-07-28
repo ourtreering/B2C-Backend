@@ -9,7 +9,7 @@ import com.sillock.domain.sillog.model.dto.SillogPostDto;
 import com.sillock.domain.sillog.model.entity.Sillog;
 import com.sillock.domain.sillog.model.entity.SillogTitle;
 import com.sillock.domain.sillog.repository.SillogRepository;
-import com.sillock.domain.sillog.repository.TagRepository;
+import com.sillock.domain.tag.repository.TagRepository;
 import org.bson.types.ObjectId;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;

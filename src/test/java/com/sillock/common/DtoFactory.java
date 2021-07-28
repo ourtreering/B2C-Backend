@@ -1,10 +1,7 @@
 package com.sillock.common;
 
 import com.sillock.domain.sillog.model.dto.SillogPostDto;
-import com.sillock.domain.sillog.model.dto.SillogResponseDto;
-import com.sillock.domain.sillog.model.dto.TagDto;
-import com.sillock.domain.sillog.model.entity.Memo;
-import com.sillock.domain.sillog.model.entity.Sillog;
+import com.sillock.domain.tag.model.dto.TagDto;
 
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -27,8 +24,4 @@ public class DtoFactory {
                 .build();
     }
 
-
-//    public static SillogResponseDto() {
-//        return
-//    }
 }

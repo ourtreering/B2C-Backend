@@ -1,6 +1,6 @@
 package com.sillock.domain.sillog.model.entity;
 
-import com.sillock.domain.member.model.entity.Member;
+import com.sillock.domain.tag.model.entity.Tag;
 import lombok.*;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.index.Indexed;
@@ -27,6 +27,7 @@ public class Sillog {
     @Id
     private ObjectId id;
 
+    @Indexed
     private ObjectId memberId;
 
     private String title;
@@ -44,7 +45,6 @@ public class Sillog {
 
     private List<LocalDate> dateList;
 
-    @Indexed
     @Builder.Default
     private LocalDate regDate = LocalDate.now();
 

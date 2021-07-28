@@ -2,10 +2,10 @@ package com.sillock.common;
 
 import com.sillock.domain.member.model.entity.Member;
 import com.sillock.domain.sillog.model.entity.*;
+import com.sillock.domain.tag.model.entity.Tag;
 import com.sillock.domain.template.model.entity.Template;
 import org.bson.types.ObjectId;
 
-import javax.persistence.TableGenerator;
 import java.time.LocalDate;
 import java.util.Arrays;
 
