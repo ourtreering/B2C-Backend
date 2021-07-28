@@ -2,6 +2,7 @@ package com.sillock.common;
 
 import com.sillock.domain.sillog.model.dto.SillogPostDto;
 import com.sillock.domain.tag.model.dto.TagDto;
+import com.sillock.domain.tag.model.dto.TagInfoDto;
 
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -21,6 +22,13 @@ public class DtoFactory {
         return TagDto.builder()
                 .category("category test")
                 .name("test tag")
+                .build();
+    }
+
+    public static TagInfoDto tagInfoDto() {
+        return TagInfoDto.builder()
+                .category("test category")
+                .tagNameList(Arrays.asList("tag1", "tag2"))
                 .build();
     }
 

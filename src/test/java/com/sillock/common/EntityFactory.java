@@ -3,6 +3,7 @@ package com.sillock.common;
 import com.sillock.domain.member.model.entity.Member;
 import com.sillock.domain.sillog.model.entity.*;
 import com.sillock.domain.tag.model.entity.Tag;
+import com.sillock.domain.tag.model.entity.TagInfo;
 import com.sillock.domain.template.model.entity.Template;
 import org.bson.types.ObjectId;
 
@@ -96,6 +97,13 @@ public class EntityFactory {
                 return LocalDate.of(2021, 07, 07);
             }
         };
+    }
+
+    public static TagInfo basicTagInfoEntity(){
+        return TagInfo.builder()
+                .category("test category")
+                .tagNameList(Arrays.asList("tag1", "tag2"))
+                .build();
     }
 
 }
