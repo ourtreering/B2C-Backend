@@ -2,6 +2,7 @@ package com.sillock.common;
 
 import com.sillock.domain.member.model.entity.Member;
 import com.sillock.domain.sillog.model.entity.*;
+import com.sillock.domain.tag.model.entity.MemberTagInfo;
 import com.sillock.domain.tag.model.entity.Tag;
 import com.sillock.domain.tag.model.entity.TagInfo;
 import com.sillock.domain.template.model.entity.Template;
@@ -9,6 +10,7 @@ import org.bson.types.ObjectId;
 
 import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.HashMap;
 
 public class EntityFactory {
 
@@ -103,6 +105,13 @@ public class EntityFactory {
         return TagInfo.builder()
                 .category("test category")
                 .tagNameList(Arrays.asList("tag1", "tag2"))
+                .build();
+    }
+
+    public static MemberTagInfo basicMemberTagInfoEntity(){
+        return MemberTagInfo.builder()
+                .memberId(new ObjectId(basicObjectId()))
+                .tagInfoUsed(new HashMap<>())
                 .build();
     }
 

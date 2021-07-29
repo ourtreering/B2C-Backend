@@ -11,6 +11,8 @@ import org.springframework.aop.aspectj.annotation.AspectJProxyFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.test.context.event.ApplicationEvents;
 
 import java.util.Arrays;
 
@@ -26,12 +28,18 @@ class PublishEventAspectTest {
     @Autowired
     private TagRepository tagRepository;
 
+    @Autowired
+    private ApplicationEventPublisher applicationEventPublisher;
+
+
     @Test
     public void aspectTest(){
         AspectJProxyFactory factory = new AspectJProxyFactory(new TagService(tagInfoRepository, tagRepository));
         factory.addAspect(publishEventAspect);
         TagService tagService1 = factory.getProxy();
         CalculateTagEvent event = tagService1.saveTagList(new ObjectId(EntityFactory.basicObjectId()), Arrays.asList(EntityFactory.basicTagEntity()));
+
+
     }
 
 }
