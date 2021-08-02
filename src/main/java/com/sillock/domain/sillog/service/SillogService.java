@@ -1,11 +1,15 @@
 package com.sillock.domain.sillog.service;
 
 
+import com.sillock.core.annotation.PublishEvent;
 import com.sillock.domain.sillog.model.entity.Sillog;
 import com.sillock.domain.sillog.model.entity.SillogTitle;
 import com.sillock.domain.sillog.repository.SillogRepository;
 import com.sillock.domain.tag.model.entity.Tag;
 import com.sillock.domain.tag.repository.TagRepository;
+import com.sillock.domain.tag.service.TagEventService;
+import com.sillock.domain.tag.service.TagService;
+import com.sillock.event.entity.CalculateTagEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.bson.types.ObjectId;
@@ -23,11 +27,13 @@ import java.util.stream.Collectors;
 public class SillogService {
     private final SillogRepository sillogRepository;
     private final TagRepository tagRepository;
+    private final TagEventService tagEventService;
+    private final TagService tagService;
 
     @Transactional
-    public void register(Sillog sillog){
-        List<Tag> tagList = sillog.getTagList();
-        tagRepository.saveAll(tagList);
+    public void registerSillog(Sillog sillog){
+        tagService.saveTagList(sillog.getMemberId(), sillog.getTagList());
+
         sillogRepository.save(sillog);
     }
 

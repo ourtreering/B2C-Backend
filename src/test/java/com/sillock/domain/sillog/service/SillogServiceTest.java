@@ -71,7 +71,7 @@ public class SillogServiceTest {
 
         Member member = EntityFactory.basicMemberEntity();
 
-        sillogService.register(
+        sillogService.registerSillog(
                 sillogMapper.toEntityFromPostDto(sillogPostDto, member)
         );
     }

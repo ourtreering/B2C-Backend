@@ -59,6 +59,9 @@ dependencies {
 
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
 	implementation group: 'org.mongounit', name: 'mongounit', version: '2.0.1'
+
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-aop', version: '2.5.3'
+
 }
 
 test {
