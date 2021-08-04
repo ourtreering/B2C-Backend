@@ -15,5 +15,6 @@ public class ResponseMessage {
 
 
     // Tag
-    public static final String READ_TAG_INFO_LIST = "기본 태그 정보 리스트를 조회합니다.";
+    public static final String READ_DEFAULT_TAG_INFO_LIST = "기본 태그 정보 리스트를 조회합니다.";
+    public static final String READ_MEMBER_TAG_INFO_LIST = "사용자가 사용한 태그 정보 리스트를 조회합니다.";
 }

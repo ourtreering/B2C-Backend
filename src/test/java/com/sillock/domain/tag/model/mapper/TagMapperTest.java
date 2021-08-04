@@ -13,6 +13,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -33,5 +36,16 @@ class TagMapperTest {
         TagInfoDto mappedDto = tagMapper.toTagInfoDtoFromTagInfoEntity(tagInfo);
         assertEquals(mappedDto.getCategory(), tagInfo.getCategory());
         assertEquals(mappedDto.getTagNameList().get(0), tagInfo.getTagNameList().get(0));
+    }
+
+    @Test
+    void toTagInfoDtoFromMemberTagInfoUsed(){
+        String category = "category";
+        List<String> tagNameList = Arrays.asList("tag1", "tag2", "tag3");
+
+        TagInfoDto mappedDto = tagMapper.toTagInfoDtoFromMemberTagInfoUsed(category, tagNameList);
+        assertEquals(mappedDto.getTagNameList().size(), tagNameList.size());
+        assertEquals(mappedDto.getCategory(), category);
+        assertEquals(mappedDto.getTagNameList().get(0), tagNameList.get(0));
     }
 }
