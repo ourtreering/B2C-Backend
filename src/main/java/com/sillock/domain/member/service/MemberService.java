@@ -1,6 +1,7 @@
 package com.sillock.domain.member.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.sillock.common.message.ExceptionMessage;
 import com.sillock.core.exception.BadRequestException;
 import com.sillock.core.auth.social.model.SocialProfile;
 import com.sillock.core.auth.social.service.SocialService;
@@ -11,6 +12,8 @@ import org.bson.types.ObjectId;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
+
 @Service
 @RequiredArgsConstructor
 public class MemberService {
@@ -18,9 +21,9 @@ public class MemberService {
     private final SocialService socialService;
 
     @Transactional(readOnly = true)
-    public Member findById(ObjectId memberId){
+    public Member findByMemberId(ObjectId memberId){
         return memberRepository.findById(memberId)
-                .orElseThrow(()->new BadRequestException("존재하지 않은 사용자에 대한 요청입니다."));
+                .orElseThrow(()-> new EntityNotFoundException(ExceptionMessage.ENTITY_NOT_FOUND));
     }
 
 
@@ -28,5 +31,11 @@ public class MemberService {
     public boolean isExistMemberByProvider(String accessToken, String provider) throws JsonProcessingException {
         SocialProfile profile = socialService.getSocialProfile(accessToken);
         return memberRepository.existsByEmail(profile.getEmail());
+    }
+
+    @Transactional(readOnly = true)
+    public Member findByIdentifier(String identifier){
+        return memberRepository.findByIdentifier(identifier)
+                .orElseThrow(() -> new EntityNotFoundException(ExceptionMessage.ENTITY_NOT_FOUND));
     }
 }

@@ -13,4 +13,5 @@ import java.util.Optional;
 public interface MemberRepository extends MongoRepository<Member, ObjectId> {
     Optional<Member> findById(ObjectId memberId);
     boolean existsByEmail(String email);
+    Optional<Member> findByIdentifier(String identifier);
 }
