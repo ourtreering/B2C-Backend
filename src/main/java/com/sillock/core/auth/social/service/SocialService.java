@@ -3,12 +3,9 @@ package com.sillock.core.auth.social.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sillock.core.auth.jwt.JwtProvider;
-import com.sillock.core.auth.social.dto.SocialProfile;
+import com.sillock.core.auth.social.model.SocialProfile;
 import com.sillock.domain.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
@@ -27,7 +24,6 @@ public class SocialService {
     private final ObjectMapper objectMapper;
 
     private final MemberRepository memberRepository;
-    private final JwtProvider jwtTokenProvider;
 
     @Value("${spring.social.kakao.url}")
     private String providerUrl;

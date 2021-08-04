@@ -2,7 +2,7 @@ package com.sillock.domain.member.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.sillock.core.exception.BadRequestException;
-import com.sillock.core.auth.social.dto.SocialProfile;
+import com.sillock.core.auth.social.model.SocialProfile;
 import com.sillock.core.auth.social.service.SocialService;
 import com.sillock.domain.member.model.entity.Member;
 import com.sillock.domain.member.repository.MemberRepository;

@@ -1,4 +1,4 @@
-package com.sillock.core.auth.jwt.dto;
+package com.sillock.core.auth.jwt.model;
 
 import lombok.*;
 

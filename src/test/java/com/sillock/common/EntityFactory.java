@@ -41,7 +41,7 @@ public class EntityFactory {
                 .email("test@gmail.com")
                 .birth(LocalDate.of(2021,07,21))
                 .gender("man")
-                .nickName("test")
+                .nickname("test")
                 .password("1234")
                 .profileImage("/test.jpg")
                 .build();
