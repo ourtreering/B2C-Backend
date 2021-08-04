@@ -38,6 +38,7 @@ public class EntityFactory {
     public static Member basicMemberEntity(){
         return Member.builder()
                 .id(new ObjectId(basicObjectId()))
+                .identifier("identifier")
                 .email("test@gmail.com")
                 .birth(LocalDate.of(2021,07,21))
                 .gender("man")
