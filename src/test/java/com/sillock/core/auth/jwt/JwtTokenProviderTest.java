@@ -1,58 +1,45 @@
-//package com.sillock.core.auth.jwt;
-//
-//import ch.qos.logback.classic.Logger;
-//import ch.qos.logback.classic.spi.ILoggingEvent;
-//import ch.qos.logback.core.read.ListAppender;
-//import com.sillock.common.message.JwtMessage;
-//import io.jsonwebtoken.Claims;
-//import io.jsonwebtoken.Jwts;
-//import org.assertj.core.api.Assertions;
-//import org.junit.jupiter.api.Test;
-//import org.junit.runner.RunWith;
-//import org.mockito.junit.MockitoJUnitRunner;
-//import org.slf4j.LoggerFactory;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.boot.test.context.SpringBootTest;
-//
-//import java.util.Date;
-//
-//import static org.junit.Assert.assertTrue;
-//
-//@RunWith(MockitoJUnitRunner.class)
-//@SpringBootTest
-//class JwtTokenProviderTest {
-//
-//    @Autowired
-//    private JwtProvider jwtTokenProvider;
-//
-//    private ListAppender<ILoggingEvent> appender;
-//    Logger log = (Logger) LoggerFactory.getLogger(JwtProvider.class);
-//
-//    String name = "Testtest";
-//    String email = "test@gmail.com";
-//
-//    @Test
-//    void Token_생성성공() {
-//        String jwt = jwtTokenProvider.createToken(name,email);
-//        assertTrue(jwtTokenProvider.validateToken(jwt));
-//    }
-//
+package com.sillock.core.auth.jwt;
+
+import com.sillock.common.EntityFactory;
+import com.sillock.core.auth.jwt.component.JwtCreator;
+import com.sillock.core.auth.jwt.component.JwtResolver;
+import com.sillock.core.auth.jwt.component.JwtValidator;
+import com.sillock.domain.member.model.entity.Member;
+import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import static org.junit.Assert.assertTrue;
+
+@SpringBootTest
+class JwtTokenProviderTest {
+
+    @Autowired
+    private JwtResolver jwtResolver;
+
+    @Autowired
+    private JwtCreator jwtCreator;
+
+    @Autowired
+    private JwtValidator jwtValidator;
+
+    private final Member member = EntityFactory.basicMemberEntity();
+
+    @Test
+    void Token_생성성공() {
+        String jwt = jwtCreator.createAccessToken(member);
+        System.out.println(jwt);
+        assertTrue(jwtValidator.validateToken(jwt));
+    }
+
 //    @Test
 //    void Token_생성실패_잘못된_JWT_서명 () {
-//        String jwt = jwtTokenProvider.createToken(name,email);
-//        appender = new ListAppender<>();
-//        appender.start(); //기록을 시작한다
-//        log.addAppender(appender);
+//        String jwt = jwtCreator.createAccessToken(EntityFactory.basicMemberEntity());
 //
 //        //잘못된 JWT 서명 test
 //        String wrongJwt = jwt+"wrongjwt";
-//        jwtTokenProvider.validateToken(wrongJwt);
-//
-//            //원하는 필드를 추출하고(extracting) containExactly로 비교.
-//            //ILoggingEvent::getFormattedMessage 는 로그 표준형 출력의 의미
-//        Assertions.assertThat(appender.list)
-//                .extracting(ILoggingEvent::getFormattedMessage)
-//                .containsExactly(JwtMessage.WRONG_JWT);
+//        jwtValidator.validateToken(wrongJwt);
 //    }
 //
 //    @Test
@@ -93,5 +80,5 @@
 //                .extracting(ILoggingEvent::getFormattedMessage)
 //                .containsExactly(JwtMessage.UNSUPPORTED_JWT);
 //    }
-//
-//}
+
+}
