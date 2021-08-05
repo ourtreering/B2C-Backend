@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -44,7 +45,7 @@ public class TagController {
         for (String category : tagInfoMap.keySet()) {
             tagInfoDtoList.add(
                     tagMapper.toTagInfoDtoFromMemberTagInfoUsed(
-                            category, (List<String>) tagInfoMap.get(category).keySet()
+                            category, new ArrayList<>(tagInfoMap.get(category).keySet())
                     )
             );
         }
