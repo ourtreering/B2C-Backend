@@ -7,6 +7,7 @@ import com.sillock.domain.tag.repository.TagRepository;
 import com.sillock.domain.tag.service.TagService;
 import com.sillock.event.entity.CalculateTagEvent;
 import org.bson.types.ObjectId;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.aop.aspectj.annotation.AspectJProxyFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,13 +38,12 @@ class PublishEventAspectTest {
 
 
     @Test
+    @Disabled
     public void aspectTest(){
         AspectJProxyFactory factory = new AspectJProxyFactory(new TagService(tagInfoRepository, tagRepository, memberTagInfoRepository));
         factory.addAspect(publishEventAspect);
         TagService tagService1 = factory.getProxy();
         CalculateTagEvent event = tagService1.saveTagList(new ObjectId(EntityFactory.basicObjectId()), Arrays.asList(EntityFactory.basicTagEntity()));
-
-
     }
 
 }

@@ -1,5 +1,6 @@
 package com.sillock.domain.tag.controller;
 
+import com.sillock.annotation.SillogUser;
 import com.sillock.common.AbstractControllerTest;
 import com.sillock.common.EntityFactory;
 import com.sillock.domain.member.model.entity.Member;
@@ -17,6 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.sillock.common.message.ResponseMessage.READ_DEFAULT_TAG_INFO_LIST;
+import static com.sillock.common.message.ResponseMessage.READ_MEMBER_TAG_INFO_LIST;
 import static com.sillock.config.ApiDocumentUtils.getDocumentRequest;
 import static com.sillock.config.ApiDocumentUtils.getDocumentResponse;
 import static org.mockito.ArgumentMatchers.any;
@@ -64,6 +66,7 @@ class TagControllerTest extends AbstractControllerTest {
                 ));
     }
 
+    @SillogUser
     @Test
     void 사용자가_사용한_태그_리스트_조회() throws Exception {
         Member member = EntityFactory.basicMemberEntity();
@@ -85,7 +88,7 @@ class TagControllerTest extends AbstractControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value(READ_DEFAULT_TAG_INFO_LIST)) // (5)
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value(READ_MEMBER_TAG_INFO_LIST)) // (5)
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].category").value("test category"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].tagNameList[0]").value("tag1"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].tagNameList[1]").value("tag2"))

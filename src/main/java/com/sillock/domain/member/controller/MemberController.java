@@ -33,7 +33,7 @@ public class MemberController {
 //
 //        return ResponseEntity.ok(new MemberCheckDto(isExist));
 //    }
-//
+
 //    @GetMapping("/test")
 //    public ResponseEntity<MemberDto> test(){
 //        MemberDto memberDto = MemberDto.builder().memberId(1L).email("test@gmail.com").nickName("treering").build();

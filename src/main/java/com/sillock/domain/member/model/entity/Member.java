@@ -22,7 +22,9 @@ public class Member {
     @Id
     private ObjectId id;
 
-    private String nickName;
+    private String identifier;
+
+    private String nickname;
 
     private String email;
 
