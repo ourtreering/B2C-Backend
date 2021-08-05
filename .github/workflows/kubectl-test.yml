@@ -1,5 +1,16 @@
 name: Get pods
-on: [push]
+on:
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Log level'
+        required: true
+        default: 'warning'
+      tags:
+        description: 'Test scenario tags'
+  push:
+    branches:
+      - chore/k8s
 
 jobs:
   deploy:
