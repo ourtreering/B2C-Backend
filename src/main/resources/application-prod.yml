@@ -3,5 +3,8 @@ spring:
     kakao:
       url: https://kapi.kakao.com/v2/user/me
 
+server:
+  port: 8081
+
 jwt:
   secret: thisissecretwhichusedforsillogservicethisissecretwhichusedforsillogservice
