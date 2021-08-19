@@ -1,32 +1,38 @@
 package com.sillock.domain.member.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sillock.annotation.SillogUser;
 import com.sillock.common.AbstractControllerTest;
+import com.sillock.common.EntityFactory;
+import com.sillock.core.auth.jwt.model.SocialProfile;
+import com.sillock.domain.member.service.MemberService;
 import org.junit.jupiter.api.Test;
 import org.mongounit.MongoUnitTest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import static com.sillock.common.message.ResponseMessage.LOGIN_SUCCESS;
 import static com.sillock.config.ApiDocumentUtils.getDocumentRequest;
 import static com.sillock.config.ApiDocumentUtils.getDocumentResponse;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.given;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessRequest;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessResponse;
-import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
-import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
+import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 public class MemberControllerTest extends AbstractControllerTest {
 
-//    @MockBean
-//    private SillogService sillogService;
-//
-//    @MockBean
-//    private SillogRepository sillogRepository;
-//
-//
+    @MockBean
+    private MemberService memberService;
+
+    @Autowired
+    private ObjectMapper objectMapper;
 
     @SillogUser
     @Test
@@ -46,6 +52,37 @@ public class MemberControllerTest extends AbstractControllerTest {
                                 fieldWithPath("data.nickname").description("사용자 닉네임"),
                                 fieldWithPath("data.profileImage").description("사용자 프로필 이미지 URL"),
                                 fieldWithPath("data.identifier").description("사용자 identifier"),
+                                fieldWithPath("timestamp").description("타임스탬프")
+                        )
+                ));
+    }
+
+    @Test
+    public void 사용자_로그인_테스트() throws Exception {
+        SocialProfile socialProfile = new SocialProfile("id", "test@gmail.com");
+        String content = objectMapper.writeValueAsString(socialProfile);
+
+        given(memberService.findByMemberByEmail(any(String.class))).willReturn(EntityFactory.basicMemberEntity());
+
+        mockMvc.perform(post("/api/v1/members/login")
+                .content(content)
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value(LOGIN_SUCCESS))
+                .andDo(print())
+                .andDo(document("api/v1/members/login",
+                        getDocumentRequest(),
+                        getDocumentResponse(),
+                        requestFields(
+                                fieldWithPath("id").description("소셜 프로필 id"),
+                                fieldWithPath("email").description("소셜 프로필 이메일")
+                        ),
+                        responseFields(
+                                fieldWithPath("status").description("상태 값"),
+                                fieldWithPath("message").description("응답 메시지"),
+                                fieldWithPath("data.accessToken").description("사용자 액세스 토큰"),
+                                fieldWithPath("data.refreshToken").description("사용자 리프레시 토큰"),
                                 fieldWithPath("timestamp").description("타임스탬프")
                         )
                 ));

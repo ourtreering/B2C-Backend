@@ -23,19 +23,19 @@ public class MemberService {
     @Transactional(readOnly = true)
     public Member findByMemberId(ObjectId memberId){
         return memberRepository.findById(memberId)
-                .orElseThrow(()-> new EntityNotFoundException(ExceptionMessage.ENTITY_NOT_FOUND));
+                .orElseThrow(()-> new EntityNotFoundException(ExceptionMessage.MEMBER_ENTITY_NOT_FOUND));
     }
 
 
-    @Transactional
-    public boolean isExistMemberByProvider(String accessToken, String provider) throws JsonProcessingException {
-        SocialProfile profile = socialService.getSocialProfile(accessToken);
-        return memberRepository.existsByEmail(profile.getEmail());
+    @Transactional(readOnly = true)
+    public Member findByMemberByEmail(String email) {
+        return memberRepository.findByEmail(email)
+                .orElseThrow(()-> new EntityNotFoundException(ExceptionMessage.MEMBER_ENTITY_NOT_FOUND));
     }
 
     @Transactional(readOnly = true)
     public Member findByIdentifier(String identifier){
         return memberRepository.findByIdentifier(identifier)
-                .orElseThrow(() -> new EntityNotFoundException(ExceptionMessage.ENTITY_NOT_FOUND));
+                .orElseThrow(() -> new EntityNotFoundException(ExceptionMessage.MEMBER_ENTITY_NOT_FOUND));
     }
 }

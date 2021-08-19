@@ -1,21 +1,21 @@
 package com.sillock.domain.member.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.sillock.common.dto.ResponseDto;
 import com.sillock.common.message.ResponseMessage;
 import com.sillock.core.annotation.CurrentUser;
+import com.sillock.core.auth.jwt.component.JwtCreator;
+import com.sillock.core.auth.jwt.model.SocialProfile;
+import com.sillock.core.auth.jwt.model.TokenDto;
 import com.sillock.domain.member.model.component.MemberMapper;
-import com.sillock.domain.member.model.dto.MemberDto;
 import com.sillock.domain.member.model.dto.MemberProfile;
 import com.sillock.domain.member.model.entity.Member;
 import com.sillock.domain.member.service.MemberService;
-import com.sillock.domain.sillog.model.dto.SillogResponseDto;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.bson.types.ObjectId;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -24,19 +24,22 @@ public class MemberController {
 
     private final MemberService memberService;
     private final MemberMapper memberMapper;
+    private final JwtCreator jwtCreator;
 
     @GetMapping(value = "/me")
     public ResponseEntity<ResponseDto<MemberProfile>> getMyProfile(@CurrentUser Member member){
         return ResponseEntity.status(HttpStatus.OK)
                .body(ResponseDto.of(HttpStatus.OK, ResponseMessage.READ_MEMBER_PROFILER, memberMapper.toDtoFromMemberEntity(member)));
     }
-//
-//    @PostMapping("/exist/{provider}")
-//    public ResponseEntity<MemberCheckDto> isExistMember(@RequestBody TokenDto token, @PathVariable String provider) throws JsonProcessingException {
-//        boolean isExist = memberService.isExistMemberByProvider(token.getAccessToken(), provider);
-//
-//        return ResponseEntity.ok(new MemberCheckDto(isExist));
-//    }
+
+    @PostMapping("/login")
+    public ResponseEntity<ResponseDto<?>> loginByProvider(@RequestBody SocialProfile profile) {
+        Member member = memberService.findByMemberByEmail(profile.getEmail());
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(ResponseDto.of(HttpStatus.OK, ResponseMessage.LOGIN_SUCCESS,
+                        new TokenDto(jwtCreator.createAccessToken(member), null)));
+    }
+
 
 //    @GetMapping("/test")
 //    public ResponseEntity<MemberDto> test(){
@@ -62,9 +65,9 @@ public class MemberController {
 //    }
 //
 //
-//    @AllArgsConstructor
-//    public class MemberCheckDto {
-//        private boolean exist;
-//    }
+    @AllArgsConstructor
+    public class MemberCheckDto {
+        private boolean exist;
+    }
 
 }

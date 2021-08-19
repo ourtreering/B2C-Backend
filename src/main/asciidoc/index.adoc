@@ -8,6 +8,20 @@
 
 == 사용자
 
+== POST /api/v1/members/login
+
+.request
+include::{snippets}/api/v1/members/login/http-request.adoc[]
+
+.request fields
+include::{snippets}/api/v1/members/login/request-fields.adoc[]
+
+.response
+include::{snippets}/api/v1/members/login/http-response.adoc[]
+
+.response fields
+include::{snippets}/api/v1/members/login/response-fields.adoc[]
+
 == GET /api/v1/members/me
 
 .request
