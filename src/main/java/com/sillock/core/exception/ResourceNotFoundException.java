@@ -2,7 +2,7 @@ package com.sillock.core.exception;
 /**
  * 리소스 찾을 수 없음 예외 (404 Not Found)
  */
-public class ResourceNotFoundException extends SillockException{
+public class ResourceNotFoundException extends SillogException {
     public ResourceNotFoundException() {
     }
 

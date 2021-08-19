@@ -1,11 +1,10 @@
 package com.sillock.core.advice;
 
 import com.sillock.common.dto.ErrorResponseDto;
-import com.sillock.common.dto.ResponseDto;
 import com.sillock.core.exception.AccessNotAllowedException;
 import com.sillock.core.exception.BadRequestException;
 import com.sillock.core.exception.ResourceNotFoundException;
-import com.sillock.core.exception.SillockException;
+import com.sillock.core.exception.SillogException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -19,7 +18,7 @@ import javax.annotation.Priority;
 @Priority(20)
 @RestControllerAdvice
 public class DefaultControllerAdvice extends AbstractControllerAdvice {
-    @ExceptionHandler(value = { Exception.class, SillockException.class })
+    @ExceptionHandler(value = { Exception.class, SillogException.class })
     public ResponseEntity<ErrorResponseDto<?>> handleUnknownException(Exception e) {
         return handleException(e, HttpStatus.INTERNAL_SERVER_ERROR);
     }

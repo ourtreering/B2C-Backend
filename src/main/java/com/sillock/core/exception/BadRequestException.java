@@ -2,7 +2,7 @@ package com.sillock.core.exception;
 /**
  * 리소스 잘못된 요청 예외 (400 Bad Request)
  */
-public class BadRequestException extends SillockException{
+public class BadRequestException extends SillogException {
     public BadRequestException() {
     }
 

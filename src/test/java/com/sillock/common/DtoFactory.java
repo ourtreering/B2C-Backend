@@ -1,5 +1,6 @@
 package com.sillock.common;
 
+import com.sillock.domain.member.model.dto.MemberSignUp;
 import com.sillock.domain.sillog.model.dto.SillogPostDto;
 import com.sillock.domain.tag.model.dto.TagDto;
 import com.sillock.domain.tag.model.dto.TagInfoDto;
@@ -29,6 +30,17 @@ public class DtoFactory {
         return TagInfoDto.builder()
                 .category("test category")
                 .tagNameList(Arrays.asList("tag1", "tag2"))
+                .build();
+    }
+
+    public static MemberSignUp memberSignUpDto(){
+        return MemberSignUp.builder()
+                .email("test@gmail.com")
+                .birth(LocalDate.of(2021,07,21))
+                .gender("male")
+                .nickname("test")
+                .password("1234")
+                .profileImage("/test.jpg")
                 .build();
     }
 
