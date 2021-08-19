@@ -1,17 +1,23 @@
 package com.sillock.domain.member.controller;
 
+import com.sillock.annotation.SillogUser;
 import com.sillock.common.AbstractControllerTest;
+import org.junit.jupiter.api.Test;
 import org.mongounit.MongoUnitTest;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import static com.sillock.config.ApiDocumentUtils.getDocumentRequest;
+import static com.sillock.config.ApiDocumentUtils.getDocumentResponse;
 import static org.mockito.ArgumentMatchers.any;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
+import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessRequest;
+import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessResponse;
+import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
-/**
- * created by hyunwoo 21/06/22
- */
 public class MemberControllerTest extends AbstractControllerTest {
 
 //    @MockBean
@@ -20,29 +26,31 @@ public class MemberControllerTest extends AbstractControllerTest {
 //    @MockBean
 //    private SillogRepository sillogRepository;
 //
-//    BuilderObjects builderObjects = new BuilderObjects();
 //
-//    @Test
-//    public void 멤버를_조회한다() throws Exception {
-//        mockMvc.perform(get("/api/members/test")
-//                .accept(MediaType.APPLICATION_JSON))
-//                .andExpect(MockMvcResultMatchers.status().isOk())
-//                .andExpect(MockMvcResultMatchers.jsonPath("$.memberId").value(1L)) // (5)
-//                .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("treering"))
-//                .andExpect(MockMvcResultMatchers.jsonPath("$.email").value("test@gmail.com"))
-//                .andDo(print())
-//                .andDo(document("member/test",
-//                        preprocessRequest(prettyPrint()),
-//                        preprocessResponse(prettyPrint()),
-//                        responseFields(
-//                                fieldWithPath("memberId").description("member unique id"),
-//                                fieldWithPath("name").description("name"),
-//                                fieldWithPath("email").description("email"),
-//                                fieldWithPath("identifier").description("identifier"),
-//                                fieldWithPath("uniqueCode").description("uniqueCode")
-//                        )
-//                ));
-//    }
+
+    @SillogUser
+    @Test
+    public void 멤버를_조회한다() throws Exception {
+        mockMvc.perform(get("/api/v1/members/me")
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.email").value("test@gmail.com"))
+                .andDo(print())
+                .andDo(document("api/v1/members/me",
+                        getDocumentRequest(),
+                        getDocumentResponse(),
+                        responseFields(
+                                fieldWithPath("status").description("상태 값"),
+                                fieldWithPath("message").description("응답 메시지"),
+                                fieldWithPath("data.email").description("사용자 이메일"),
+                                fieldWithPath("data.nickname").description("사용자 닉네임"),
+                                fieldWithPath("data.profileImage").description("사용자 프로필 이미지 URL"),
+                                fieldWithPath("data.identifier").description("사용자 identifier"),
+                                fieldWithPath("timestamp").description("타임스탬프")
+                        )
+                ));
+    }
+
 //
 //    @Test
 //    public void 사용자_실록_조회_테스트() throws Exception{

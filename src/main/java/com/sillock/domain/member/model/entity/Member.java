@@ -1,6 +1,5 @@
 package com.sillock.domain.member.model.entity;
 
-import com.sillock.core.auth.jwt.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
