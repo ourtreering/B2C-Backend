@@ -9,7 +9,9 @@ import com.sillock.core.auth.jwt.model.SocialProfile;
 import com.sillock.core.auth.jwt.model.TokenDto;
 import com.sillock.domain.member.model.component.MemberMapper;
 import com.sillock.domain.member.model.dto.MemberProfile;
+import com.sillock.domain.member.model.dto.MemberSignUp;
 import com.sillock.domain.member.model.entity.Member;
+import com.sillock.domain.member.service.MemberAuthService;
 import com.sillock.domain.member.service.MemberService;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +25,7 @@ import org.springframework.web.bind.annotation.*;
 public class MemberController {
 
     private final MemberService memberService;
+    private final MemberAuthService memberAuthService;
     private final MemberMapper memberMapper;
     private final JwtCreator jwtCreator;
 
@@ -34,12 +37,23 @@ public class MemberController {
 
     @PostMapping("/login")
     public ResponseEntity<ResponseDto<?>> loginByProvider(@RequestBody SocialProfile profile) {
-        Member member = memberService.findByMemberByEmail(profile.getEmail());
+        Member member = memberAuthService.login(profile.getEmail());
+
         return ResponseEntity.status(HttpStatus.OK)
                 .body(ResponseDto.of(HttpStatus.OK, ResponseMessage.LOGIN_SUCCESS,
                         new TokenDto(jwtCreator.createAccessToken(member), null)));
     }
 
+    @PostMapping("/signup")
+    public ResponseEntity<ResponseDto<?>> signUp(@RequestBody MemberSignUp memberSignUp) {
+        Member newMember = memberMapper.toEntityFromMemberSignUp(memberSignUp);
+
+        Member member = memberAuthService.signup(newMember);
+
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(ResponseDto.of(HttpStatus.CREATED, ResponseMessage.SIGN_UP_SUCCESS,
+                        new TokenDto(jwtCreator.createAccessToken(member), null)));
+    }
 
 //    @GetMapping("/test")
 //    public ResponseEntity<MemberDto> test(){

@@ -10,8 +10,7 @@ import java.time.LocalDate;
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class MemberDto {
-    private ObjectId memberId;
+public class MemberSignUp {
     private String email;
     private String nickname;
     private String password;

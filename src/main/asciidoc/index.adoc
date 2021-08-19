@@ -22,6 +22,20 @@ include::{snippets}/api/v1/members/login/http-response.adoc[]
 .response fields
 include::{snippets}/api/v1/members/login/response-fields.adoc[]
 
+== POST /api/v1/members/signup
+
+.request
+include::{snippets}/api/v1/members/signup/http-request.adoc[]
+
+.request fields
+include::{snippets}/api/v1/members/signup/request-fields.adoc[]
+
+.response
+include::{snippets}/api/v1/members/signup/http-response.adoc[]
+
+.response fields
+include::{snippets}/api/v1/members/signup/response-fields.adoc[]
+
 == GET /api/v1/members/me
 
 .request

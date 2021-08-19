@@ -3,8 +3,12 @@ package com.sillock.domain.member.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sillock.annotation.SillogUser;
 import com.sillock.common.AbstractControllerTest;
+import com.sillock.common.DtoFactory;
 import com.sillock.common.EntityFactory;
 import com.sillock.core.auth.jwt.model.SocialProfile;
+import com.sillock.domain.member.model.dto.MemberSignUp;
+import com.sillock.domain.member.model.entity.Member;
+import com.sillock.domain.member.service.MemberAuthService;
 import com.sillock.domain.member.service.MemberService;
 import org.junit.jupiter.api.Test;
 import org.mongounit.MongoUnitTest;
@@ -13,7 +17,10 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import java.time.LocalDate;
+
 import static com.sillock.common.message.ResponseMessage.LOGIN_SUCCESS;
+import static com.sillock.common.message.ResponseMessage.SIGN_UP_SUCCESS;
 import static com.sillock.config.ApiDocumentUtils.getDocumentRequest;
 import static com.sillock.config.ApiDocumentUtils.getDocumentResponse;
 import static org.mockito.ArgumentMatchers.any;
@@ -30,6 +37,9 @@ public class MemberControllerTest extends AbstractControllerTest {
 
     @MockBean
     private MemberService memberService;
+
+    @MockBean
+    private MemberAuthService memberAuthService;
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -62,7 +72,7 @@ public class MemberControllerTest extends AbstractControllerTest {
         SocialProfile socialProfile = new SocialProfile("id", "test@gmail.com");
         String content = objectMapper.writeValueAsString(socialProfile);
 
-        given(memberService.findByMemberByEmail(any(String.class))).willReturn(EntityFactory.basicMemberEntity());
+        given(memberAuthService.login(any(String.class))).willReturn(EntityFactory.basicMemberEntity());
 
         mockMvc.perform(post("/api/v1/members/login")
                 .content(content)
@@ -77,6 +87,41 @@ public class MemberControllerTest extends AbstractControllerTest {
                         requestFields(
                                 fieldWithPath("id").description("소셜 프로필 id"),
                                 fieldWithPath("email").description("소셜 프로필 이메일")
+                        ),
+                        responseFields(
+                                fieldWithPath("status").description("상태 값"),
+                                fieldWithPath("message").description("응답 메시지"),
+                                fieldWithPath("data.accessToken").description("사용자 액세스 토큰"),
+                                fieldWithPath("data.refreshToken").description("사용자 리프레시 토큰"),
+                                fieldWithPath("timestamp").description("타임스탬프")
+                        )
+                ));
+    }
+
+    @Test
+    public void 사용자_회원가입_테스트() throws Exception {
+        MemberSignUp memberSignUp = DtoFactory.memberSignUpDto();
+        String content = objectMapper.writeValueAsString(memberSignUp);
+
+        given(memberAuthService.signup(any(Member.class))).willReturn(EntityFactory.basicMemberEntity());
+
+        mockMvc.perform(post("/api/v1/members/signup")
+                .content(content)
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isCreated())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value(SIGN_UP_SUCCESS))
+                .andDo(print())
+                .andDo(document("api/v1/members/signup",
+                        getDocumentRequest(),
+                        getDocumentResponse(),
+                        requestFields(
+                                fieldWithPath("email").description("사용자 이메일"),
+                                fieldWithPath("nickname").description("사용자 닉네임"),
+                                fieldWithPath("birth").description("사용자 생일"),
+                                fieldWithPath("password").description("사용자 비밀번호"),
+                                fieldWithPath("profileImage").description("사용자 프로필 이미지 주소(default:null)"),
+                                fieldWithPath("gender").description("사용자 성별")
                         ),
                         responseFields(
                                 fieldWithPath("status").description("상태 값"),

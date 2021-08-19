@@ -38,4 +38,14 @@ public class MemberService {
         return memberRepository.findByIdentifier(identifier)
                 .orElseThrow(() -> new EntityNotFoundException(ExceptionMessage.MEMBER_ENTITY_NOT_FOUND));
     }
+
+    @Transactional(readOnly = true)
+    public boolean existsByEmail(String email){
+        return memberRepository.existsByEmail(email);
+    }
+
+    @Transactional
+    public Member register(Member member){
+        return memberRepository.save(member);
+    }
 }
