@@ -1,6 +1,7 @@
 package com.sillock.domain.member.service;
 
 import com.sillock.common.message.ExceptionMessage;
+import com.sillock.core.exception.BadRequestException;
 import com.sillock.core.exception.SillogException;
 import com.sillock.domain.member.model.entity.Member;
 import com.sillock.domain.member.repository.MemberRepository;
@@ -16,7 +17,7 @@ public class MemberAuthService {
     @Transactional
     public Member signup(Member member){
         if(memberService.existsByEmail(member.getEmail()))
-            throw new SillogException(ExceptionMessage.ALREADY_SIGN_UP_MEMBER);
+            throw new BadRequestException(ExceptionMessage.ALREADY_SIGN_UP_MEMBER);
 
         memberService.init(member);
 
