@@ -48,4 +48,8 @@ public class MemberService {
     public Member register(Member member){
         return memberRepository.save(member);
     }
+
+    public void init(Member member){
+        member.setIdentifier("identifier");
+    }
 }

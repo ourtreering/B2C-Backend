@@ -18,6 +18,8 @@ public class MemberAuthService {
         if(memberService.existsByEmail(member.getEmail()))
             throw new SillogException(ExceptionMessage.ALREADY_SIGN_UP_MEMBER);
 
+        memberService.init(member);
+
         return memberService.register(member);
     }
 
