@@ -8,6 +8,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ResponseMessage {
     public static final String EXAMPLE = "메시지 예시입니다.";
+
+    // Member
+    public static final String READ_MEMBER_PROFILER = "사용자 정보를 조회합니다.";
+
+    // Sillog
     public static final String REGISTER_SILLOG = "실록 등록이 완료되었습니다.";
     public static final String READ_EVENT = "행사정보를 성공적으로 불러왔습니다.";
     public static final String READ_SILLOG_LIST = "실록 리스트를 조회합니다.";

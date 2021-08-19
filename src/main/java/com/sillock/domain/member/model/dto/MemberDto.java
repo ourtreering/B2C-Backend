@@ -13,7 +13,7 @@ import java.time.LocalDate;
 public class MemberDto {
     private ObjectId memberId;
     private String email;
-    private String nickName;
+    private String nickname;
     private String password;
     private LocalDate birth;
     private String profileImage;

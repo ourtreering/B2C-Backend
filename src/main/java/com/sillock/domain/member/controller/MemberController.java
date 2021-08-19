@@ -1,11 +1,17 @@
 package com.sillock.domain.member.controller;
 
 import com.sillock.common.dto.ResponseDto;
+import com.sillock.common.message.ResponseMessage;
 import com.sillock.core.annotation.CurrentUser;
+import com.sillock.domain.member.model.component.MemberMapper;
+import com.sillock.domain.member.model.dto.MemberDto;
+import com.sillock.domain.member.model.dto.MemberProfile;
 import com.sillock.domain.member.model.entity.Member;
+import com.sillock.domain.member.service.MemberService;
 import com.sillock.domain.sillog.model.dto.SillogResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.bson.types.ObjectId;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,16 +22,14 @@ import java.util.List;
 @RequestMapping("/api/v1/members")
 public class MemberController {
 
-//    private final MemberService memberService;
-//    private final SillogService sillogService;
-//    private final SillogMapper sillogMapper;
-//    BuilderObjects builderObjects = new BuilderObjects();
-//
-//    @GetMapping(value = "/{memberId}")
-//    public ResponseEntity<Member> getMember(@PathVariable String memberId){
-//        Member member = memberService.findById(memberId);
-//        return new ResponseEntity<>(member, HttpStatus.OK);
-//    }
+    private final MemberService memberService;
+    private final MemberMapper memberMapper;
+
+    @GetMapping(value = "/me")
+    public ResponseEntity<ResponseDto<MemberProfile>> getMyProfile(@CurrentUser Member member){
+        return ResponseEntity.status(HttpStatus.OK)
+               .body(ResponseDto.of(HttpStatus.OK, ResponseMessage.READ_MEMBER_PROFILER, memberMapper.toDtoFromMemberEntity(member)));
+    }
 //
 //    @PostMapping("/exist/{provider}")
 //    public ResponseEntity<MemberCheckDto> isExistMember(@RequestBody TokenDto token, @PathVariable String provider) throws JsonProcessingException {
