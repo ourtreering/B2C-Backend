@@ -6,7 +6,7 @@
 :icons: font
 :source-highlighter: highlightjs
 
-== 사용자
+= 사용자
 
 == POST /api/v1/members/login
 
@@ -47,7 +47,21 @@ include::{snippets}/api/v1/members/me/http-response.adoc[]
 .response fields
 include::{snippets}/api/v1/members/me/response-fields.adoc[]
 
-== 실록
+== PATCH /api/v1/members/me
+
+.request
+include::{snippets}/api/v1/members/me/patch/http-request.adoc[]
+
+.request fields
+include::{snippets}/api/v1/members/me/patch/request-fields.adoc[]
+
+.response
+include::{snippets}/api/v1/members/me/patch/http-response.adoc[]
+
+.response fields
+include::{snippets}/api/v1/members/me/patch/response-fields.adoc[]
+
+= 실록
 
 == POST /api/v1/sillogs
 
@@ -89,7 +103,7 @@ include::{snippets}/api/v1/members/memberId/sillogs/title/http-response.adoc[]
 .response fields
 include::{snippets}/api/v1/members/memberId/sillogs/title/response-fields.adoc[]
 
-== 태그
+= 태그
 
 == GET /api/v1/tags/default
 

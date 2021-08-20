@@ -51,6 +51,11 @@ public class MemberService {
         return memberRepository.save(member);
     }
 
+    @Transactional
+    public Member updateProfile(Member member){
+        return memberRepository.save(member);
+    }
+
     public void init(Member member){
         member.setIdentifier("identifier");
     }

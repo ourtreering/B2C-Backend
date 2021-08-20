@@ -6,29 +6,28 @@ import com.sillock.common.AbstractControllerTest;
 import com.sillock.common.DtoFactory;
 import com.sillock.common.EntityFactory;
 import com.sillock.core.auth.jwt.model.SocialProfile;
+import com.sillock.domain.member.model.component.MemberMapper;
+import com.sillock.domain.member.model.dto.MemberProfile;
 import com.sillock.domain.member.model.dto.MemberSignUp;
 import com.sillock.domain.member.model.entity.Member;
 import com.sillock.domain.member.service.MemberAuthService;
 import com.sillock.domain.member.service.MemberService;
 import org.junit.jupiter.api.Test;
-import org.mongounit.MongoUnitTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import java.time.LocalDate;
-
-import static com.sillock.common.message.ResponseMessage.LOGIN_SUCCESS;
-import static com.sillock.common.message.ResponseMessage.SIGN_UP_SUCCESS;
+import static com.sillock.common.message.ResponseMessage.*;
 import static com.sillock.config.ApiDocumentUtils.getDocumentRequest;
 import static com.sillock.config.ApiDocumentUtils.getDocumentResponse;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.willDoNothing;
+import static org.mockito.Mockito.doNothing;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.patch;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
-import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessRequest;
-import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessResponse;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -120,7 +119,7 @@ public class MemberControllerTest extends AbstractControllerTest {
                                 fieldWithPath("nickname").description("사용자 닉네임"),
                                 fieldWithPath("birth").description("사용자 생일"),
                                 fieldWithPath("password").description("사용자 비밀번호"),
-                                fieldWithPath("profileImage").description("사용자 프로필 이미지 주소(default:null)"),
+                                fieldWithPath("profileImage").description("사용자 프로필 이미지 주소(default : null)"),
                                 fieldWithPath("gender").description("사용자 성별")
                         ),
                         responseFields(
@@ -128,6 +127,43 @@ public class MemberControllerTest extends AbstractControllerTest {
                                 fieldWithPath("message").description("응답 메시지"),
                                 fieldWithPath("data.accessToken").description("사용자 액세스 토큰"),
                                 fieldWithPath("data.refreshToken").description("사용자 리프레시 토큰"),
+                                fieldWithPath("timestamp").description("타임스탬프")
+                        )
+                ));
+    }
+
+    @SillogUser
+    @Test
+    public void 사용자_프로필_수정_테스트() throws Exception {
+        MemberProfile profile = new MemberProfile();
+        profile.setNickname("changed nickname");
+
+        String content = objectMapper.writeValueAsString(profile);
+
+        mockMvc.perform(patch("/api/v1/members/me")
+                .content(content)
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value(UPDATE_MEMBER_PROFILE))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.nickname").value(profile.getNickname()))
+                .andDo(print())
+                .andDo(document("api/v1/members/me/patch",
+                        getDocumentRequest(),
+                        getDocumentResponse(),
+                        requestFields(
+                                fieldWithPath("email").description("사용자 이메일 - 선택"),
+                                fieldWithPath("nickname").description("사용자 닉네임 - 선택"),
+                                fieldWithPath("profileImage").description("사용자 프로필 이미지 URL - 선택"),
+                                fieldWithPath("identifier").description("사용자 identifier - 선택")
+                        ),
+                        responseFields(
+                                fieldWithPath("status").description("상태 값"),
+                                fieldWithPath("message").description("응답 메시지"),
+                                fieldWithPath("data.email").description("사용자 이메일"),
+                                fieldWithPath("data.nickname").description("사용자 닉네임"),
+                                fieldWithPath("data.profileImage").description("사용자 프로필 이미지 URL"),
+                                fieldWithPath("data.identifier").description("사용자 identifier"),
                                 fieldWithPath("timestamp").description("타임스탬프")
                         )
                 ));

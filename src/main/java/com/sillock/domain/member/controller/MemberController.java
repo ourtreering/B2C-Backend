@@ -1,6 +1,5 @@
 package com.sillock.domain.member.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.sillock.common.dto.ResponseDto;
 import com.sillock.common.message.ResponseMessage;
 import com.sillock.core.annotation.CurrentUser;
@@ -32,7 +31,7 @@ public class MemberController {
     @GetMapping(value = "/me")
     public ResponseEntity<ResponseDto<MemberProfile>> getMyProfile(@CurrentUser Member member){
         return ResponseEntity.status(HttpStatus.OK)
-               .body(ResponseDto.of(HttpStatus.OK, ResponseMessage.READ_MEMBER_PROFILER, memberMapper.toDtoFromMemberEntity(member)));
+               .body(ResponseDto.of(HttpStatus.OK, ResponseMessage.READ_MEMBER_PROFILE, memberMapper.toDtoFromMemberEntity(member)));
     }
 
     @PostMapping("/login")
@@ -53,6 +52,16 @@ public class MemberController {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(ResponseDto.of(HttpStatus.CREATED, ResponseMessage.SIGN_UP_SUCCESS,
                         new TokenDto(jwtCreator.createAccessToken(member), null)));
+    }
+
+    @PatchMapping("/me")
+    public ResponseEntity<ResponseDto<MemberProfile>> updateProfile(@CurrentUser Member member, @RequestBody MemberProfile memberProfile){
+        memberMapper.updateProfile(memberProfile, member);
+        memberService.updateProfile(member);
+
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(ResponseDto.of(HttpStatus.OK, ResponseMessage.UPDATE_MEMBER_PROFILE,
+                        memberMapper.toDtoFromMemberEntity(member)));
     }
 
 //    @GetMapping("/test")

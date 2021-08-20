@@ -1,5 +1,6 @@
 package com.sillock.common;
 
+import com.sillock.domain.member.model.dto.MemberProfile;
 import com.sillock.domain.member.model.dto.MemberSignUp;
 import com.sillock.domain.sillog.model.dto.SillogPostDto;
 import com.sillock.domain.tag.model.dto.TagDto;
@@ -40,6 +41,15 @@ public class DtoFactory {
                 .gender("male")
                 .nickname("test")
                 .password("1234")
+                .profileImage("/test.jpg")
+                .build();
+    }
+
+    public static MemberProfile memberProfileDto(){
+        return memberProfileDto().builder()
+                .email("test@gmail.com")
+                .identifier("identifier")
+                .nickname("test")
                 .profileImage("/test.jpg")
                 .build();
     }
