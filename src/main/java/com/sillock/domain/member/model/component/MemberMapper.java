@@ -4,6 +4,7 @@ import com.sillock.domain.member.model.dto.MemberProfile;
 import com.sillock.domain.member.model.dto.MemberSignUp;
 import com.sillock.domain.member.model.entity.Member;
 import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 import org.mapstruct.ReportingPolicy;
 
@@ -13,4 +14,6 @@ public interface MemberMapper {
     MemberProfile toDtoFromMemberEntity(Member member);
 
     Member toEntityFromMemberSignUp(MemberSignUp memberSignUp);
+
+    void updateProfile(MemberProfile memberProfile, @MappingTarget Member member);
 }

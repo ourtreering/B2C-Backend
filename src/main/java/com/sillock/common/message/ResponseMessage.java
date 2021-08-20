@@ -18,7 +18,8 @@ public class ResponseMessage {
     public static final String SIGN_UP_SUCCESS = "회원가입에 성공했습니다.";
 
     // Member
-    public static final String READ_MEMBER_PROFILER = "사용자 정보를 조회합니다.";
+    public static final String READ_MEMBER_PROFILE = "사용자 정보를 조회합니다.";
+    public static final String UPDATE_MEMBER_PROFILE = "사용자 정보를 수정합니다.";
 
     // Sillog
     public static final String REGISTER_SILLOG = "실록 등록이 완료되었습니다.";
