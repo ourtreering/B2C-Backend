@@ -6,6 +6,7 @@ import com.sillock.domain.tag.model.entity.MemberTagInfo;
 import com.sillock.domain.tag.model.entity.Tag;
 import com.sillock.domain.tag.model.entity.TagInfo;
 import com.sillock.domain.template.model.entity.Template;
+import com.sillock.domain.template.model.entity.TemplateCategory;
 import org.bson.types.ObjectId;
 
 import java.time.LocalDate;
@@ -50,6 +51,7 @@ public class EntityFactory {
 
     public static Template basicTemplateEntity(){
         return Template.builder()
+                .category(TemplateCategory.PROJECT)
                 .qnaList(Arrays.asList(basicQnaEntity()))
                 .build();
     }

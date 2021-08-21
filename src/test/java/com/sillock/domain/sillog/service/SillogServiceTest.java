@@ -10,6 +10,8 @@ import com.sillock.domain.sillog.model.entity.Sillog;
 import com.sillock.domain.sillog.model.entity.SillogTitle;
 import com.sillock.domain.sillog.repository.SillogRepository;
 import com.sillock.domain.tag.repository.TagRepository;
+import org.apache.commons.codec.DecoderException;
+import org.apache.commons.codec.binary.Hex;
 import org.bson.types.ObjectId;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -18,6 +20,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.mongodb.core.MongoTemplate;
 
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -88,5 +91,16 @@ public class SillogServiceTest {
         List<SillogTitle> sillogTitleList = sillogService.getMemberSillogTitleList(new ObjectId(EntityFactory.basicObjectId()));
         assertEquals(sillogTitleList.size(), 1);
 
+    }
+
+    @Test
+    public void test() throws DecoderException {
+        String hex = "611de2bb16a4c5308be8eb54";
+        String encodedString = Base64.getEncoder().encodeToString(hex.getBytes());
+
+        System.out.println((encodedString));
+
+        String decodedStr = new String(Base64.getDecoder().decode(encodedString));
+        System.out.println(decodedStr);
     }
 }
