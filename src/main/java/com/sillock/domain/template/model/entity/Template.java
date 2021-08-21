@@ -18,6 +18,9 @@ import java.util.List;
 public class Template {
     @Id
     private ObjectId id;
+
+    private TemplateCategory category;
+
     private List<Qna> qnaList;
 
     @Indexed
