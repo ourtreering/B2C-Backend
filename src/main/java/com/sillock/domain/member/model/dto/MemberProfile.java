@@ -1,6 +1,7 @@
 package com.sillock.domain.member.model.dto;
 
 import lombok.*;
+import org.bson.types.ObjectId;
 
 @Builder
 @Getter
@@ -8,6 +9,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MemberProfile {
+    private String id;
     private String email;
     private String nickname;
     private String profileImage;

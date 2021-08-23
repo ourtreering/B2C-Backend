@@ -57,6 +57,7 @@ public class MemberControllerTest extends AbstractControllerTest {
                         responseFields(
                                 fieldWithPath("status").description("상태 값"),
                                 fieldWithPath("message").description("응답 메시지"),
+                                fieldWithPath("data.id").description("사용자 id"),
                                 fieldWithPath("data.email").description("사용자 이메일"),
                                 fieldWithPath("data.nickname").description("사용자 닉네임"),
                                 fieldWithPath("data.profileImage").description("사용자 프로필 이미지 URL"),
@@ -152,6 +153,7 @@ public class MemberControllerTest extends AbstractControllerTest {
                         getDocumentRequest(),
                         getDocumentResponse(),
                         requestFields(
+                                fieldWithPath("id").description("사용자 id - 선택"),
                                 fieldWithPath("email").description("사용자 이메일 - 선택"),
                                 fieldWithPath("nickname").description("사용자 닉네임 - 선택"),
                                 fieldWithPath("profileImage").description("사용자 프로필 이미지 URL - 선택"),
@@ -160,6 +162,7 @@ public class MemberControllerTest extends AbstractControllerTest {
                         responseFields(
                                 fieldWithPath("status").description("상태 값"),
                                 fieldWithPath("message").description("응답 메시지"),
+                                fieldWithPath("data.id").description("사용자 id"),
                                 fieldWithPath("data.email").description("사용자 이메일"),
                                 fieldWithPath("data.nickname").description("사용자 닉네임"),
                                 fieldWithPath("data.profileImage").description("사용자 프로필 이미지 URL"),
