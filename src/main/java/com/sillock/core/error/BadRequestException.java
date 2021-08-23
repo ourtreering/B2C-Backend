@@ -1,8 +1,8 @@
-package com.sillock.core.exception;
+package com.sillock.core.error;
 /**
  * 리소스 잘못된 요청 예외 (400 Bad Request)
  */
-public class BadRequestException extends SillogException {
+public class BadRequestException extends RuntimeException {
     public BadRequestException() {
     }
 

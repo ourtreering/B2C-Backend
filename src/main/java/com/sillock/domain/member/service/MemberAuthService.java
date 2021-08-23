@@ -1,10 +1,8 @@
 package com.sillock.domain.member.service;
 
 import com.sillock.common.message.ExceptionMessage;
-import com.sillock.core.exception.BadRequestException;
-import com.sillock.core.exception.SillogException;
+import com.sillock.core.error.BadRequestException;
 import com.sillock.domain.member.model.entity.Member;
-import com.sillock.domain.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

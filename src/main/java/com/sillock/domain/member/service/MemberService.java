@@ -1,20 +1,14 @@
 package com.sillock.domain.member.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.sillock.common.message.ExceptionMessage;
-import com.sillock.core.exception.BadRequestException;
-import com.sillock.core.auth.social.model.SocialProfile;
 import com.sillock.core.auth.social.service.SocialService;
-import com.sillock.core.exception.ResourceNotFoundException;
+import com.sillock.core.error.ResourceNotFoundException;
 import com.sillock.domain.member.model.entity.Member;
 import com.sillock.domain.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.bson.types.ObjectId;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import javax.persistence.EntityNotFoundException;
-import java.lang.module.ResolutionException;
 
 @Service
 @RequiredArgsConstructor

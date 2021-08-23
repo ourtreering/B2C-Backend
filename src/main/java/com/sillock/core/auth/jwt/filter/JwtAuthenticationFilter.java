@@ -5,7 +5,7 @@ import com.sillock.common.dto.ErrorResponseDto;
 import com.sillock.common.message.ExceptionMessage;
 import com.sillock.core.auth.jwt.component.JwtResolver;
 import com.sillock.core.auth.jwt.component.JwtValidator;
-import com.sillock.core.exception.ResourceNotFoundException;
+import com.sillock.core.error.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;

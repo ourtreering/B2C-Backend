@@ -1,8 +1,8 @@
-package com.sillock.core.exception;
+package com.sillock.core.error;
 /**
  * 리소스 접근 권한 없음 예외 (403 Forbidden)
  */
-public class AccessNotAllowedException extends SillogException {
+public class AccessNotAllowedException extends RuntimeException {
     public AccessNotAllowedException() {
     }
 

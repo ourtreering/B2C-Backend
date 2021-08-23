@@ -1,10 +1,9 @@
 package com.sillock.core.advice;
 
 import com.sillock.common.dto.ErrorResponseDto;
-import com.sillock.core.exception.AccessNotAllowedException;
-import com.sillock.core.exception.BadRequestException;
-import com.sillock.core.exception.ResourceNotFoundException;
-import com.sillock.core.exception.SillogException;
+import com.sillock.core.error.AccessNotAllowedException;
+import com.sillock.core.error.BadRequestException;
+import com.sillock.core.error.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -13,12 +12,12 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import javax.annotation.Priority;
 
 /**
- * created by hyunwoo 21/06/23
+ * TODO: error 패키지 내부 어드바이스랑 합치기
  */
 @Priority(20)
 @RestControllerAdvice
 public class DefaultControllerAdvice extends AbstractControllerAdvice {
-    @ExceptionHandler(value = { Exception.class, SillogException.class })
+    @ExceptionHandler(value = { Exception.class})
     public ResponseEntity<ErrorResponseDto<?>> handleUnknownException(Exception e) {
         return handleException(e, HttpStatus.INTERNAL_SERVER_ERROR);
     }
