@@ -42,6 +42,12 @@ public class MemberService {
     }
 
     @Transactional(readOnly = true)
+    public Member findByEmail(String email){
+        return memberRepository.findByEmail(email)
+                .orElseThrow(() -> new ResourceNotFoundException(ExceptionMessage.MEMBER_ENTITY_NOT_FOUND));
+    }
+
+    @Transactional(readOnly = true)
     public boolean existsByEmail(String email){
         return memberRepository.existsByEmail(email);
     }

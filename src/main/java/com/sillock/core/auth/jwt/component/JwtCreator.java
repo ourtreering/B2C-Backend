@@ -26,7 +26,7 @@ public class JwtCreator {
     }
 
     public String createAccessToken(Member member) {
-        Claims claims = Jwts.claims().setSubject(member.getIdentifier());
+        Claims claims = Jwts.claims().setSubject(member.getEmail());
         claims.put("email", member.getEmail());
         Date now = new Date();
         return Jwts.builder()
