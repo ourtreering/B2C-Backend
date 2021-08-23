@@ -116,6 +116,17 @@ include::{snippets}/api/v1/tags/default/http-response.adoc[]
 .response fields
 include::{snippets}/api/v1/tags/default/response-fields.adoc[]
 
+== GET /api/v1/tags/me
+
+.request
+include::{snippets}/api/v1/tags/me/http-request.adoc[]
+
+.response
+include::{snippets}/api/v1/tags/me/http-response.adoc[]
+
+.response fields
+include::{snippets}/api/v1/tags/me/response-fields.adoc[]
+
 = 템플릿
 
 == GET /api/v1/templates
@@ -128,4 +139,43 @@ include::{snippets}/api/v1/templates/http-response.adoc[]
 
 .response fields
 include::{snippets}/api/v1/templates/response-fields.adoc[]
+
+== POST /api/v1/templates
+
+.request
+include::{snippets}/api/v1/templates/post/http-request.adoc[]
+
+.request fields
+include::{snippets}/api/v1/templates/post/request-fields.adoc[]
+
+.response
+include::{snippets}/api/v1/templates/post/http-response.adoc[]
+
+.response fields
+include::{snippets}/api/v1/templates/post/response-fields.adoc[]
+
+== PUT /api/v1/templated/{id}
+
+.request
+include::{snippets}/api/v1/templates/id/http-request.adoc[]
+
+.request fields
+include::{snippets}/api/v1/templates/id/request-fields.adoc[]
+
+.response
+include::{snippets}/api/v1/templates/id/http-response.adoc[]
+
+.response fields
+include::{snippets}/api/v1/templates/id/response-fields.adoc[]
+
+== DELETE /api/v1/templated/{id}
+
+.request
+include::{snippets}/api/v1/templates/id/delete/http-request.adoc[]
+
+.response
+include::{snippets}/api/v1/templates/id/delete/http-response.adoc[]
+
+.response fields
+include::{snippets}/api/v1/templates/id/delete/response-fields.adoc[]
 

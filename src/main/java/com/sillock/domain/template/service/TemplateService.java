@@ -1,13 +1,16 @@
 package com.sillock.domain.template.service;
 
+import com.sillock.common.message.ExceptionMessage;
 import com.sillock.domain.template.model.dto.TemplateListResponse;
 import com.sillock.domain.template.model.entity.Template;
 import com.sillock.domain.template.model.entity.TemplateCategory;
 import com.sillock.domain.template.repository.TemplateRepository;
 import lombok.RequiredArgsConstructor;
+import org.bson.types.ObjectId;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.*;
 
 @RequiredArgsConstructor
@@ -31,6 +34,22 @@ public class TemplateService {
         }
 
         return templateListMap;
+    }
+
+    @Transactional
+    public void saveTemplate(Template template) {
+        templateRepository.save(template);
+    }
+
+    @Transactional(readOnly = true)
+    public Template findById(ObjectId id) {
+        return templateRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(ExceptionMessage.TEMPLATE_ENTITY_NOT_FOUND));
+    }
+
+    @Transactional
+    public void deleteTemplate(ObjectId id){
+        templateRepository.deleteById(id);
     }
 
 }

@@ -11,4 +11,7 @@ public class ExceptionMessage {
 
     // JWT
     public static final String JWT_ENTITY_NOT_FOUND = "토큰에 해당하는 사용자가 없습니다.";
+
+    // Template
+    public static final String TEMPLATE_ENTITY_NOT_FOUND = "존재하지 않는 템플릿에 대한 요청입니다.";
 }
