@@ -33,4 +33,9 @@ public class TemplateService {
         return templateListMap;
     }
 
+    @Transactional
+    public void createTemplate(Template template) {
+        templateRepository.save(template);
+    }
+
 }

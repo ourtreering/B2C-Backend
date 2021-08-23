@@ -14,4 +14,6 @@ public interface TemplateMapper {
     Map<TemplateCategory, List<TemplateDto>> toDtoFromEntity(Map<TemplateCategory, List<Template>> templateListMap);
 
     List<TemplateDto> toDtoListFromEntityList(List<Template> templateList);
+
+    Template toEntityFromTemplateDto(TemplateDto templateDto);
 }

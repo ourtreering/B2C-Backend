@@ -129,3 +129,17 @@ include::{snippets}/api/v1/templates/http-response.adoc[]
 .response fields
 include::{snippets}/api/v1/templates/response-fields.adoc[]
 
+== POST /api/v1/templates
+
+.request
+include::{snippets}/api/v1/templates/post/http-request.adoc[]
+
+.request fields
+include::{snippets}/api/v1/templates/post/request-fields.adoc[]
+
+.response
+include::{snippets}/api/v1/templates/post/http-response.adoc[]
+
+.response fields
+include::{snippets}/api/v1/templates/post/response-fields.adoc[]
+

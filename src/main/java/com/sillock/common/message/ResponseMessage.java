@@ -12,6 +12,7 @@ public class ResponseMessage {
     // Default
     public static final String SUCCESS = "success";
     public static final String FAIL = "fail";
+    public static final String CREATED = "created";
 
     // Auth
     public static final String LOGIN_SUCCESS = "로그인에 성공했습니다.";
