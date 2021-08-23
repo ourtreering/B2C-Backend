@@ -14,6 +14,7 @@ public class ResponseMessage {
     public static final String FAIL = "fail";
     public static final String CREATED = "created";
     public static final String UPDATED = "updated";
+    public static final String DELETED = "deleted";
 
     // Auth
     public static final String LOGIN_SUCCESS = "로그인에 성공했습니다.";

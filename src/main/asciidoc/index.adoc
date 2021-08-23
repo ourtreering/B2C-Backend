@@ -168,3 +168,14 @@ include::{snippets}/api/v1/templates/id/http-response.adoc[]
 .response fields
 include::{snippets}/api/v1/templates/id/response-fields.adoc[]
 
+== DELETE /api/v1/templated/{id}
+
+.request
+include::{snippets}/api/v1/templates/id/delete/http-request.adoc[]
+
+.response
+include::{snippets}/api/v1/templates/id/delete/http-response.adoc[]
+
+.response fields
+include::{snippets}/api/v1/templates/id/delete/response-fields.adoc[]
+

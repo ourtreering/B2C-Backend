@@ -43,7 +43,13 @@ public class TemplateService {
 
     @Transactional(readOnly = true)
     public Template findById(ObjectId id) {
-        return templateRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(ExceptionMessage.TEMPLATE_ENTITY_NOT_FOUND));
+        return templateRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(ExceptionMessage.TEMPLATE_ENTITY_NOT_FOUND));
+    }
+
+    @Transactional
+    public void deleteTemplate(ObjectId id){
+        templateRepository.deleteById(id);
     }
 
 }

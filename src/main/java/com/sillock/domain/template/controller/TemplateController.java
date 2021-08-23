@@ -48,4 +48,12 @@ public class TemplateController {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(ResponseDto.of(HttpStatus.OK, ResponseMessage.UPDATED));
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<ResponseDto<?>> deleteTemplate(@PathVariable ObjectId id){
+        templateService.deleteTemplate(id);
+
+        return ResponseEntity.status(HttpStatus.NO_CONTENT)
+                .body(ResponseDto.of(HttpStatus.NO_CONTENT, ResponseMessage.DELETED));
+    }
 }

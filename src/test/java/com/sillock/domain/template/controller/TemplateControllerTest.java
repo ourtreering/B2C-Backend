@@ -118,4 +118,21 @@ public class TemplateControllerTest extends AbstractControllerTest {
                 ));
 
     }
+
+    @Test
+    void deleteTemplate() throws Exception{
+        mockMvc.perform(delete("/api/v1/templates/{id}", EntityFactory.basicObjectId())
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isNoContent())
+                .andDo(print())
+                .andDo(document("api/v1/templates/id/delete",
+                        getDocumentRequest(),
+                        getDocumentResponse(),
+                        responseFields(
+                                fieldWithPath("status").description("상태 값"),
+                                fieldWithPath("message").description("응답 메시지"),
+                                fieldWithPath("timestamp").description("타임스탬프")
+                        )
+                ));
+    }
 }
