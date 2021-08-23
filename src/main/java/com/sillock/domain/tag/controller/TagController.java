@@ -50,9 +50,7 @@ public class TagController {
             );
         }
         return ResponseEntity.status(HttpStatus.OK)
-                .body(ResponseDto.of(HttpStatus.OK, ResponseMessage.READ_MEMBER_TAG_INFO_LIST,
-                        tagInfoDtoList
-                ));
+                .body(ResponseDto.of(HttpStatus.OK, ResponseMessage.READ_MEMBER_TAG_INFO_LIST, tagInfoDtoList));
     }
 }
 

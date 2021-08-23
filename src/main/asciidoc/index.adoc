@@ -116,6 +116,17 @@ include::{snippets}/api/v1/tags/default/http-response.adoc[]
 .response fields
 include::{snippets}/api/v1/tags/default/response-fields.adoc[]
 
+== GET /api/v1/tags/me
+
+.request
+include::{snippets}/api/v1/tags/me/http-request.adoc[]
+
+.response
+include::{snippets}/api/v1/tags/me/http-response.adoc[]
+
+.response fields
+include::{snippets}/api/v1/tags/me/response-fields.adoc[]
+
 = 템플릿
 
 == GET /api/v1/templates
