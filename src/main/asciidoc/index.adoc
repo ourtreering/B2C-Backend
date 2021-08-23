@@ -154,3 +154,17 @@ include::{snippets}/api/v1/templates/post/http-response.adoc[]
 .response fields
 include::{snippets}/api/v1/templates/post/response-fields.adoc[]
 
+== PUT /api/v1/templated/{id}
+
+.request
+include::{snippets}/api/v1/templates/id/http-request.adoc[]
+
+.request fields
+include::{snippets}/api/v1/templates/id/request-fields.adoc[]
+
+.response
+include::{snippets}/api/v1/templates/id/http-response.adoc[]
+
+.response fields
+include::{snippets}/api/v1/templates/id/response-fields.adoc[]
+

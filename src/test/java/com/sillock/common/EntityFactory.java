@@ -12,6 +12,7 @@ import org.bson.types.ObjectId;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedList;
 
 public class EntityFactory {
 
@@ -52,7 +53,7 @@ public class EntityFactory {
     public static Template basicTemplateEntity(){
         return Template.builder()
                 .category(TemplateCategory.PROJECT)
-                .qnaList(Arrays.asList(basicQnaEntity()))
+                .qnaList(new LinkedList<>(Arrays.asList(basicQnaEntity())))
                 .build();
     }
 

@@ -13,6 +13,7 @@ public class ResponseMessage {
     public static final String SUCCESS = "success";
     public static final String FAIL = "fail";
     public static final String CREATED = "created";
+    public static final String UPDATED = "updated";
 
     // Auth
     public static final String LOGIN_SUCCESS = "로그인에 성공했습니다.";
@@ -28,8 +29,8 @@ public class ResponseMessage {
     public static final String READ_SILLOG_LIST = "실록 리스트를 조회합니다.";
     public static final String READ_SILLOG_TITLE_LIST = "실록 타이틀 리스트를 조회합니다.";
 
-
     // Tag
     public static final String READ_DEFAULT_TAG_INFO_LIST = "기본 태그 정보 리스트를 조회합니다.";
     public static final String READ_MEMBER_TAG_INFO_LIST = "사용자가 사용한 태그 정보 리스트를 조회합니다.";
+
 }

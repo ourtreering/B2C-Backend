@@ -8,6 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.Id;
 import java.time.LocalDate;
+import java.util.LinkedList;
 import java.util.List;
 
 @Builder
@@ -21,7 +22,7 @@ public class Template {
 
     private TemplateCategory category;
 
-    private List<Qna> qnaList;
+    private LinkedList<Qna> qnaList;
 
     @Indexed
     @Builder.Default
