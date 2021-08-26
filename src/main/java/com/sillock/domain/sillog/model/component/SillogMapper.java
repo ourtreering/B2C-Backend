@@ -1,6 +1,7 @@
 package com.sillock.domain.sillog.model.component;
 
 import com.sillock.domain.member.model.entity.Member;
+import com.sillock.domain.sillog.model.dto.SillogDetailDto;
 import com.sillock.domain.sillog.model.dto.SillogElementDto;
 import com.sillock.domain.sillog.model.dto.SillogPostDto;
 import com.sillock.domain.sillog.model.dto.SillogTitleDto;
@@ -21,4 +22,5 @@ public interface SillogMapper {
 
     SillogTitleDto toSillogTitleDtoFromSillogTitle(SillogTitle sillogTitle);
 
+    SillogDetailDto toSillogDetailDtoFromEntity(Sillog sillog);
 }

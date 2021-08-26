@@ -51,5 +51,8 @@ public class Sillog {
     @Builder.Default
     private LocalDate modDate = LocalDate.now();
 
+    public boolean isWriter(ObjectId memberId){
+        return this.memberId.equals(memberId);
+    }
 
 }

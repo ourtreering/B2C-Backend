@@ -22,18 +22,10 @@ public enum ErrorCode {
 
     // Member
     EMAIL_DUPLICATION(400, "M001", "Email is Duplication"),
+    MEMBER_NOT_AUTHORIZED(401, "M002", "Member Not Authorized"),
+    MEMBER_NOT_WRITER(401, "M003", "Member Not Writer"),
+    ;
 
-    // Friend
-    ALREADY_FRIEND(400, "F001", "Already Friend"),
-    NOT_FRIEND(400, "F002", "Not Friend"),
-    NOT_FOLLOWING(400, "F003", "Not Following"),
-    NOT_FOLLOWER(400, "F004", "Not Follower"),
-    NOT_DEFAULT(400, "F005", "Not Default"),
-
-    // AlaCard
-    INVALID_COOKIE(400, "A001", "Invalid Cookie"),
-    BACKGROUND_NOT_FOUND(400, "A002", "Background Not Found"),
-    ALACARD_NOT_FOUND(400, "A003", "AlaCard Not Found");
 
     private final String code;
     private final String message;

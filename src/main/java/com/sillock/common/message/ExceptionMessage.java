@@ -14,4 +14,7 @@ public class ExceptionMessage {
 
     // Template
     public static final String TEMPLATE_ENTITY_NOT_FOUND = "존재하지 않는 템플릿에 대한 요청입니다.";
+
+    // Sillog
+    public static final String SILLOG_ENTITY_NOT_FOUND = "존재하지 않는 실록에 대한 요청입니다.";
 }
