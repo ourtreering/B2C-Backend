@@ -1,6 +1,8 @@
 package com.sillock.domain.sillog.service;
 
 
+import com.sillock.common.message.ExceptionMessage;
+import com.sillock.domain.member.model.entity.Member;
 import com.sillock.domain.sillog.model.entity.Sillog;
 import com.sillock.domain.sillog.model.entity.SillogTitle;
 import com.sillock.domain.sillog.repository.SillogRepository;
@@ -12,6 +14,7 @@ import org.bson.types.ObjectId;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -50,6 +53,11 @@ public class SillogService {
         return sillogTitleList;
     }
 
+    @Transactional(readOnly = true)
+    public Sillog findById(ObjectId sillogId){
+        return sillogRepository.findById(sillogId)
+                .orElseThrow(() -> new EntityNotFoundException(ExceptionMessage.SILLOG_ENTITY_NOT_FOUND));
+    }
 
     /* 나중에 실록 태그가 생겼을 때의 사용할 코드 */
 //    @Transactional(readOnly = true)

@@ -3,6 +3,8 @@ package com.sillock.domain.member.controller;
 import com.sillock.common.dto.ResponseDto;
 import com.sillock.common.message.ResponseMessage;
 import com.sillock.core.annotation.CurrentUser;
+import com.sillock.core.error.ErrorCode;
+import com.sillock.core.error.exception.BusinessException;
 import com.sillock.domain.member.model.entity.Member;
 import com.sillock.domain.sillog.model.component.SillogMapper;
 import com.sillock.domain.sillog.model.dto.SillogElementDto;
@@ -48,6 +50,18 @@ public class MemberSillogController {
                 .body(ResponseDto.of(HttpStatus.OK, ResponseMessage.READ_SILLOG_TITLE_LIST,
                         sillogTitleList.stream().map(sillogMapper::toSillogTitleDtoFromSillogTitle).collect(Collectors.toList())
                 ));
+    }
+
+    @GetMapping("/{memberId}/sillogs/{sillogId}")
+    public ResponseEntity<ResponseDto<?>> readDetail(@PathVariable ObjectId memberId, @PathVariable ObjectId sillogId){
+        Sillog sillog = sillogService.findById(sillogId);
+
+        if (!sillog.isWriter(memberId))
+            throw new BusinessException(ErrorCode.MEMBER_NOT_WRITER);
+
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(ResponseDto.of(HttpStatus.OK, ResponseMessage.READ_SILLOG_DETAIL,
+                        sillogMapper.toSillogDetailDtoFromEntity(sillog)));
     }
 
 //    @GetMapping(value = "/{memberId}/sillogs/search")

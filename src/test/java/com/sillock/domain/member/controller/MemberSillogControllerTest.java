@@ -1,6 +1,7 @@
 package com.sillock.domain.member.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.sillock.annotation.SillogUser;
 import com.sillock.common.AbstractControllerTest;
 import com.sillock.common.DtoFactory;
 import com.sillock.common.EntityFactory;
@@ -27,6 +28,7 @@ import java.util.List;
 import static com.sillock.common.message.ResponseMessage.*;
 import static com.sillock.config.ApiDocumentUtils.getDocumentRequest;
 import static com.sillock.config.ApiDocumentUtils.getDocumentResponse;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
@@ -111,6 +113,44 @@ public class MemberSillogControllerTest extends AbstractControllerTest {
                                 fieldWithPath("message").description("결과 메시지"),
                                 fieldWithPath("data.[].title").description("제목"),
                                 fieldWithPath("data.[].regDate").description("실록 등록 날짜"),
+                                fieldWithPath("timestamp").description("타임 스탬프")
+                        )
+                ));
+    }
+
+    @SillogUser
+    @Test
+    public void 실록_디테일_조회_테스트() throws Exception {
+        Sillog sillog = EntityFactory.basicSillogMemoEntity();
+        sillog.setQnaList(Arrays.asList(EntityFactory.basicQnaEntity()));
+        sillog.setDateList(Arrays.asList(LocalDate.of(2021, 8, 26)));
+
+        given(sillogService.findById(any(ObjectId.class))).willReturn(sillog);
+
+        mockMvc.perform(RestDocumentationRequestBuilders.get("/api/v1/members/{memberId}/sillogs/{sillogId}", EntityFactory.basicObjectId(), EntityFactory.basicObjectId())
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value(READ_SILLOG_DETAIL))
+                .andDo(print())
+                .andDo(document("api/v1/members/memberId/sillogs/sillogId",
+                        getDocumentRequest(),
+                        getDocumentResponse(),
+                        pathParameters(
+                                parameterWithName("memberId").description("사용자 ID"),
+                                parameterWithName("sillogId").description("실록 ID")
+                        ),
+                        responseFields(
+                                fieldWithPath("status").description("상태 값"),
+                                fieldWithPath("message").description("결과 메시지"),
+                                fieldWithPath("data.title").description("제목"),
+                                fieldWithPath("data.qnaList.[].question").description("QnA 질문"),
+                                fieldWithPath("data.qnaList.[].answer").description("QnA 답변"),
+                                fieldWithPath("data.memo.body").description("Memo 데이터"),
+                                fieldWithPath("data.tagList.[].category").description("태그 카테고리"),
+                                fieldWithPath("data.tagList.[].name").description("태그 이름"),
+                                fieldWithPath("data.dateList.[]").description("날짜 리스트"),
+                                fieldWithPath("data.imageList.[]").description("이미지 리스트"),
+                                fieldWithPath("data.fileList.[]").description("파일 리스트"),
                                 fieldWithPath("timestamp").description("타임 스탬프")
                         )
                 ));
