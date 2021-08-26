@@ -15,4 +15,5 @@ public interface SillogRepository extends MongoRepository<Sillog, ObjectId> {
 //    List<Sillog> findByAuthorIdAndTitle(ObjectId memberId, String title);
     List<Sillog> findAllByMemberId(ObjectId memberId);
     List<SillogTitle> findTitlesByMemberId(ObjectId memberId);
+    List<Sillog> findAllByMemberIdAndTitle(ObjectId memberId, String title);
 }

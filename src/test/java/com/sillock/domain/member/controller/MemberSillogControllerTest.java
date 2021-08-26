@@ -34,8 +34,7 @@ import static org.mockito.BDDMockito.given;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
-import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
-import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
+import static org.springframework.restdocs.request.RequestDocumentation.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 public class MemberSillogControllerTest extends AbstractControllerTest {
@@ -53,9 +52,9 @@ public class MemberSillogControllerTest extends AbstractControllerTest {
         sillog.setDateList(Arrays.asList(LocalDate.of(2021,07,07)));
         List<Sillog> sillogList = Arrays.asList(sillog);
 
-        given(sillogService.getMemberSillogList(eq(new ObjectId(EntityFactory.basicObjectId())))).willReturn(sillogList);
+        given(sillogService.getMemberSillogList(eq(new ObjectId(EntityFactory.basicObjectId())), any(String.class))).willReturn(sillogList);
 
-        mockMvc.perform(RestDocumentationRequestBuilders.get("/api/v1/members/{memberId}/sillogs", EntityFactory.basicObjectId())
+        mockMvc.perform(RestDocumentationRequestBuilders.get("/api/v1/members/{memberId}/sillogs", EntityFactory.basicObjectId()).param("title", "test")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
@@ -70,6 +69,9 @@ public class MemberSillogControllerTest extends AbstractControllerTest {
                         getDocumentResponse(),
                         pathParameters(
                                 parameterWithName("memberId").description("사용자 ID")
+                        ),
+                        requestParameters(
+                                parameterWithName("title").description("제목 - 선택")
                         ),
                         responseFields(
                                 fieldWithPath("status").description("상태 값"),

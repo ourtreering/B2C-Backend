@@ -33,8 +33,11 @@ public class MemberSillogController {
     // TODO: 페이징 기능이 적용되어야 함 https://medium.com/@davide.pedone/cursor-based-pagination-with-spring-boot-and-mongodb-bca6446f3b1f
     @GetMapping(value = "/{memberId}/sillogs")
     @ResponseBody
-    public ResponseEntity<ResponseDto<List<SillogElementDto>>> getMemberSillogList(@CurrentUser Member member, @PathVariable ObjectId memberId) {
-        List<Sillog> sillogList = sillogService.getMemberSillogList(memberId);
+    public ResponseEntity<ResponseDto<List<SillogElementDto>>> getMemberSillogList(@PathVariable ObjectId memberId,
+                                                                     @RequestParam(required = false) String title) {
+
+        List<Sillog> sillogList = sillogService.getMemberSillogList(memberId, title);
+
         return ResponseEntity.status(HttpStatus.OK)
                 .body(ResponseDto.of(HttpStatus.OK, ResponseMessage.READ_SILLOG_LIST,
                         sillogList.stream().map(sillogMapper::toSillogElementDtoFromEntity)

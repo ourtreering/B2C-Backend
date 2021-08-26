@@ -82,6 +82,9 @@ include::{snippets}/api/v1/members/memberId/sillogs/http-request.adoc[]
 .path parameters
 include::{snippets}/api/v1/members/memberId/sillogs/path-parameters.adoc[]
 
+.request parameters
+include::{snippets}/api/v1/members/memberId/sillogs/request-parameters.adoc[]
+
 .response
 include::{snippets}/api/v1/members/memberId/sillogs/http-response.adoc[]
 
