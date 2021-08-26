@@ -36,7 +36,12 @@ public class SillogService {
     }
 
     @Transactional(readOnly = true)
-    public List<Sillog> getMemberSillogList(ObjectId memberId){
+    public List<Sillog> getMemberSillogList(ObjectId memberId, String title){
+
+        if(null != title){
+            return sillogRepository.findAllByMemberIdAndTitle(memberId, title);
+        }
+
         return sillogRepository.findAllByMemberId(memberId);
     }
 
