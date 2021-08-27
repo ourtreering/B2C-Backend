@@ -24,7 +24,7 @@ public class PublishEventAspect implements ApplicationEventPublisherAware {
     public void afterReturning(JoinPoint joinPoint, Object returnObj){
         String method = joinPoint.getSignature().getName();
         log.info(method + "가 실행됩니다.");
-        if(method.equals("saveTagList")){
+        if(method.equals("saveTagList") || method.equals("countDownTagList")){
             CalculateTagEvent event = (CalculateTagEvent) returnObj;
             eventPublisher.publishEvent(event);
             log.info("Publish CalculateTagEvent");

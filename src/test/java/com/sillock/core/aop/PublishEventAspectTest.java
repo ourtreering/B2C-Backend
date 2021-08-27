@@ -12,9 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.aop.aspectj.annotation.AspectJProxyFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.test.context.event.ApplicationEvents;
 
 import java.util.Arrays;
 
@@ -43,7 +41,7 @@ class PublishEventAspectTest {
         AspectJProxyFactory factory = new AspectJProxyFactory(new TagService(tagInfoRepository, tagRepository, memberTagInfoRepository));
         factory.addAspect(publishEventAspect);
         TagService tagService1 = factory.getProxy();
-        CalculateTagEvent event = tagService1.saveTagList(new ObjectId(EntityFactory.basicObjectId()), Arrays.asList(EntityFactory.basicTagEntity()));
+        CalculateTagEvent event = tagService1.countUpTagList(new ObjectId(EntityFactory.basicObjectId()), Arrays.asList(EntityFactory.basicTagEntity()));
     }
 
 }
