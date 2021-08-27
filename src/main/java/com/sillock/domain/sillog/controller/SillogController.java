@@ -44,8 +44,8 @@ public class SillogController {
         sillogMapper.updateSillogEntity(sillogPostDto, sillog);
         sillogService.updateSillog(sillog, preTagList);
 
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(ResponseDto.of(HttpStatus.CREATED, ResponseMessage.REGISTER_SILLOG));
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(ResponseDto.of(HttpStatus.OK, ResponseMessage.UPDATE_SILLOG));
     }
 
 }

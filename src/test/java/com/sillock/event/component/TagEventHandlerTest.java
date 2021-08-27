@@ -6,6 +6,7 @@ import com.sillock.domain.tag.model.entity.MemberTagInfo;
 import com.sillock.domain.tag.model.entity.Tag;
 import com.sillock.domain.tag.repository.MemberTagInfoRepository;
 import com.sillock.event.entity.CalculateTagEvent;
+import com.sillock.event.entity.EventType;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -38,7 +39,7 @@ class TagEventHandlerTest {
         Tag tagB1 = Tag.builder().category("B").name("1").build();
 
         List<Tag> tagList = Arrays.asList(tagA1, tagA2, tagA22, tagB1);
-        CalculateTagEvent event = new CalculateTagEvent(member.getId(), tagList);
+        CalculateTagEvent event = new CalculateTagEvent(member.getId(), tagList, null, EventType.PLUS);
 
         MemberTagInfo memberTagInfo = EntityFactory.basicMemberTagInfoEntity();
 
