@@ -40,6 +40,15 @@ public class SillogService {
         sillogRepository.save(sillog);
     }
 
+    @Transactional
+    public void deleteSillog(ObjectId memberId, Sillog sillog){
+        tagService.countDownTagList(memberId, sillog.getTagList());
+
+        // Todo : tag cascade 설정하기
+
+        sillogRepository.delete(sillog);
+    }
+
     @Transactional(readOnly = true)
     public List<Sillog> getMemberSillogList(ObjectId memberId, String title){
 

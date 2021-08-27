@@ -3,7 +3,6 @@ package com.sillock.domain.template.controller;
 import com.sillock.annotation.SillogUser;
 import com.sillock.common.AbstractControllerTest;
 import com.sillock.common.EntityFactory;
-import com.sillock.core.auth.jwt.model.SocialProfile;
 import com.sillock.domain.template.model.dto.TemplateDto;
 import com.sillock.domain.template.model.entity.Template;
 import com.sillock.domain.template.model.entity.TemplateCategory;
@@ -23,13 +22,13 @@ import static com.sillock.common.message.ResponseMessage.CREATED;
 import static com.sillock.common.message.ResponseMessage.UPDATED;
 import static com.sillock.config.ApiDocumentUtils.getDocumentRequest;
 import static com.sillock.config.ApiDocumentUtils.getDocumentResponse;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.refEq;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.*;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
+import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 public class TemplateControllerTest extends AbstractControllerTest {
@@ -105,6 +104,9 @@ public class TemplateControllerTest extends AbstractControllerTest {
                 .andDo(document("api/v1/templates/id",
                         getDocumentRequest(),
                         getDocumentResponse(),
+                        pathParameters(
+                                parameterWithName("id").description("템플릿 ID")
+                        ),
                         requestFields(
                                 fieldWithPath("category").description("카테고리"),
                                 fieldWithPath("qnaList.[].question").description("질문"),
@@ -128,6 +130,9 @@ public class TemplateControllerTest extends AbstractControllerTest {
                 .andDo(document("api/v1/templates/id/delete",
                         getDocumentRequest(),
                         getDocumentResponse(),
+                        pathParameters(
+                                parameterWithName("id").description("템플릿 ID")
+                        ),
                         responseFields(
                                 fieldWithPath("status").description("상태 값"),
                                 fieldWithPath("message").description("응답 메시지"),
