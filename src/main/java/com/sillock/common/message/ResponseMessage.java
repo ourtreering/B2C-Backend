@@ -30,6 +30,8 @@ public class ResponseMessage {
     public static final String READ_SILLOG_LIST = "실록 리스트를 조회합니다.";
     public static final String READ_SILLOG_TITLE_LIST = "실록 타이틀 리스트를 조회합니다.";
     public static final String READ_SILLOG_DETAIL = "실록 디테일을 조회합니다.";
+    public static final String UPDATE_SILLOG = "실록 수정이 완료되었습니다.";
+    public static final String DELETE_SILLOG = "실록 삭제가 완료되었습니다.";
 
     // Tag
     public static final String READ_DEFAULT_TAG_INFO_LIST = "기본 태그 정보 리스트를 조회합니다.";

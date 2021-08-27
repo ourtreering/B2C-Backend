@@ -8,6 +8,7 @@ import com.sillock.domain.tag.repository.MemberTagInfoRepository;
 import com.sillock.domain.tag.repository.TagInfoRepository;
 import com.sillock.domain.tag.repository.TagRepository;
 import com.sillock.event.entity.CalculateTagEvent;
+import com.sillock.event.entity.EventType;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -35,19 +36,33 @@ public class TagService {
         return tagInfoRepository.findAll();
     }
 
-    @PublishEvent
-    @Transactional
-    public CalculateTagEvent saveTagList(ObjectId memberId, List<Tag> tagList) {
-        tagRepository.saveAll(tagList);
-        return new CalculateTagEvent(memberId, tagList);
-    }
-
     @Transactional(readOnly = true)
     public Map<String, Map<String, Integer>> getMemberTagInfo(ObjectId memberId){
         MemberTagInfo memberTagInfo = memberTagInfoRepository.findMemberTagInfoByMemberId(memberId)
                 .orElseThrow(() -> new EntityNotFoundException(ENTITY_NOT_FOUND));
 
         return memberTagInfo.getTagInfoUsed();
+    }
+
+    @PublishEvent
+    @Transactional
+    public CalculateTagEvent countUpTagList(ObjectId memberId, List<Tag> tagList) {
+        tagRepository.saveAll(tagList);
+        return new CalculateTagEvent(memberId, tagList, null, EventType.PLUS);
+    }
+
+    @PublishEvent
+    @Transactional
+    public CalculateTagEvent countDownTagList(ObjectId memberId, List<Tag> tagList) {
+        return new CalculateTagEvent(memberId, null, tagList, EventType.MINUS);
+    }
+
+    @PublishEvent
+    @Transactional
+    public CalculateTagEvent updateTagList(ObjectId memberId, List<Tag> postTagList, List<Tag> preTagList) {
+        tagRepository.saveAll(postTagList);
+
+        return new CalculateTagEvent(memberId, postTagList, preTagList, EventType.UPDATE);
     }
 
 

@@ -11,5 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 public class CalculateTagEvent {
     private ObjectId memberId;
-    private List<Tag> tagList;
+    private List<Tag> countUpTagList;
+    private List<Tag> countDownTagList;
+    private EventType type;
 }

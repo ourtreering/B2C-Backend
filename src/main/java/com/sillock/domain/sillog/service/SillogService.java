@@ -2,11 +2,10 @@ package com.sillock.domain.sillog.service;
 
 
 import com.sillock.common.message.ExceptionMessage;
-import com.sillock.domain.member.model.entity.Member;
 import com.sillock.domain.sillog.model.entity.Sillog;
 import com.sillock.domain.sillog.model.entity.SillogTitle;
 import com.sillock.domain.sillog.repository.SillogRepository;
-import com.sillock.domain.tag.repository.TagRepository;
+import com.sillock.domain.tag.model.entity.Tag;
 import com.sillock.domain.tag.service.TagService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,14 +24,29 @@ import java.util.stream.Collectors;
 @Service
 public class SillogService {
     private final SillogRepository sillogRepository;
-    private final TagRepository tagRepository;
     private final TagService tagService;
 
     @Transactional
     public void registerSillog(Sillog sillog){
-        tagService.saveTagList(sillog.getMemberId(), sillog.getTagList());
+        tagService.countUpTagList(sillog.getMemberId(), sillog.getTagList());
 
         sillogRepository.save(sillog);
+    }
+
+    @Transactional
+    public void updateSillog(Sillog sillog, List<Tag> preTagList){
+        tagService.updateTagList(sillog.getMemberId(), sillog.getTagList(), preTagList);
+
+        sillogRepository.save(sillog);
+    }
+
+    @Transactional
+    public void deleteSillog(ObjectId memberId, Sillog sillog){
+        tagService.countDownTagList(memberId, sillog.getTagList());
+
+        // Todo : tag cascade 설정하기
+
+        sillogRepository.delete(sillog);
     }
 
     @Transactional(readOnly = true)
@@ -63,6 +77,8 @@ public class SillogService {
         return sillogRepository.findById(sillogId)
                 .orElseThrow(() -> new EntityNotFoundException(ExceptionMessage.SILLOG_ENTITY_NOT_FOUND));
     }
+
+
 
     /* 나중에 실록 태그가 생겼을 때의 사용할 코드 */
 //    @Transactional(readOnly = true)

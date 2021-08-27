@@ -1,22 +1,18 @@
 package com.sillock.event.component;
 
-import com.sillock.core.annotation.CurrentUser;
-import com.sillock.domain.member.model.entity.Member;
 import com.sillock.domain.tag.model.entity.MemberTagInfo;
 import com.sillock.domain.tag.model.entity.Tag;
 import com.sillock.domain.tag.repository.MemberTagInfoRepository;
 import com.sillock.event.entity.CalculateTagEvent;
+import com.sillock.event.entity.EventType;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.event.TransactionPhase;
 import org.springframework.transaction.event.TransactionalEventListener;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import static com.sillock.common.message.ExceptionMessage.ENTITY_NOT_FOUND;
@@ -32,15 +28,28 @@ public class TagEventHandler {
         MemberTagInfo memberTagInfo = memberTagInfoRepository.findMemberTagInfoByMemberId(event.getMemberId()).
                 orElseThrow(() -> new EntityNotFoundException(ENTITY_NOT_FOUND));
 
+        if (event.getType().equals(EventType.PLUS))
+            plusTagAggregation(memberTagInfo, event);
+        else if(event.getType().equals(EventType.MINUS)) {
+            minusTagAggregation(memberTagInfo, event);
+        } else if(event.getType().equals(EventType.UPDATE)){
+            minusTagAggregation(memberTagInfo, event);
+            plusTagAggregation(memberTagInfo, event);
+        }
+
+        memberTagInfoRepository.save(memberTagInfo);
+    }
+
+    private void plusTagAggregation(MemberTagInfo memberTagInfo, CalculateTagEvent event){
         Map<String, Map<String, Integer>> tagInfoUsed = memberTagInfo.getTagInfoUsed();
 
-        for(Tag tag : event.getTagList()){
+        for(Tag tag : event.getCountUpTagList()){
             Map<String, Integer> subMap = tagInfoUsed.get(tag.getCategory());
 
             if(!tagInfoUsed.containsKey(tag.getCategory())){ // Category가 없는 경우
                 tagInfoUsed.put(tag.getCategory(), new HashMap<>(){
-                        { put(tag.getName(), 1); }
-                    }
+                            { put(tag.getName(), 1); }
+                        }
                 );
             } else if(!subMap.containsKey(tag.getName())){ // TagName이 없는 경우
                 tagInfoUsed.get(tag.getCategory()).put(tag.getName(), 1);
@@ -48,8 +57,22 @@ public class TagEventHandler {
                 subMap.put(tag.getName(), subMap.get(tag.getName()) + 1);
             }
         }
+    }
 
-        memberTagInfoRepository.save(memberTagInfo);
+    private void minusTagAggregation(MemberTagInfo memberTagInfo, CalculateTagEvent event){
+        Map<String, Map<String, Integer>> tagInfoUsed = memberTagInfo.getTagInfoUsed();
+
+        for(Tag tag : event.getCountDownTagList()){
+            Map<String, Integer> tagInfoUsedByCategory = tagInfoUsed.get(tag.getCategory());
+            tagInfoUsedByCategory.computeIfPresent(tag.getName(), (k, v) -> {
+                v -= 1;
+                if (v == 0) return null;
+                return v;
+            });
+
+            if(tagInfoUsedByCategory.values().size() == 0)
+                tagInfoUsed.remove(tag.getCategory());
+        }
     }
 
 }

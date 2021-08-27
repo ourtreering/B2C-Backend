@@ -23,4 +23,6 @@ public interface SillogMapper {
     SillogTitleDto toSillogTitleDtoFromSillogTitle(SillogTitle sillogTitle);
 
     SillogDetailDto toSillogDetailDtoFromEntity(Sillog sillog);
+
+    void updateSillogEntity(SillogPostDto dto, @MappingTarget Sillog sillog);
 }
