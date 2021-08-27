@@ -32,8 +32,10 @@ public class TagEventHandler {
             plusTagAggregation(memberTagInfo, event);
         else if(event.getType().equals(EventType.MINUS)) {
             minusTagAggregation(memberTagInfo, event);
+        } else if(event.getType().equals(EventType.UPDATE)){
+            minusTagAggregation(memberTagInfo, event);
+            plusTagAggregation(memberTagInfo, event);
         }
-
 
         memberTagInfoRepository.save(memberTagInfo);
     }
@@ -60,7 +62,7 @@ public class TagEventHandler {
     private void minusTagAggregation(MemberTagInfo memberTagInfo, CalculateTagEvent event){
         Map<String, Map<String, Integer>> tagInfoUsed = memberTagInfo.getTagInfoUsed();
 
-        for(Tag tag : event.getCountUpTagList()){
+        for(Tag tag : event.getCountDownTagList()){
             Map<String, Integer> tagInfoUsedByCategory = tagInfoUsed.get(tag.getCategory());
             tagInfoUsedByCategory.computeIfPresent(tag.getName(), (k, v) -> {
                 v -= 1;

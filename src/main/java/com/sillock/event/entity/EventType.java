@@ -1,5 +1,5 @@
 package com.sillock.event.entity;
 
 public enum EventType {
-    PLUS, MINUS
+    PLUS, MINUS, UPDATE
 }
