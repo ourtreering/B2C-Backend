@@ -24,6 +24,6 @@ public class MemberAuthService {
 
     @Transactional(readOnly = true)
     public Member login(String email){
-        return memberService.findByMemberByEmail(email);
+        return memberService.findMemberByEmail(email);
     }
 }

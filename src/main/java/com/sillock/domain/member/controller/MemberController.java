@@ -64,30 +64,14 @@ public class MemberController {
                         memberMapper.toDtoFromMemberEntity(member)));
     }
 
-//    @GetMapping("/test")
-//    public ResponseEntity<MemberDto> test(){
-//        MemberDto memberDto = MemberDto.builder().memberId(1L).email("test@gmail.com").nickName("treering").build();
-//        return ResponseEntity.ok(memberDto);
-//    }
-//
-//    /*실록태그 생기면 사용할 코드 - sillogService 코드도 동일*/
-////    @GetMapping(value = "/{memberId}/sillogs")
-////    @ResponseBody
-////    public ResponseDto<List<SillogDto>> readSillogList(@PathVariable Long memberId,
-////    @RequestParam(required = false) String title, @RequestParam(required = false) String tag) {
-////        List<Sillog> sillogListByTitle = sillogService.findSillogList(memberId, title, tag);
-////        List<SillogDto> sillogDtoListByTitle = sillogListByTitle.stream().map(sillogMapper::toDto).collect(Collectors.toList());
-////        return ResponseDto.of(HttpStatus.OK, ResponseMessage.READ_EVENT, sillogDtoListByTitle);
-////    }
-//
-    /*실록 태그가 없어서 임시로 사용하는 코드*/
-//    @GetMapping(value = "/{memberId}/sillogs")
-//    @ResponseBody
-//    public ResponseEntity<ResponseDto<List<SillogResponseDto>>> readSillogList(@CurrentUser Member member, @PathVariable ObjectId memberId) {
-//
-//    }
-//
-//
+    @DeleteMapping("/me")
+    public ResponseEntity<ResponseDto<?>> deleteMember(@CurrentUser Member member){
+        memberService.deleteMember(member);
+
+        return ResponseEntity.status(HttpStatus.NO_CONTENT)
+                .body(ResponseDto.of(HttpStatus.NO_CONTENT, ResponseMessage.DELETED));
+    }
+
     @AllArgsConstructor
     public class MemberCheckDto {
         private boolean exist;

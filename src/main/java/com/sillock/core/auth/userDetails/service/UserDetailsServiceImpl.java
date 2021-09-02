@@ -4,7 +4,6 @@ import com.sillock.core.auth.userDetails.model.UserDetailsImpl;
 import com.sillock.domain.member.model.entity.Member;
 import com.sillock.domain.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
-import org.bson.types.ObjectId;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -19,7 +18,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Member member = memberService.findByMemberByEmail(email);
+        Member member = memberService.findMemberByEmail(email);
 
         return new UserDetailsImpl(member);
     }

@@ -1,6 +1,6 @@
 package com.sillock.core.aop;
 
-import com.sillock.core.annotation.MemberInit;
+import com.sillock.core.annotation.MemberSetting;
 import com.sillock.domain.member.model.entity.Member;
 import com.sillock.event.entity.MemberEvent;
 import lombok.extern.slf4j.Slf4j;
@@ -18,12 +18,12 @@ import org.springframework.stereotype.Component;
 public class MemberAspect implements ApplicationEventPublisherAware {
     private ApplicationEventPublisher eventPublisher;
 
-    @Pointcut("@annotation(memberInit)")
-    public void pointcut(MemberInit memberInit) {
+    @Pointcut("@annotation(memberSetting)")
+    public void pointcut(MemberSetting memberSetting) {
     }
 
-    @AfterReturning(pointcut = "pointcut(memberInit)", returning = "returnObj")
-    public void afterReturning(JoinPoint joinPoint, MemberInit memberInit, Object returnObj){
+    @AfterReturning(pointcut = "pointcut(memberSetting)", returning = "returnObj")
+    public void afterReturning(JoinPoint joinPoint, MemberSetting memberSetting, Object returnObj){
         Member member = null;
 
         for(Object arg : joinPoint.getArgs()){
