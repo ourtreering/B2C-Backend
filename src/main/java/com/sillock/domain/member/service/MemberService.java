@@ -5,6 +5,7 @@ import com.sillock.core.annotation.MemberSetting;
 import com.sillock.core.error.ResourceNotFoundException;
 import com.sillock.domain.member.model.entity.Member;
 import com.sillock.domain.member.repository.MemberRepository;
+import com.sillock.event.entity.MemberSettingType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,6 +37,7 @@ public class MemberService {
         return memberRepository.save(member);
     }
 
+    @MemberSetting(type = MemberSettingType.DELETE)
     @Transactional
     public void deleteMember(Member member){
         memberRepository.delete(member);
