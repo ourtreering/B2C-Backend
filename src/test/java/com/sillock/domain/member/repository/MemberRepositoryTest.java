@@ -1,13 +1,6 @@
 package com.sillock.domain.member.repository;
 
-import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.sillock.annotation.SillockDataTest;
-import com.sillock.core.auth.jwt.Role;
-import com.sillock.domain.member.model.entity.Member;
-import com.sillock.domain.member.repository.MemberRepository;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import java.time.LocalDateTime;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

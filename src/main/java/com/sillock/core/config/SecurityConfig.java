@@ -22,16 +22,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public static final String[] EXCLUDED_URLS = {
-            "/api/member/signup",
-            "/api/member/nickname-exists/**",
-            "/api/member/user-exists/**",
-            "/api/test",
-            "/api/test-failure",
-            "/api/jwt",
-            "/api/member/signin",
-            "/api/member/refresh",
-            "/",
-            "/api/fcm-token"
+            "/api/v1/members/signup",
+            "/api/v1/members/login",
     };
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
@@ -55,7 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers(EXCLUDED_URLS).permitAll()
-                .anyRequest().permitAll() // TODO: authenticated()
+                .anyRequest().authenticated() // TODO: authenticated()
                 .and()
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
     }

@@ -13,6 +13,11 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
+/**
+ * TODO
+ * 확장성있는 구조로 다른 Social login과도 잘 동작하도록 코드 변경이 필요함(인터페이스를 활용하자)
+ */
+
 @RequiredArgsConstructor
 @Service
 public class SocialService {
