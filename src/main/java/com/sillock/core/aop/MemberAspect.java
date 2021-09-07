@@ -23,8 +23,8 @@ public class MemberAspect implements ApplicationEventPublisherAware {
     public void pointcut(MemberSetting memberSetting) {
     }
 
-    @AfterReturning(pointcut = "pointcut(memberSetting)", returning = "returnObj")
-    public void afterReturning(JoinPoint joinPoint, MemberSetting memberSetting, Object returnObj){
+    @AfterReturning(pointcut = "pointcut(memberSetting)")
+    public void afterReturning(JoinPoint joinPoint, MemberSetting memberSetting){
         Member member = null;
 
         for(Object arg : joinPoint.getArgs()){

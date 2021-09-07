@@ -27,7 +27,6 @@ public class PublishEventAspect implements ApplicationEventPublisherAware {
         if(method.equals("saveTagList") || method.equals("updateTagList") || method.equals("countUpTagList")){
             CalculateTagEvent event = (CalculateTagEvent) returnObj;
             eventPublisher.publishEvent(event);
-            log.info("Publish CalculateTagEvent");
         }
     }
 

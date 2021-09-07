@@ -13,17 +13,12 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
-/**
- * created by soyeon 21/06/23
- */
 @RequiredArgsConstructor
 @Service
 public class SocialService {
 
     private final RestTemplate restTemplate = new RestTemplate();
     private final ObjectMapper objectMapper;
-
-    private final MemberRepository memberRepository;
 
     @Value("${spring.social.kakao.url}")
     private String providerUrl;

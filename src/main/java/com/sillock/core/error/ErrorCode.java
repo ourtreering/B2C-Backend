@@ -24,6 +24,7 @@ public enum ErrorCode {
     EMAIL_DUPLICATION(400, "M001", "Email is Duplication"),
     MEMBER_NOT_AUTHORIZED(401, "M002", "Member Not Authorized"),
     MEMBER_NOT_WRITER(401, "M003", "Member Not Writer"),
+    MEMBER_ALREADY_SIGNED_UP(400, "M004", "Member Already Signed Up")
     ;
 
 

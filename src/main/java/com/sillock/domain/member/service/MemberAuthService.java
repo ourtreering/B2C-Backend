@@ -1,7 +1,7 @@
 package com.sillock.domain.member.service;
 
-import com.sillock.common.message.ExceptionMessage;
-import com.sillock.core.error.BadRequestException;
+import com.sillock.core.error.ErrorCode;
+import com.sillock.core.error.exception.BusinessException;
 import com.sillock.domain.member.model.entity.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ public class MemberAuthService {
     @Transactional
     public Member signup(Member member){
         if(memberService.existsByEmail(member.getEmail()))
-            throw new BadRequestException(ExceptionMessage.ALREADY_SIGN_UP_MEMBER);
+            throw new BusinessException(ErrorCode.MEMBER_ALREADY_SIGNED_UP);
 
         memberService.init(member);
 

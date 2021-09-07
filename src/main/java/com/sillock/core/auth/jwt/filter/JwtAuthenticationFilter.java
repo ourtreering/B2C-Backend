@@ -5,7 +5,7 @@ import com.sillock.common.dto.ErrorResponseDto;
 import com.sillock.common.message.ExceptionMessage;
 import com.sillock.core.auth.jwt.component.JwtResolver;
 import com.sillock.core.auth.jwt.component.JwtValidator;
-import com.sillock.core.error.ResourceNotFoundException;
+import com.sillock.core.error.exception.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -35,7 +35,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         if (jwtValidator.validateToken(token)) {
             try {
                 setAuthToSecurityContextHolder(token);
-            } catch (ResourceNotFoundException e) {
+            } catch (EntityNotFoundException e) {
                 writeNotFoundResponse(servletResponse, e);
             }
         }
@@ -48,7 +48,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         SecurityContextHolder.getContext().setAuthentication(auth);
     }
 
-    private void writeNotFoundResponse(HttpServletResponse response, ResourceNotFoundException ex) {
+    private void writeNotFoundResponse(HttpServletResponse response, EntityNotFoundException ex) {
         response.setStatus(HttpStatus.NOT_FOUND.value());
         response.setContentType("application/json");
         ErrorResponseDto errorResponse = ErrorResponseDto.of(ExceptionMessage.JWT_ENTITY_NOT_FOUND);
