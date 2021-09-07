@@ -40,9 +40,7 @@ public class SillogController {
     /**
      * TODO
      * 사용자의 권한 체크를 어느 단에서 처리할 것인가
-     * 1. 컨트롤러
-     * 2. 서비스
-     * 3. 리포지토리
+     * AOP로 처리할 것
      */
 
     @PatchMapping("/{sillogId}")

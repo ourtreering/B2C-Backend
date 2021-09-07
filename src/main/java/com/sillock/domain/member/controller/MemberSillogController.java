@@ -30,7 +30,11 @@ public class MemberSillogController {
     private final SillogService sillogService;
     private final SillogMapper sillogMapper;
 
-    // TODO: 페이징 기능이 적용되어야 함 https://medium.com/@davide.pedone/cursor-based-pagination-with-spring-boot-and-mongodb-bca6446f3b1f
+    /**
+     * TODO
+     * 1. 페이징 기능이 적용되어야 함 https://medium.com/@davide.pedone/cursor-based-pagination-with-spring-boot-and-mongodb-bca6446f3b1f
+     * 2. 실록 전체조회에서 연속된 실록을 묶어서 보낼 수 있어야 함
+     */
     @GetMapping(value = "/{memberId}/sillogs")
     @ResponseBody
     public ResponseEntity<ResponseDto<List<SillogElementDto>>> getMemberSillogList(@PathVariable ObjectId memberId,
@@ -67,11 +71,4 @@ public class MemberSillogController {
                         sillogMapper.toSillogDetailDtoFromEntity(sillog)));
     }
 
-//    @GetMapping(value = "/{memberId}/sillogs/search")
-//    @ResponseBody
-//    public ResponseEntity<ResponseDto<List<SillogResponseDto>>> searchMemberSillogListByTag(@CurrentUser Member member, @PathVariable ObjectId memberId, ) {
-//
-//       return ResponseEntity.status(HttpStatus.OK)
-//               .body()
-//    }
 }

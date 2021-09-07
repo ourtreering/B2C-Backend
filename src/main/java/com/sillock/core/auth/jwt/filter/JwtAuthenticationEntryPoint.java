@@ -18,7 +18,7 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
     private final JwtValidator jwtValidator;
     private final JwtResolver jwtResolver;
 
-    // TODO: 실제로 동작하지 않음. 어떻게 고치지? jwt 관련 시큐리티 설정 필요
+    // TODO: 잘 동작하는 것 확인
     @Override
     public void commence(HttpServletRequest request,
                          HttpServletResponse response,

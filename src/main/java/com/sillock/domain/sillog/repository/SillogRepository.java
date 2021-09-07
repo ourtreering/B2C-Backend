@@ -11,8 +11,6 @@ import java.util.List;
 
 @Repository
 public interface SillogRepository extends MongoRepository<Sillog, ObjectId> {
-//    List<Sillog> findAllByAuthorId(ObjectId memberId);
-//    List<Sillog> findByAuthorIdAndTitle(ObjectId memberId, String title);
     List<Sillog> findAllByMemberId(ObjectId memberId);
     List<SillogTitle> findTitlesByMemberId(ObjectId memberId);
     List<Sillog> findAllByMemberIdAndTitle(ObjectId memberId, String title);

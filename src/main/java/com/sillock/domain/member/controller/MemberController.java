@@ -34,6 +34,15 @@ public class MemberController {
                .body(ResponseDto.of(HttpStatus.OK, ResponseMessage.READ_MEMBER_PROFILE, memberMapper.toDtoFromMemberEntity(member)));
     }
 
+    @GetMapping
+    public ResponseEntity<ResponseDto<MemberProfile>> getMember(@PathVariable String email){
+        Member member = memberService.findMemberByEmailWithTemplate(email);
+        MemberProfile profile = memberMapper.toDtoFromMemberEntity(member);
+
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(ResponseDto.of(HttpStatus.OK, ResponseMessage.READ_MEMBER_PROFILE, profile));
+    }
+
     @PostMapping("/login")
     public ResponseEntity<ResponseDto<?>> loginByProvider(@RequestBody SocialProfile profile) {
         Member member = memberAuthService.login(profile.getEmail());
