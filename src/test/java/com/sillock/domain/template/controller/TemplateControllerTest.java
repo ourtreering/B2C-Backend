@@ -75,6 +75,7 @@ public class TemplateControllerTest extends AbstractControllerTest {
                         getDocumentRequest(),
                         getDocumentResponse(),
                         requestFields(
+                                fieldWithPath("id").description("template id - 사용 X"),
                                 fieldWithPath("category").description("카테고리"),
                                 fieldWithPath("qnaList.[].question").description("질문"),
                                 fieldWithPath("qnaList.[].answer").description("답변")
@@ -108,6 +109,7 @@ public class TemplateControllerTest extends AbstractControllerTest {
                                 parameterWithName("id").description("템플릿 ID")
                         ),
                         requestFields(
+                                fieldWithPath("id").description("template id - 사용 X"),
                                 fieldWithPath("category").description("카테고리"),
                                 fieldWithPath("qnaList.[].question").description("질문"),
                                 fieldWithPath("qnaList.[].answer").description("답변")

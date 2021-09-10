@@ -12,7 +12,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TemplateDto {
-    private TemplateCategory category;
 
+    private String id;
+    private TemplateCategory category;
     private List<Qna> qnaList;
 }

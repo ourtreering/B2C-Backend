@@ -4,6 +4,7 @@ import com.sillock.domain.template.model.dto.TemplateDto;
 import com.sillock.domain.template.model.entity.Template;
 import com.sillock.domain.template.model.entity.TemplateCategory;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.ReportingPolicy;
 
@@ -16,7 +17,12 @@ public interface TemplateMapper {
 
     List<TemplateDto> toDtoListFromEntityList(List<Template> templateList);
 
+    @Mapping(target = "id", expression = "java(template.getId().toString())")
+    TemplateDto toDtoFromEntity(Template template);
+
+    @Mapping(target = "id", ignore = true)
     Template toEntityFromTemplateDto(TemplateDto templateDto);
 
+    @Mapping(target = "id", ignore = true)
     void updateEntityFromDto(TemplateDto dto, @MappingTarget Template template);
 }

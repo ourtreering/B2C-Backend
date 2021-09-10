@@ -52,6 +52,7 @@ public class EntityFactory {
 
     public static Template basicTemplateEntity(){
         return Template.builder()
+                .id(new ObjectId(basicObjectId()))
                 .category(TemplateCategory.PROJECT)
                 .qnaList(new LinkedList<>(Arrays.asList(basicQnaEntity())))
                 .build();
