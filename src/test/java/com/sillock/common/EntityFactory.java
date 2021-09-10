@@ -72,6 +72,7 @@ public class EntityFactory {
 
     public static Sillog basicSillogMemoEntity(){
         return Sillog.builder()
+                .id(new ObjectId(basicObjectId()))
                 .memberId(basicMemberEntity().getId())
                 .title("제목")
                 .qnaList(null)

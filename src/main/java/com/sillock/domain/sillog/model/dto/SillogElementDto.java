@@ -4,6 +4,7 @@ import com.sillock.domain.sillog.model.entity.Memo;
 import com.sillock.domain.sillog.model.entity.Qna;
 import com.sillock.domain.tag.model.dto.TagDto;
 import lombok.*;
+import org.bson.types.ObjectId;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SillogElementDto {
+    private String id;
     private String title;
     private List<Qna> qnaList;
     private Memo memo;

@@ -76,6 +76,7 @@ public class MemberSillogControllerTest extends AbstractControllerTest {
                         responseFields(
                                 fieldWithPath("status").description("상태 값"),
                                 fieldWithPath("message").description("결과 메시지"),
+                                fieldWithPath("data.[].id").description("실록 id"),
                                 fieldWithPath("data.[].title").description("제목"),
                                 fieldWithPath("data.[].qnaList.[].question").description("QnA 질문"),
                                 fieldWithPath("data.[].qnaList.[].answer").description("QnA 답변"),
@@ -144,6 +145,7 @@ public class MemberSillogControllerTest extends AbstractControllerTest {
                         responseFields(
                                 fieldWithPath("status").description("상태 값"),
                                 fieldWithPath("message").description("결과 메시지"),
+                                fieldWithPath("data.id").description("실록 id"),
                                 fieldWithPath("data.title").description("제목"),
                                 fieldWithPath("data.qnaList.[].question").description("QnA 질문"),
                                 fieldWithPath("data.qnaList.[].answer").description("QnA 답변"),

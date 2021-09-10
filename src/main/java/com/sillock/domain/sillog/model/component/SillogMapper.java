@@ -18,10 +18,12 @@ public interface SillogMapper {
     @Mapping(target = "memberId", expression = "java(member.getId())")
     Sillog toEntityFromPostDto(SillogPostDto sillogPostDto, @Context Member member);
 
+    @Mapping(target = "id", expression = "java(sillog.getId().toString())")
     SillogElementDto toSillogElementDtoFromEntity(Sillog sillog);
 
     SillogTitleDto toSillogTitleDtoFromSillogTitle(SillogTitle sillogTitle);
 
+    @Mapping(target = "id", expression = "java(sillog.getId().toString())")
     SillogDetailDto toSillogDetailDtoFromEntity(Sillog sillog);
 
     void updateSillogEntity(SillogPostDto dto, @MappingTarget Sillog sillog);

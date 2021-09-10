@@ -7,8 +7,8 @@ import com.sillock.core.error.ErrorCode;
 import com.sillock.core.error.exception.BusinessException;
 import com.sillock.domain.member.model.entity.Member;
 import com.sillock.domain.sillog.model.component.SillogMapper;
+import com.sillock.domain.sillog.model.dto.SillogDetailDto;
 import com.sillock.domain.sillog.model.dto.SillogElementDto;
-import com.sillock.domain.sillog.model.dto.SillogResponseDto;
 import com.sillock.domain.sillog.model.dto.SillogTitleDto;
 import com.sillock.domain.sillog.model.entity.Sillog;
 import com.sillock.domain.sillog.model.entity.SillogTitle;
@@ -56,7 +56,7 @@ public class MemberSillogController {
     }
 
     @GetMapping("/{memberId}/sillogs/{sillogId}")
-    public ResponseEntity<ResponseDto<?>> readDetail(@PathVariable ObjectId memberId, @PathVariable ObjectId sillogId){
+    public ResponseEntity<ResponseDto<SillogDetailDto>> readDetail(@PathVariable ObjectId memberId, @PathVariable ObjectId sillogId){
         Sillog sillog = sillogService.findById(sillogId);
 
         if (!sillog.isWriter(memberId))
