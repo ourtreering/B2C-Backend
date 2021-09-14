@@ -43,6 +43,7 @@ public class MemberService {
         memberRepository.delete(member);
     }
 
+    // Todo : identifier 추후 변겯
     public void init(Member member){
         member.setIdentifier("identifier");
     }

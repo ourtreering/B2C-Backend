@@ -3,6 +3,7 @@ package com.sillock.common.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import org.springframework.http.ResponseEntity;
 
 /**
  * created by hyunwoo 21/06/23

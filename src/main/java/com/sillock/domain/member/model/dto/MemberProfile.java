@@ -8,6 +8,9 @@ import org.bson.types.ObjectId;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+/**
+ * 사용자 프로필을 조회할 때 및 기본적으로 제공할 때 사용
+ */
 public class MemberProfile {
     private String id;
     private String email;

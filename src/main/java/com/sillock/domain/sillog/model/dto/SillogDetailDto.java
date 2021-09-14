@@ -13,6 +13,9 @@ import java.util.List;
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+/**
+ * 실록 상세 조회 시 사용
+ */
 public class SillogDetailDto {
     private String id;
     private String title;

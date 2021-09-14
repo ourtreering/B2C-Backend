@@ -51,6 +51,7 @@ public class SillogController {
 
         Sillog sillog = sillogService.findById(sillogId);
 
+        // Todo : AOP로 처리가능
         if(!sillog.isWriter(member.getId()))
             throw new BusinessException(ErrorCode.MEMBER_NOT_WRITER);
 
@@ -68,6 +69,7 @@ public class SillogController {
 
         Sillog sillog = sillogService.findById(sillogId);
 
+        // Todo : AOP로 처리가능
         if(!sillog.isWriter(member.getId()))
             throw new BusinessException(ErrorCode.MEMBER_NOT_WRITER);
 

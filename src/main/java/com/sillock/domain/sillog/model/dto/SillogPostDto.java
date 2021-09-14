@@ -13,6 +13,9 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+/**
+ * 실록 등록 시 사용
+ */
 public class SillogPostDto {
     private String title;
     private List<Qna> qnaList;

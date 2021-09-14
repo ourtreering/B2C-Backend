@@ -26,7 +26,6 @@ public enum ErrorCode {
     MEMBER_NOT_WRITER(401, "M003", "Member Not Writer"),
     ;
 
-
     private final String code;
     private final String message;
     private int status;

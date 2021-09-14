@@ -14,6 +14,9 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+/**
+ * 실록 리스트 조회 시 사용
+ */
 public class SillogElementDto {
     private String id;
     private String title;

@@ -11,6 +11,9 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+/**
+ * 템플릿 생성할 때 사용
+ */
 public class TemplateDto {
 
     private String id;
