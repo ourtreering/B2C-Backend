@@ -4,6 +4,7 @@ package com.sillock.domain.sillog.service;
 import com.sillock.common.message.ExceptionMessage;
 import com.sillock.domain.sillog.model.entity.Sillog;
 import com.sillock.domain.sillog.model.entity.SillogTitle;
+import com.sillock.domain.sillog.repository.SillogMongo;
 import com.sillock.domain.sillog.repository.SillogRepository;
 import com.sillock.domain.tag.model.entity.Tag;
 import com.sillock.domain.tag.service.TagService;
@@ -25,6 +26,7 @@ import java.util.stream.Collectors;
 public class SillogService {
     private final SillogRepository sillogRepository;
     private final TagService tagService;
+    private final SillogMongo sillogMongo;
 
     @Transactional
     public void registerSillog(Sillog sillog){
