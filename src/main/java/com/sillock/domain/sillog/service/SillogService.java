@@ -35,6 +35,12 @@ public class SillogService {
         sillogRepository.save(sillog);
     }
 
+    @Transactional(readOnly = true)
+    public String getSillogId(ObjectId memberId, String title) {
+        List<Sillog> silloglist = sillogRepository.findAllByMemberIdAndTitle(memberId, title);
+        return silloglist.get(silloglist.size() - 1).getId().toString();
+    }
+
     @Transactional
     public void updateSillog(Sillog sillog, List<Tag> preTagList){
         tagService.updateTagList(sillog.getMemberId(), sillog.getTagList(), preTagList);

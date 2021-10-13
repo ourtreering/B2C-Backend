@@ -35,6 +35,7 @@ public class SillogControllerTest extends AbstractControllerTest {
     @MockBean
     private SillogMapper sillogMapper;
 
+    @SillogUser
     @Test
     public void 실록_등록_테스트() throws Exception {
         SillogPostDto sillogPostDto = DtoFactory.sillogPostDto();
@@ -42,6 +43,7 @@ public class SillogControllerTest extends AbstractControllerTest {
         sillogPostDto.setQnaList(Arrays.asList(EntityFactory.basicQnaEntity()));
 
         String content = objectMapper.writeValueAsString(sillogPostDto);
+        given(sillogService.getSillogId(any(ObjectId.class),any(String.class))).willReturn("00000001");
 
         mockMvc.perform(post("/api/v1/sillogs")
                 .content(content)
@@ -67,6 +69,7 @@ public class SillogControllerTest extends AbstractControllerTest {
                         responseFields(
                                 fieldWithPath("status").description("상태 값"),
                                 fieldWithPath("message").description("결과 메시지"),
+                                fieldWithPath("data").description("등록된 실록 ID"),
                                 fieldWithPath("timestamp").description("타임 스탬프")
                         )
                 ));
