@@ -5,7 +5,7 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.8">
-<title>members/test API</title>
+<title>Sillog API Document</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -433,58 +433,370 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="book toc2 toc-left">
 <div id="header">
-<h1>members/test API</h1>
+<h1>Sillog API Document</h1>
 <div class="details">
 <span id="revnumber">version 0.0.1-SNAPSHOT</span>
 </div>
 <div id="toc" class="toc2">
-<div id="toctitle">유저정보</div>
+<div id="toctitle">Sillog API Document</div>
+<ul class="sectlevel0">
+<li><a href="#_사용자">사용자</a>
 <ul class="sectlevel1">
-<li><a href="#_목차">목차</a>
-<ul class="sectlevel2">
-<li><a href="#_목차_curl_request">Curl request</a></li>
-<li><a href="#_목차_http_request">HTTP request</a></li>
-<li><a href="#_목차_http_response">HTTP response</a></li>
-<li><a href="#_목차_response_body">Response body</a></li>
-<li><a href="#_목차_response_fields">Response fields</a></li>
+<li><a href="#_post_apiv1memberslogin">POST /api/v1/members/login</a></li>
+<li><a href="#_post_apiv1memberssignup">POST /api/v1/members/signup</a></li>
+<li><a href="#_get_apiv1membersme">GET /api/v1/members/me</a></li>
+<li><a href="#_patch_apiv1membersme">PATCH /api/v1/members/me</a></li>
+</ul>
+</li>
+<li><a href="#_실록">실록</a>
+<ul class="sectlevel1">
+<li><a href="#_post_apiv1sillogs">POST /api/v1/sillogs</a></li>
+<li><a href="#_patch_apiv1sillogssillogid">PATCH /api/v1/sillogs/{sillogId}</a></li>
+<li><a href="#_delete_apiv1sillogssillogid">DELETE /api/v1/sillogs/{sillogId}</a></li>
+<li><a href="#_get_apiv1membersmemberidsillogs">GET /api/v1/members/{memberId}/sillogs</a></li>
+<li><a href="#_get_apiv1membersmemberidsillogstitle">GET /api/v1/members/{memberId}/sillogs/title</a></li>
+<li><a href="#_get_apiv1membersmemberidsillogssillogid">GET /api/v1/members/{memberId}/sillogs/{sillogId}</a></li>
+</ul>
+</li>
+<li><a href="#_태그">태그</a>
+<ul class="sectlevel1">
+<li><a href="#_get_apiv1tagsdefault">GET /api/v1/tags/default</a></li>
+<li><a href="#_get_apiv1tagsme">GET /api/v1/tags/me</a></li>
+</ul>
+</li>
+<li><a href="#_템플릿">템플릿</a>
+<ul class="sectlevel1">
+<li><a href="#_get_apiv1templates">GET /api/v1/templates</a></li>
+<li><a href="#_post_apiv1templates">POST /api/v1/templates</a></li>
+<li><a href="#_put_apiv1templatesid">PUT /api/v1/templates/{id}</a></li>
+<li><a href="#_delete_apiv1templatesid">DELETE /api/v1/templates/{id}</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 <div id="content">
+<h1 id="_사용자" class="sect0">사용자</h1>
 <div class="sect1">
-<h2 id="_목차">목차</h2>
+<h2 id="_post_apiv1memberslogin">POST /api/v1/members/login</h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="_목차_curl_request">Curl request</h3>
 <div class="paragraph">
-<p>Snippet curl-request not found for operation::/member/test</p>
+<div class="title">request</div>
+<p>Unresolved directive in index.adoc - include::C:\Users\shine\Desktop\211013B2C-Backend\build\generated-snippets/api/v1/members/login/http-request.adoc[]</p>
 </div>
-</div>
-<div class="sect2">
-<h3 id="_목차_http_request">HTTP request</h3>
 <div class="paragraph">
-<p>Snippet http-request not found for operation::/member/test</p>
+<div class="title">request fields</div>
+<p>Unresolved directive in index.adoc - include::C:\Users\shine\Desktop\211013B2C-Backend\build\generated-snippets/api/v1/members/login/request-fields.adoc[]</p>
 </div>
-</div>
-<div class="sect2">
-<h3 id="_목차_http_response">HTTP response</h3>
 <div class="paragraph">
-<p>Snippet http-response not found for operation::/member/test</p>
+<div class="title">response</div>
+<p>Unresolved directive in index.adoc - include::C:\Users\shine\Desktop\211013B2C-Backend\build\generated-snippets/api/v1/members/login/http-response.adoc[]</p>
 </div>
-</div>
-<div class="sect2">
-<h3 id="_목차_response_body">Response body</h3>
 <div class="paragraph">
-<p>Snippet response-body not found for operation::/member/test</p>
+<div class="title">response fields</div>
+<p>Unresolved directive in index.adoc - include::C:\Users\shine\Desktop\211013B2C-Backend\build\generated-snippets/api/v1/members/login/response-fields.adoc[]</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_목차_response_fields">Response fields</h3>
+</div>
+<div class="sect1">
+<h2 id="_post_apiv1memberssignup">POST /api/v1/members/signup</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>Snippet response-fields not found for operation::/member/test</p>
+<div class="title">request</div>
+<p>Unresolved directive in index.adoc - include::C:\Users\shine\Desktop\211013B2C-Backend\build\generated-snippets/api/v1/members/signup/http-request.adoc[]</p>
 </div>
+<div class="paragraph">
+<div class="title">request fields</div>
+<p>Unresolved directive in index.adoc - include::C:\Users\shine\Desktop\211013B2C-Backend\build\generated-snippets/api/v1/members/signup/request-fields.adoc[]</p>
+</div>
+<div class="paragraph">
+<div class="title">response</div>
+<p>Unresolved directive in index.adoc - include::C:\Users\shine\Desktop\211013B2C-Backend\build\generated-snippets/api/v1/members/signup/http-response.adoc[]</p>
+</div>
+<div class="paragraph">
+<div class="title">response fields</div>
+<p>Unresolved directive in index.adoc - include::C:\Users\shine\Desktop\211013B2C-Backend\build\generated-snippets/api/v1/members/signup/response-fields.adoc[]</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_get_apiv1membersme">GET /api/v1/members/me</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<div class="title">request</div>
+<p>Unresolved directive in index.adoc - include::C:\Users\shine\Desktop\211013B2C-Backend\build\generated-snippets/api/v1/members/me/http-request.adoc[]</p>
+</div>
+<div class="paragraph">
+<div class="title">response</div>
+<p>Unresolved directive in index.adoc - include::C:\Users\shine\Desktop\211013B2C-Backend\build\generated-snippets/api/v1/members/me/http-response.adoc[]</p>
+</div>
+<div class="paragraph">
+<div class="title">response fields</div>
+<p>Unresolved directive in index.adoc - include::C:\Users\shine\Desktop\211013B2C-Backend\build\generated-snippets/api/v1/members/me/response-fields.adoc[]</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_patch_apiv1membersme">PATCH /api/v1/members/me</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<div class="title">request</div>
+<p>Unresolved directive in index.adoc - include::C:\Users\shine\Desktop\211013B2C-Backend\build\generated-snippets/api/v1/members/me/patch/http-request.adoc[]</p>
+</div>
+<div class="paragraph">
+<div class="title">request fields</div>
+<p>Unresolved directive in index.adoc - include::C:\Users\shine\Desktop\211013B2C-Backend\build\generated-snippets/api/v1/members/me/patch/request-fields.adoc[]</p>
+</div>
+<div class="paragraph">
+<div class="title">response</div>
+<p>Unresolved directive in index.adoc - include::C:\Users\shine\Desktop\211013B2C-Backend\build\generated-snippets/api/v1/members/me/patch/http-response.adoc[]</p>
+</div>
+<div class="paragraph">
+<div class="title">response fields</div>
+<p>Unresolved directive in index.adoc - include::C:\Users\shine\Desktop\211013B2C-Backend\build\generated-snippets/api/v1/members/me/patch/response-fields.adoc[]</p>
+</div>
+</div>
+</div>
+<h1 id="_실록" class="sect0">실록</h1>
+<div class="sect1">
+<h2 id="_post_apiv1sillogs">POST /api/v1/sillogs</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<div class="title">request</div>
+<p>Unresolved directive in index.adoc - include::C:\Users\shine\Desktop\211013B2C-Backend\build\generated-snippets/api/v1/sillogs/http-request.adoc[]</p>
+</div>
+<div class="paragraph">
+<div class="title">request fields</div>
+<p>Unresolved directive in index.adoc - include::C:\Users\shine\Desktop\211013B2C-Backend\build\generated-snippets/api/v1/sillogs/request-fields.adoc[]</p>
+</div>
+<div class="paragraph">
+<div class="title">response</div>
+<p>Unresolved directive in index.adoc - include::C:\Users\shine\Desktop\211013B2C-Backend\build\generated-snippets/api/v1/sillogs/http-response.adoc[]</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_patch_apiv1sillogssillogid">PATCH /api/v1/sillogs/{sillogId}</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<div class="title">request</div>
+<p>Unresolved directive in index.adoc - include::C:\Users\shine\Desktop\211013B2C-Backend\build\generated-snippets/api/v1/sillogs/sillogId/http-request.adoc[]</p>
+</div>
+<div class="paragraph">
+<div class="title">path parameters</div>
+<p>Unresolved directive in index.adoc - include::C:\Users\shine\Desktop\211013B2C-Backend\build\generated-snippets/api/v1/sillogs/sillogId/path-parameters.adoc[]</p>
+</div>
+<div class="paragraph">
+<div class="title">request fields</div>
+<p>Unresolved directive in index.adoc - include::C:\Users\shine\Desktop\211013B2C-Backend\build\generated-snippets/api/v1/sillogs/sillogId/request-fields.adoc[]</p>
+</div>
+<div class="paragraph">
+<div class="title">response</div>
+<p>Unresolved directive in index.adoc - include::C:\Users\shine\Desktop\211013B2C-Backend\build\generated-snippets/api/v1/sillogs/sillogId/http-response.adoc[]</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_delete_apiv1sillogssillogid">DELETE /api/v1/sillogs/{sillogId}</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<div class="title">request</div>
+<p>Unresolved directive in index.adoc - include::C:\Users\shine\Desktop\211013B2C-Backend\build\generated-snippets/api/v1/sillogs/sillogId/delete/http-request.adoc[]</p>
+</div>
+<div class="paragraph">
+<div class="title">path parameters</div>
+<p>Unresolved directive in index.adoc - include::C:\Users\shine\Desktop\211013B2C-Backend\build\generated-snippets/api/v1/sillogs/sillogId/delete/path-parameters.adoc[]</p>
+</div>
+<div class="paragraph">
+<div class="title">response</div>
+<p>Unresolved directive in index.adoc - include::C:\Users\shine\Desktop\211013B2C-Backend\build\generated-snippets/api/v1/sillogs/sillogId/delete/http-response.adoc[]</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_get_apiv1membersmemberidsillogs">GET /api/v1/members/{memberId}/sillogs</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<div class="title">request</div>
+<p>Unresolved directive in index.adoc - include::C:\Users\shine\Desktop\211013B2C-Backend\build\generated-snippets/api/v1/members/memberId/sillogs/http-request.adoc[]</p>
+</div>
+<div class="paragraph">
+<div class="title">path parameters</div>
+<p>Unresolved directive in index.adoc - include::C:\Users\shine\Desktop\211013B2C-Backend\build\generated-snippets/api/v1/members/memberId/sillogs/path-parameters.adoc[]</p>
+</div>
+<div class="paragraph">
+<div class="title">request parameters</div>
+<p>Unresolved directive in index.adoc - include::C:\Users\shine\Desktop\211013B2C-Backend\build\generated-snippets/api/v1/members/memberId/sillogs/request-parameters.adoc[]</p>
+</div>
+<div class="paragraph">
+<div class="title">response</div>
+<p>Unresolved directive in index.adoc - include::C:\Users\shine\Desktop\211013B2C-Backend\build\generated-snippets/api/v1/members/memberId/sillogs/http-response.adoc[]</p>
+</div>
+<div class="paragraph">
+<div class="title">response fields</div>
+<p>Unresolved directive in index.adoc - include::C:\Users\shine\Desktop\211013B2C-Backend\build\generated-snippets/api/v1/members/memberId/sillogs/response-fields.adoc[]</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_get_apiv1membersmemberidsillogstitle">GET /api/v1/members/{memberId}/sillogs/title</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<div class="title">request</div>
+<p>Unresolved directive in index.adoc - include::C:\Users\shine\Desktop\211013B2C-Backend\build\generated-snippets/api/v1/members/memberId/sillogs/title/http-request.adoc[]</p>
+</div>
+<div class="paragraph">
+<div class="title">path parameters</div>
+<p>Unresolved directive in index.adoc - include::C:\Users\shine\Desktop\211013B2C-Backend\build\generated-snippets/api/v1/members/memberId/sillogs/title/path-parameters.adoc[]</p>
+</div>
+<div class="paragraph">
+<div class="title">response</div>
+<p>Unresolved directive in index.adoc - include::C:\Users\shine\Desktop\211013B2C-Backend\build\generated-snippets/api/v1/members/memberId/sillogs/title/http-response.adoc[]</p>
+</div>
+<div class="paragraph">
+<div class="title">response fields</div>
+<p>Unresolved directive in index.adoc - include::C:\Users\shine\Desktop\211013B2C-Backend\build\generated-snippets/api/v1/members/memberId/sillogs/title/response-fields.adoc[]</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_get_apiv1membersmemberidsillogssillogid">GET /api/v1/members/{memberId}/sillogs/{sillogId}</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<div class="title">request</div>
+<p>Unresolved directive in index.adoc - include::C:\Users\shine\Desktop\211013B2C-Backend\build\generated-snippets/api/v1/members/memberId/sillogs/sillogId/http-request.adoc[]</p>
+</div>
+<div class="paragraph">
+<div class="title">path parameters</div>
+<p>Unresolved directive in index.adoc - include::C:\Users\shine\Desktop\211013B2C-Backend\build\generated-snippets/api/v1/members/memberId/sillogs/sillogId/path-parameters.adoc[]</p>
+</div>
+<div class="paragraph">
+<div class="title">response</div>
+<p>Unresolved directive in index.adoc - include::C:\Users\shine\Desktop\211013B2C-Backend\build\generated-snippets/api/v1/members/memberId/sillogs/sillogId/http-response.adoc[]</p>
+</div>
+<div class="paragraph">
+<div class="title">response fields</div>
+<p>Unresolved directive in index.adoc - include::C:\Users\shine\Desktop\211013B2C-Backend\build\generated-snippets/api/v1/members/memberId/sillogs/sillogId/response-fields.adoc[]</p>
+</div>
+</div>
+</div>
+<h1 id="_태그" class="sect0">태그</h1>
+<div class="sect1">
+<h2 id="_get_apiv1tagsdefault">GET /api/v1/tags/default</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<div class="title">request</div>
+<p>Unresolved directive in index.adoc - include::C:\Users\shine\Desktop\211013B2C-Backend\build\generated-snippets/api/v1/tags/default/http-request.adoc[]</p>
+</div>
+<div class="paragraph">
+<div class="title">response</div>
+<p>Unresolved directive in index.adoc - include::C:\Users\shine\Desktop\211013B2C-Backend\build\generated-snippets/api/v1/tags/default/http-response.adoc[]</p>
+</div>
+<div class="paragraph">
+<div class="title">response fields</div>
+<p>Unresolved directive in index.adoc - include::C:\Users\shine\Desktop\211013B2C-Backend\build\generated-snippets/api/v1/tags/default/response-fields.adoc[]</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_get_apiv1tagsme">GET /api/v1/tags/me</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<div class="title">request</div>
+<p>Unresolved directive in index.adoc - include::C:\Users\shine\Desktop\211013B2C-Backend\build\generated-snippets/api/v1/tags/me/http-request.adoc[]</p>
+</div>
+<div class="paragraph">
+<div class="title">response</div>
+<p>Unresolved directive in index.adoc - include::C:\Users\shine\Desktop\211013B2C-Backend\build\generated-snippets/api/v1/tags/me/http-response.adoc[]</p>
+</div>
+<div class="paragraph">
+<div class="title">response fields</div>
+<p>Unresolved directive in index.adoc - include::C:\Users\shine\Desktop\211013B2C-Backend\build\generated-snippets/api/v1/tags/me/response-fields.adoc[]</p>
+</div>
+</div>
+</div>
+<h1 id="_템플릿" class="sect0">템플릿</h1>
+<div class="sect1">
+<h2 id="_get_apiv1templates">GET /api/v1/templates</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<div class="title">request</div>
+<p>Unresolved directive in index.adoc - include::C:\Users\shine\Desktop\211013B2C-Backend\build\generated-snippets/api/v1/templates/http-request.adoc[]</p>
+</div>
+<div class="paragraph">
+<div class="title">response</div>
+<p>Unresolved directive in index.adoc - include::C:\Users\shine\Desktop\211013B2C-Backend\build\generated-snippets/api/v1/templates/http-response.adoc[]</p>
+</div>
+<div class="paragraph">
+<div class="title">response fields</div>
+<p>Unresolved directive in index.adoc - include::C:\Users\shine\Desktop\211013B2C-Backend\build\generated-snippets/api/v1/templates/response-fields.adoc[]</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_post_apiv1templates">POST /api/v1/templates</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<div class="title">request</div>
+<p>Unresolved directive in index.adoc - include::C:\Users\shine\Desktop\211013B2C-Backend\build\generated-snippets/api/v1/templates/post/http-request.adoc[]</p>
+</div>
+<div class="paragraph">
+<div class="title">request fields</div>
+<p>Unresolved directive in index.adoc - include::C:\Users\shine\Desktop\211013B2C-Backend\build\generated-snippets/api/v1/templates/post/request-fields.adoc[]</p>
+</div>
+<div class="paragraph">
+<div class="title">response</div>
+<p>Unresolved directive in index.adoc - include::C:\Users\shine\Desktop\211013B2C-Backend\build\generated-snippets/api/v1/templates/post/http-response.adoc[]</p>
+</div>
+<div class="paragraph">
+<div class="title">response fields</div>
+<p>Unresolved directive in index.adoc - include::C:\Users\shine\Desktop\211013B2C-Backend\build\generated-snippets/api/v1/templates/post/response-fields.adoc[]</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_put_apiv1templatesid">PUT /api/v1/templates/{id}</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<div class="title">request</div>
+<p>Unresolved directive in index.adoc - include::C:\Users\shine\Desktop\211013B2C-Backend\build\generated-snippets/api/v1/templates/id/http-request.adoc[]</p>
+</div>
+<div class="paragraph">
+<div class="title">path parameters</div>
+<p>Unresolved directive in index.adoc - include::C:\Users\shine\Desktop\211013B2C-Backend\build\generated-snippets/api/v1/templates/id/path-parameters.adoc[]</p>
+</div>
+<div class="paragraph">
+<div class="title">request fields</div>
+<p>Unresolved directive in index.adoc - include::C:\Users\shine\Desktop\211013B2C-Backend\build\generated-snippets/api/v1/templates/id/request-fields.adoc[]</p>
+</div>
+<div class="paragraph">
+<div class="title">response</div>
+<p>Unresolved directive in index.adoc - include::C:\Users\shine\Desktop\211013B2C-Backend\build\generated-snippets/api/v1/templates/id/http-response.adoc[]</p>
+</div>
+<div class="paragraph">
+<div class="title">response fields</div>
+<p>Unresolved directive in index.adoc - include::C:\Users\shine\Desktop\211013B2C-Backend\build\generated-snippets/api/v1/templates/id/response-fields.adoc[]</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_delete_apiv1templatesid">DELETE /api/v1/templates/{id}</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<div class="title">request</div>
+<p>Unresolved directive in index.adoc - include::C:\Users\shine\Desktop\211013B2C-Backend\build\generated-snippets/api/v1/templates/id/delete/http-request.adoc[]</p>
+</div>
+<div class="paragraph">
+<div class="title">path parameters</div>
+<p>Unresolved directive in index.adoc - include::C:\Users\shine\Desktop\211013B2C-Backend\build\generated-snippets/api/v1/templates/id/delete/path-parameters.adoc[]</p>
+</div>
+<div class="paragraph">
+<div class="title">response</div>
+<p>Unresolved directive in index.adoc - include::C:\Users\shine\Desktop\211013B2C-Backend\build\generated-snippets/api/v1/templates/id/delete/http-response.adoc[]</p>
+</div>
+<div class="paragraph">
+<div class="title">response fields</div>
+<p>Unresolved directive in index.adoc - include::C:\Users\shine\Desktop\211013B2C-Backend\build\generated-snippets/api/v1/templates/id/delete/response-fields.adoc[]</p>
 </div>
 </div>
 </div>
@@ -492,7 +804,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1-SNAPSHOT<br>
-Last updated 2021-07-12 01:01:03 +0900
+Last updated 2021-10-13 11:14:07 +0900
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/github.min.css">
