@@ -6,6 +6,7 @@ import com.sillock.common.DtoFactory;
 import com.sillock.common.EntityFactory;
 import com.sillock.domain.sillog.model.component.SillogMapper;
 import com.sillock.domain.sillog.model.dto.SillogPostDto;
+import com.sillock.domain.sillog.model.entity.Sillog;
 import com.sillock.domain.sillog.service.SillogService;
 import org.bson.types.ObjectId;
 import org.junit.jupiter.api.Test;
@@ -20,6 +21,8 @@ import static com.sillock.config.ApiDocumentUtils.getDocumentRequest;
 import static com.sillock.config.ApiDocumentUtils.getDocumentResponse;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.when;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.*;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
@@ -43,7 +46,8 @@ public class SillogControllerTest extends AbstractControllerTest {
         sillogPostDto.setQnaList(Arrays.asList(EntityFactory.basicQnaEntity()));
 
         String content = objectMapper.writeValueAsString(sillogPostDto);
-        given(sillogService.getSillogId(any(ObjectId.class),any(String.class))).willReturn("00000001");
+
+        when(sillogService.registerSillog(any())).thenReturn(EntityFactory.basicObjectId());
 
         mockMvc.perform(post("/api/v1/sillogs")
                 .content(content)
