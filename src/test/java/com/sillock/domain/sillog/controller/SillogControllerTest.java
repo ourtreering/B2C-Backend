@@ -55,6 +55,7 @@ public class SillogControllerTest extends AbstractControllerTest {
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isCreated())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.message").value(REGISTER_SILLOG)) // (5)
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data").value(EntityFactory.basicObjectId()))
                 .andDo(print())
                 .andDo(document("api/v1/sillogs",
                         getDocumentRequest(),
