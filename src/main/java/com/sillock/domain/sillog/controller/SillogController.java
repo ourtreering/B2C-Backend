@@ -32,8 +32,7 @@ public class SillogController {
 
     @PostMapping
     public ResponseEntity<ResponseDto<?>> register(@CurrentUser Member member, @RequestBody SillogPostDto sillogPostDto) {
-        sillogService.registerSillog(sillogMapper.toEntityFromPostDto(sillogPostDto, member));
-        String sillogId = sillogService.getSillogId(member.getId(), sillogPostDto.getTitle());
+        String sillogId = sillogService.registerSillog(sillogMapper.toEntityFromPostDto(sillogPostDto, member)).toString();
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(ResponseDto.of(HttpStatus.CREATED, ResponseMessage.REGISTER_SILLOG, sillogId));
     }
