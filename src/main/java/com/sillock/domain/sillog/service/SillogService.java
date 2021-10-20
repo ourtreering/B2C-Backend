@@ -31,7 +31,8 @@ public class SillogService {
     @Transactional
     public String registerSillog(Sillog sillog){
         tagService.countUpTagList(sillog.getMemberId(), sillog.getTagList());
-        return sillogRepository.save(sillog).getId().toString();
+        String sillogId = sillogRepository.save(sillog).getId().toString();
+        return sillogId;
     }
 
     @Transactional

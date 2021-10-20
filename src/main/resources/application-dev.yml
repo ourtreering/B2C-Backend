@@ -5,7 +5,7 @@ spring:
 
   data:
     mongodb:
-      uri: mongodb://127.0.0.1:27017/sillog
-
+#      uri: mongodb://127.0.0.1:27017/sillog
+      uri: mongodb+srv://haen:haen12@ala0.axbqe.mongodb.net/sillog?retryWrites=true&w=majority
 jwt:
   secret: thisissecretwhichusedforsillogservicethisissecretwhichusedforsillogservice
