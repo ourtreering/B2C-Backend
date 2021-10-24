@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sillock-app-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sillock-app-dev
+  template:
+    metadata:
+      labels:
+        app: sillock-app-dev
+    spec:
+      containers:
+        - name: sillock-app-dev
+          image: gcr.io/PROJECT_ID/IMAGE:TAG
+          resources: {}
+#            requests:
+#              memory: "256Mi"
+#              cpu: "500m"
+#            limits:
+#              memory: "256Mi"
+#              cpu: "500m"
+#          volumeMounts:
+#            - name: content-server-volume
+#              mountPath: /home/gradle/mount
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: "prod"
+            - name: SPRING_DATA_MONGODB_URI
+              value: "$SPRING_DATA_MONGODB_URI"
+#      volumes:
+#        - name: content-server-volume
+#          hostPath:
+#            path: "$DEV_STATIC_DATA_PATH" # secret
+#            type: Directory

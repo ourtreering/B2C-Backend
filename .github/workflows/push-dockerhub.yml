@@ -1,0 +1,116 @@
+# This workflow will build a docker container, publish it to Google Container Registry, and deploy it to GKE when a release is created
+#
+# To configure this workflow:
+#
+# 1. Ensure that your repository contains the necessary configuration for your Google Kubernetes Engine cluster, including deployment.yml, kustomization.yml, service.yml, etc.
+#
+# 2. Set up secrets in your workspace: GKE_PROJECT with the name of the project and GKE_SA_KEY with the Base64 encoded JSON service account key (https://github.com/GoogleCloudPlatform/github-actions/tree/docs/service-account-key/setup-gcloud#inputs).
+#
+# 3. Change the values for the GKE_ZONE, GKE_CLUSTER, IMAGE, and DEPLOYMENT_NAME environment variables (below).
+#
+# For more support on how to run the workflow, please visit https://github.com/google-github-actions/setup-gcloud/tree/master/example-workflows/gke
+
+name: Push to dockerhub
+
+on:
+  workflow_dispatch:
+      inputs:
+        logLevel:
+          description: 'Log level'
+          required: true
+          default: 'warning'
+        tags:
+          description: 'Test scenario tags'
+  push:
+    branches:
+      - develop
+
+env:
+  IMAGE: sillock-app-dev
+
+jobs:      
+  setup-build-publish-deploy:
+    name: Setup, Build, Publish, and Deploy
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Set up JDK 11
+      uses: actions/setup-java@v2
+      with:
+        java-version: '11'
+        distribution: 'adopt'
+        
+    - name: Start MongoDB
+      uses: supercharge/mongodb-github-action@1.6.0
+        
+    # Set permission
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+      
+    - name: Gradle 빌드 캐싱
+      id: gradle-cache
+      uses: actions/cache@v2
+      with:
+        path: |
+           ~/.gradle/caches
+           ~/.gradle/wrapper
+        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+        restore-keys: |
+            ${{ runner.os }}-gradle-
+      
+    - name: Build with Gradle test
+      run: ./gradlew test
+
+    - name: Publish Test Results
+      uses: EnricoMi/publish-unit-test-result-action@v1
+      if: always()
+      with:
+        files: build/test-results/**/*.xml
+        check_name: '[unit-test] Results'
+
+    - name: Run copyDocument task
+      run: ./gradlew copyDocument
+    - name: Build with Gradle
+      run: ./gradlew build
+      
+#     - name: SHA 업데이트
+#       run: echo $GITHUB_SHA > $GITHUB_WORKSPACE/_meta
+
+#     - name: 이미지 태그 준비
+#       id: get-tag
+#       run: |
+#         tag=$(echo $GITHUB_SHA | head -c7)
+#         echo "::set-output name=tag::$tag"
+#     - name: 도커 캐싱 준비
+#       uses: docker/setup-buildx-action@v1
+
+#     - name: 도커 레이어 캐싱
+#       uses: actions/cache@v2
+#       with:
+#         path: /tmp/.buildx-cache
+#         key: ${{ runner.os }}-buildx-${{ github.sha }}
+#         restore-keys: |
+#           ${{ runner.os }}-buildx-
+    - name: 도커 로그인
+      env:
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+
+    - name: 컨테이너 이미지 빌드 및 이미지 푸쉬
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        file: ./Dockerfile
+        push: true
+        tags: docker.io/catnap/sillog:latest
+#         cache-from: type=local,src=/tmp/.buildx-cache
+#         cache-to: type=local,dest=/tmp/.buildx-cache-new
+
+#     - name: 캐시 삭제
+#       run: |
+#         rm -rf /tmp/.buildx-cache
+#         mv /tmp/.buildx-cache-new /tmp/.buildx-cache
