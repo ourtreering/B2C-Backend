@@ -15,7 +15,7 @@ import org.springframework.web.client.RestTemplate;
 @RequestMapping("/api/v1/members/login/kakao")
 public class KakaoLogin {
     private static final String CLIENT_ID  = "b6ec9ceb0544a27183b1b3eedafd0944"; //REST API 키
-    private static final String REDIRECT_URL = "http://localhost:8080/api/v1/members/login/kakao/code";
+    private static final String REDIRECT_URL = "https://sillog.herokuapp.com/api/v1/members/login/kakao/code";
 
     @GetMapping("/code") //인가코드 받기
     public String getCode(@RequestParam String code){
